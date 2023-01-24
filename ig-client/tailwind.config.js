@@ -8,7 +8,8 @@ module.exports = {
         mobile: "url('./auth/assets/mobile.png')",
       },
       backgroundPosition: {
-        instagramLogo: "0px 4px",
+        instagramLogoBlack: "0px 4px",
+        instagramLogoWhite: "0px -38px",
       },
       height: {
         "custom-800": "800px",
@@ -18,6 +19,9 @@ module.exports = {
       },
       maxWidth: {
         "custom-30": "30rem",
+      },
+      margin: {
+        "mt-72px": "72px",
       },
     },
   },
