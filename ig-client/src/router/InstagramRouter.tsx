@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import { LoginPage } from "../auth/pages/LoginPage";
 import { RegisterPage } from "../auth/pages/RegisterPage";
+import { HomePage } from "../instagram/pages/HomePage";
 
 export const InstagramRouter = () => {
   return (
@@ -10,6 +11,8 @@ export const InstagramRouter = () => {
         path="/auth/register"
         element={<RegisterPage></RegisterPage>}
       ></Route>
+
+      <Route path="/" element={<HomePage></HomePage>}></Route>
     </Routes>
   );
 };
