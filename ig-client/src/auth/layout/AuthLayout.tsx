@@ -25,7 +25,7 @@ export const AuthLayout: React.FC<{
   p-3 sm:max-w-sm"
       >
         <article className="flex items-center justify-center flex-col p-3 w-full sm:bg-white sm:shadow-md sm:p-10 sm:border sm:border-gray-300">
-          <div className="inline-block bg-logos bg-cover bg-no-repeat bg-instagramLogo w-44 h-14"></div>
+          <div className="inline-block bg-logos bg-cover bg-no-repeat bg-instagramLogoBlack w-44 h-14"></div>
           {children}
         </article>
         <article className="flex items-center justify-center flex-col my-2 w-full py-2 sm:bg-white sm:shadow-md sm:border sm:border-gray-300 sm:h-20">
