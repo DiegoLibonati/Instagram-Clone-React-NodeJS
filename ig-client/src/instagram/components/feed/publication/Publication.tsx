@@ -8,14 +8,16 @@ export const Publication = () => {
     <article className="flex items-start justify-center flex-col w-full h-auto mb-5">
       <PublicationHeader></PublicationHeader>
       <img
-        src="https://cdn.pixabay.com/photo/2021/04/13/23/25/paisaje-6176882_1280.jpg"
+        src="https://www.imagineforest.com/blog/wp-content/uploads/2021/12/asian-woman-5450041_640.jpg"
         alt="paisaje"
-        className="w-full h-auto object-cover"
+        className="w-full h-auto max-h-[600px] object-cover"
       ></img>
       <PublicationActions></PublicationActions>
       <PublicationInformation></PublicationInformation>
       <PublicationForm></PublicationForm>
-      <h5 className="text-gray-400 text-sm w-100 p-2">Hace 22 horas</h5>
+      <h5 className="text-gray-400 text-sm w-100 p-2 my-[2px]">
+        Hace 22 horas
+      </h5>
     </article>
   );
 };
