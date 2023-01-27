@@ -5,7 +5,7 @@ import { PublicationInformation } from "./PublicationInformation";
 
 export const Publication = () => {
   return (
-    <article className="flex items-start justify-center flex-col w-full h-auto">
+    <article className="flex items-start justify-center flex-col w-full h-auto mb-5">
       <PublicationHeader></PublicationHeader>
       <img
         src="https://cdn.pixabay.com/photo/2021/04/13/23/25/paisaje-6176882_1280.jpg"

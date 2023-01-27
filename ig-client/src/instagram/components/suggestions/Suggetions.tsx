@@ -1,18 +1,12 @@
-import { Suggetion } from "./Suggetion";
-import { SuggetionsHeader } from "./SuggetionsHeader";
+import { SuggetionsProfileHeader } from "./SuggetionsProfileHeader";
+import { SuggetionsProfiles } from "./SuggetionsProfiles";
 
 export const Suggetions = () => {
   return (
-    <article className="flex items-center justify-start flex-col w-full h-auto">
-      <SuggetionsHeader></SuggetionsHeader>
+    <section className="flex items-center justify-start flex-col h-auto w-[25%] ml-8">
+      <SuggetionsProfileHeader></SuggetionsProfileHeader>
 
-      <ul className="flex items-center justisfy-start flex-col w-full h-auto">
-        <Suggetion></Suggetion>
-        <Suggetion></Suggetion>
-        <Suggetion></Suggetion>
-        <Suggetion></Suggetion>
-        <Suggetion></Suggetion>
-      </ul>
-    </article>
+      <SuggetionsProfiles></SuggetionsProfiles>
+    </section>
   );
 };

@@ -1,4 +1,4 @@
-export const Suggetion = () => {
+export const SuggetionProfile = () => {
   return (
     <li className="flex items-center justify-between  w-full h-auto my-2 py-1">
       <div className="flex items-center justify-start w-auto h-auto">
