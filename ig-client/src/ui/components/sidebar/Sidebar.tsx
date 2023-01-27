@@ -4,7 +4,7 @@ import { MdOutlineAddBox, MdOutlineExplore } from "react-icons/md";
 import { RxVideo } from "react-icons/rx";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { Link } from "react-router-dom";
-import { InstagramWhite } from "../../assets/images";
+import { InstagramWhite } from "../../../assets/images";
 
 export const Sidebar = () => {
   return (
