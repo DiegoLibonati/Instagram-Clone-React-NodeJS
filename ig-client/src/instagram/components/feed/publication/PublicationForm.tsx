@@ -8,7 +8,7 @@ export const PublicationForm = () => {
       ></img>
       <input
         placeholder="Agrega un comentario..."
-        className="bg-transparent border-none outline-none text-white"
+        className="bg-transparent placeholder:text-gray-500 border-none outline-none text-black"
       ></input>
     </div>
   );

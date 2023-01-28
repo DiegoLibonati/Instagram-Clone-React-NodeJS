@@ -1,3 +1,3 @@
 export const Histories = () => {
-  return <article className="bg-black w-full h-16"></article>;
+  return <article className="bg-white w-full h-16"></article>;
 };

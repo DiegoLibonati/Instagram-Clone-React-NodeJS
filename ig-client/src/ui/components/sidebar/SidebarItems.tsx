@@ -9,25 +9,25 @@ export const SidebarItems = () => {
   return (
     <ul className="flex flex-col items-start justify-center w-full h-auto pl-6">
       <SidebarItem text="Inicio">
-        <AiOutlineHome size={25} color="white"></AiOutlineHome>
+        <AiOutlineHome size={25} color="black"></AiOutlineHome>
       </SidebarItem>
       <SidebarItem text="Buscar">
-        <BsSearch size={25} color="white"></BsSearch>
+        <BsSearch size={25} color="black"></BsSearch>
       </SidebarItem>
       <SidebarItem text="Explorar">
-        <MdOutlineExplore size={25} color="white"></MdOutlineExplore>
+        <MdOutlineExplore size={25} color="black"></MdOutlineExplore>
       </SidebarItem>
       <SidebarItem text="Reels">
-        <RxVideo size={25} color="white"></RxVideo>
+        <RxVideo size={25} color="black"></RxVideo>
       </SidebarItem>
       <SidebarItem text="Mensajes">
-        <AiOutlineMessage size={25} color="white"></AiOutlineMessage>
+        <AiOutlineMessage size={25} color="black"></AiOutlineMessage>
       </SidebarItem>
       <SidebarItem text="Notificaciones">
-        <BsSuitHeart size={25} color="white"></BsSuitHeart>
+        <BsSuitHeart size={25} color="black"></BsSuitHeart>
       </SidebarItem>
       <SidebarItem text="Crear">
-        <MdOutlineAddBox size={25} color="white"></MdOutlineAddBox>
+        <MdOutlineAddBox size={25} color="black"></MdOutlineAddBox>
       </SidebarItem>
       <SidebarItem text="Perfil">
         <Link to="/">

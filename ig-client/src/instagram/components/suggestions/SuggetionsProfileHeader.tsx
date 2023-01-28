@@ -8,8 +8,8 @@ export const SuggetionsProfileHeader = () => {
       ></img>
 
       <div className="ml-4">
-        <h2 className="text-white font-bold">die_libonati</h2>
-        <h3 className="text-white">Diego Libonati</h3>
+        <h2 className="text-black font-bold">die_libonati</h2>
+        <h3 className="text-black">Diego Libonati</h3>
       </div>
     </article>
   );

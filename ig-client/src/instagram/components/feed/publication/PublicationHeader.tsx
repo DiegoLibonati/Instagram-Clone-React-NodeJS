@@ -9,10 +9,10 @@ export const PublicationHeader = () => {
           alt="perfil"
           className="rounded-full mr-2"
         ></img>
-        <h3 className="text-white">die_libonati</h3>
+        <h3 className="text-black">die_libonati</h3>
       </div>
 
-      <SlOptionsVertical color="white" size={25}></SlOptionsVertical>
+      <SlOptionsVertical color="black" size={25}></SlOptionsVertical>
     </div>
   );
 };

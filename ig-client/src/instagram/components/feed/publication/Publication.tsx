@@ -15,7 +15,7 @@ export const Publication = () => {
       <PublicationActions></PublicationActions>
       <PublicationInformation></PublicationInformation>
       <PublicationForm></PublicationForm>
-      <h5 className="text-gray-400 text-sm w-100 p-2 my-[2px]">
+      <h5 className="text-gray-500 text-sm w-100 p-2 my-[2px]">
         Hace 22 horas
       </h5>
     </article>

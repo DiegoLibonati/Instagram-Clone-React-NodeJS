@@ -12,7 +12,7 @@ export const HomePage = () => {
     <>
       <NavBarMobile></NavBarMobile>
       {matchMediaQuery && <Sidebar></Sidebar>}
-      <main className="mt-[72px] mb-14 bg-black flex items-center justify-start flex-col w-100 h-auto lg:min-h-screen lg:m-0 lg:pt-8 lg:flex-row lg:w-[80%] lg:absolute lg:right-0 lg:justify-center lg:items-start">
+      <main className="mt-14 mb-14 bg-white flex items-center justify-start flex-col w-100 h-auto lg:min-h-screen lg:m-0 lg:pt-8 lg:flex-row lg:w-[80%] lg:absolute lg:right-0 lg:justify-center lg:items-start">
         <Feed></Feed>
 
         {matchMediaQuery && <Suggetions></Suggetions>}

@@ -1,22 +1,27 @@
 import { MdOutlineAddBox } from "react-icons/md";
 import { BsSuitHeart } from "react-icons/bs";
 import { AiOutlineMessage } from "react-icons/ai";
+import { InstagramBlack } from "../../assets/images";
 
 export const NavBarMobile = () => {
   return (
-    <header className="lg:hidden fixed p-2 bg-black w-full top-0">
-      <nav className="flex items-center justify-between flex-row w-full h-auto">
-        <div className="inline-block bg-logos bg-cover bg-no-repeat bg-instagramLogoWhite w-40 h-14"></div>
+    <header className="lg:hidden fixed bg-white w-full top-0">
+      <nav className="flex items-center justify-between flex-row w-full p-2 h-14">
+        <img
+          src={InstagramBlack}
+          alt="instagram"
+          className="w-28 h-auto object-cover"
+        ></img>
 
         <div className="flex items-center justify-between flex-row">
           <MdOutlineAddBox
-            color="white"
+            color="black"
             size={25}
             className="mx-2"
           ></MdOutlineAddBox>
-          <BsSuitHeart color="white" size={25} className="mx-2"></BsSuitHeart>
+          <BsSuitHeart color="black" size={25} className="mx-2"></BsSuitHeart>
           <AiOutlineMessage
-            color="white"
+            color="black"
             size={25}
             className="mx-2"
           ></AiOutlineMessage>

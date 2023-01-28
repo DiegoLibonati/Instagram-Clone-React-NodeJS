@@ -8,11 +8,11 @@ import { Link } from "react-router-dom";
 
 export const FooterMobile = () => {
   return (
-    <footer className="lg:hidden flex items-center justify-between fixed bg-black w-full bottom-0 p-4">
-      <AiOutlineHome color="white" size={25}></AiOutlineHome>
-      <AiOutlineSearch color="white" size={25}></AiOutlineSearch>
-      <RxVideo color="white" size={25}></RxVideo>
-      <AiOutlineShopping color="white" size={25}></AiOutlineShopping>
+    <footer className="lg:hidden flex items-center justify-between fixed bg-white w-full bottom-0 p-2 h-14">
+      <AiOutlineHome color="black" size={25}></AiOutlineHome>
+      <AiOutlineSearch color="black" size={25}></AiOutlineSearch>
+      <RxVideo color="black" size={25}></RxVideo>
+      <AiOutlineShopping color="black" size={25}></AiOutlineShopping>
       <Link to="/">
         <img
           className="w-6 h-6 object-cover rounded-full"

@@ -12,7 +12,7 @@ export const SidebarNav = () => {
 
       <div className="flex flex-row w-100 h-auto items-center justify-start absolute bottom-6 pl-6">
         <SidebarItem text="Mas">
-          <GiHamburgerMenu size={25} color="white"></GiHamburgerMenu>
+          <GiHamburgerMenu size={25} color="black"></GiHamburgerMenu>
         </SidebarItem>
       </div>
     </nav>
