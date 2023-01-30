@@ -9,7 +9,7 @@ export const AuthLayout: React.FC<{
   textLink: string;
 }> = ({ children, text, textLink }) => {
   return (
-    <main className="flex items-center justify-center flex-row w-full min-h-screen p-3 sm:bg-gray-200">
+    <main className="flex items-center justify-center flex-row w-full p-3 sm:bg-gray-200">
       <section className="hidden lg:block">
         <article className="bg-mobile relative bg-contain bg-no-repeat bg-center h-custom-800 w-custom-30">
           <img
