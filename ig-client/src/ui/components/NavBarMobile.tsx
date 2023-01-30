@@ -5,7 +5,7 @@ import { InstagramBlack } from "../../assets/images";
 
 export const NavBarMobile = () => {
   return (
-    <header className="lg:hidden fixed bg-white w-full top-0">
+    <header className="lg:hidden fixed bg-white w-screen top-0 z-[9999999]">
       <nav className="flex items-center justify-between flex-row w-full p-2 h-14">
         <img
           src={InstagramBlack}

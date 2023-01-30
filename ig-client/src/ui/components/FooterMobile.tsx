@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 export const FooterMobile = () => {
   return (
-    <footer className="lg:hidden flex items-center justify-between fixed bg-white w-full bottom-0 p-2 h-14">
+    <footer className="lg:hidden flex items-center justify-between fixed bg-white w-screen bottom-0 p-2 h-14">
       <AiOutlineHome color="black" size={25}></AiOutlineHome>
       <AiOutlineSearch color="black" size={25}></AiOutlineSearch>
       <RxVideo color="black" size={25}></RxVideo>
