@@ -24,7 +24,7 @@ export const HomePage = () => {
         {matchMediaQuery && <Suggetions></Suggetions>}
       </main>
 
-      {modal.isOpen && <CommentsMobile></CommentsMobile>}
+      {!matchMediaQuery && modal.isOpen && <CommentsMobile></CommentsMobile>}
       {matchMediaQuery && modal.isOpen && <CommentsDesktop></CommentsDesktop>}
 
       <FooterMobile></FooterMobile>
