@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 interface UIContextProps {
   children: React.ReactNode;
@@ -25,6 +25,13 @@ export const UIProvider: React.FunctionComponent<UIContextProps> = ({
       type: type,
     });
   };
+
+  // UseEffects
+
+  useEffect(() => {
+    if (modal.isOpen) document.body.style.overflowY = "hidden";
+    else document.body.style.overflowY = "auto";
+  }, [modal]);
 
   return (
     <UIContext.Provider value={{ modal, setModalClose, setModalOpen }}>

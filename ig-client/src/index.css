@@ -19,6 +19,18 @@ body {
   position: relative;
 }
 
+.contain-content {
+  contain: content;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
 @media only screen and (min-width: 1024px) {
   #root {
     flex-flow: row nowrap;
