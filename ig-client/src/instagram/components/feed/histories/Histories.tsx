@@ -9,9 +9,9 @@ import "swiper/css/pagination";
 // import required modules
 import { FreeMode } from "swiper";
 
-export const Histories = () => {
+export const Histories = ({ className = "" }) => {
   return (
-    <article className="bg-white w-screen lg:w-full h-24">
+    <article className={`bg-white w-screen lg:w-full h-24 ${className}`}>
       <Swiper
         slidesPerView={5}
         spaceBetween={1}
