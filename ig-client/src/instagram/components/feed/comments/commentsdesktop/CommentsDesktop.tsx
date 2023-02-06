@@ -7,7 +7,7 @@ export const CommentsDesktop = () => {
   const { setModalClose } = useContext(UIContext);
   return (
     <div
-      className={`flex items-center justify-center flex-row bg-black bg-opacity-50 w-screen h-screen z-[999999999] relative`}
+      className={`flex items-center justify-center flex-row bg-black bg-opacity-50 w-screen h-screen z-[999999999] fixed`}
     >
       <AiOutlineClose
         size={25}

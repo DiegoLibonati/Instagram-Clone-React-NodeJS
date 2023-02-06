@@ -6,6 +6,12 @@ export const ProfileImages = () => {
       <ProfileImage></ProfileImage>
       <ProfileImage></ProfileImage>
       <ProfileImage></ProfileImage>
+      <ProfileImage></ProfileImage>
+      <ProfileImage></ProfileImage>
+      <ProfileImage></ProfileImage>
+      <ProfileImage></ProfileImage>
+      <ProfileImage></ProfileImage>
+      <ProfileImage></ProfileImage>
     </section>
   );
 };

@@ -1,9 +1,15 @@
+import { useContext } from "react";
 import { BsChat, BsSuitHeart } from "react-icons/bs";
+import { UIContext } from "../../../contexts/UIContext";
 
 export const ProfileImage = () => {
+  const { setModalOpen } = useContext(UIContext);
   return (
-    <div className="relative group h-32 md:h-48 2xl:h-72 w-full">
-      <div className="opacity-0 group-hover:opacity-75 duration-300 absolute inset-x-0 h-full flex justify-evenly items-center text-xl bg-gray-500 text-black font-semibold">
+    <div
+      className="relative group h-32 md:h-48 2xl:h-72 w-full cursor-pointer"
+      onClick={() => setModalOpen("publication")}
+    >
+      <div className="opacity-0 group-hover:opacity-75 duration-300 absolute inset-x-0 h-full flex justify-evenly items-center text-xl bg-neutral-800 text-black font-semibold">
         <p className="text-white text-center">
           <BsSuitHeart color="white" size={25}></BsSuitHeart>
           32
