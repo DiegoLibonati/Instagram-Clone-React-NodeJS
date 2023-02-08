@@ -22,7 +22,7 @@ export const ProfileHeader = () => {
         <ProfileHeaderDescriptionDesktop></ProfileHeaderDescriptionDesktop>
       )}
 
-      <Histories className="mb-5 mt-10 2xl:w-[75%]"></Histories>
+      <Histories className="mt-2 2xl:mb-5 2xl:mt-10 2xl:w-[75%]"></Histories>
     </section>
   );
 };
