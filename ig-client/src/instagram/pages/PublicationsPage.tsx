@@ -15,7 +15,7 @@ export const PublicationsPage = () => {
     if (matchMediaQuery && pathname === "/die_libonati/123123142") {
       return navigate("/die_libonati");
     }
-  }, [matchMediaQuery]);
+  }, [matchMediaQuery, navigate, pathname]);
 
   return (
     <>
