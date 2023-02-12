@@ -12,7 +12,7 @@ export const ProfileHeaderDescriptionDesktop = () => {
       <div className="flex items-start justify-center flex-col w-full h-auto">
         <div className="flex items-center justify-start flex-row w-[75%] h-auto">
           <h2 className="text-lg mr-8">die_libonati</h2>
-          <button className="text-sm px-5 py-2 bg-zinc-200 rounded-md cursor-pointer mr-2">
+          <button className="text-sm px-5 py-1 bg-zinc-200 rounded-md cursor-pointer mr-2">
             Editar perfil
           </button>
           <FiSettings size={20} color="black" className="2xl:ml-5"></FiSettings>
