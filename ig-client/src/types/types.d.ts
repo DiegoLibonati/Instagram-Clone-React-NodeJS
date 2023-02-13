@@ -4,3 +4,5 @@ export type Publication = {
   countLikes: number;
   countComments: number;
 };
+
+export type Histories = { className?: string; profileHistories: boolean };
