@@ -10,7 +10,7 @@ export const SidebarNav = () => {
 
       <SidebarItems></SidebarItems>
 
-      <div className="flex flex-row w-100 h-auto items-center justify-start absolute bottom-6 pl-6">
+      <div className="flex flex-row w-full h-auto items-center justify-start absolute bottom-6 pl-4">
         <SidebarItem text="Mas">
           <GiHamburgerMenu size={25} color="black"></GiHamburgerMenu>
         </SidebarItem>

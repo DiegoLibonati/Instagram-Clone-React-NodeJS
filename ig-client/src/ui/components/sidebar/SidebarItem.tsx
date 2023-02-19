@@ -7,7 +7,7 @@ export const SidebarItem: React.FC<{
 }> = ({ children, text, direct }) => {
   return (
     <li
-      className="flex flex-row w-100 h-auto items-center justify-start my-3 cursor-pointer"
+      className="flex flex-row w-5/6 py-3 rounded-full px-2 h-auto items-center justify-start cursor-pointer hover:bg-gray-200"
       onClick={direct}
     >
       {children}

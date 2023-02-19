@@ -9,7 +9,7 @@ export const SidebarItems = () => {
   const navigate = useNavigate();
 
   return (
-    <ul className="flex flex-col items-start justify-center w-full h-auto pl-6">
+    <ul className="flex flex-col items-start justify-center w-full h-auto pl-4">
       <SidebarItem text="Inicio" direct={() => navigate("/")}>
         <AiOutlineHome size={25} color="black"></AiOutlineHome>
       </SidebarItem>
