@@ -11,7 +11,9 @@ export const CommentsMobile = () => {
   return (
     <div
       className={`flex items-start justify-start flex-col bg-white w-screen h-screen fixed z-[999999999] overflow-x-hidden overflow-y-scroll transition transform ${
-        modal.isOpen ? "translate-x-0" : "translate-x-full"
+        modal.isOpen && modal.type === "publication"
+          ? "translate-x-0"
+          : "translate-x-full"
       }`}
     >
       <CommentsMobileHeader></CommentsMobileHeader>

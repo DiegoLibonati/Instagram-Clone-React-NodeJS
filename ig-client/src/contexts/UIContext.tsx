@@ -13,9 +13,11 @@ export const UIProvider: React.FunctionComponent<UIContextProps> = ({
     isOpen: false,
     type: "",
   });
+  const [previewSrc, setPreviewSrc] = useState<string>("");
 
   const setModalClose = (): void => {
     setModal({ ...modal, isOpen: false, type: "" });
+    setPreviewSrc("");
   };
 
   const setModalOpen = (type: string): void => {
@@ -34,7 +36,9 @@ export const UIProvider: React.FunctionComponent<UIContextProps> = ({
   }, [modal]);
 
   return (
-    <UIContext.Provider value={{ modal, setModalClose, setModalOpen }}>
+    <UIContext.Provider
+      value={{ modal, previewSrc, setPreviewSrc, setModalClose, setModalOpen }}
+    >
       {children}
     </UIContext.Provider>
   );

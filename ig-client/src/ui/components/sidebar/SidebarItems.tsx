@@ -3,14 +3,17 @@ import { BsSearch, BsSuitHeart } from "react-icons/bs";
 import { MdOutlineAddBox, MdOutlineExplore } from "react-icons/md";
 import { RxVideo } from "react-icons/rx";
 import { useNavigate } from "react-router-dom";
+import { UIContext } from "../../../contexts/UIContext";
 import { SidebarItem } from "./SidebarItem";
+import { useContext } from "react";
 
 export const SidebarItems = () => {
   const navigate = useNavigate();
+  const { setModalOpen } = useContext(UIContext);
 
   return (
     <ul className="flex flex-col items-start justify-center w-full h-auto pl-4">
-      <SidebarItem text="Inicio" direct={() => navigate("/")}>
+      <SidebarItem text="Inicio" onClick={() => navigate("/")}>
         <AiOutlineHome size={25} color="black"></AiOutlineHome>
       </SidebarItem>
       <SidebarItem text="Buscar">
@@ -28,10 +31,10 @@ export const SidebarItems = () => {
       <SidebarItem text="Notificaciones">
         <BsSuitHeart size={25} color="black"></BsSuitHeart>
       </SidebarItem>
-      <SidebarItem text="Crear">
+      <SidebarItem text="Crear" onClick={() => setModalOpen("newpublication")}>
         <MdOutlineAddBox size={25} color="black"></MdOutlineAddBox>
       </SidebarItem>
-      <SidebarItem text="Perfil" direct={() => navigate("/die_libonati")}>
+      <SidebarItem text="Perfil" onClick={() => navigate("/die_libonati")}>
         <img
           className="w-6 h-6 object-cover rounded-full"
           src="https://cdn.domestika.org/c_fill,dpr_1.0,f_auto,h_1200,pg_1,t_base_params,w_1200/v1589759117/project-covers/000/721/921/721921-original.png?1589759117"
