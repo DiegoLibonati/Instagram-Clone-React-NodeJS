@@ -1,0 +1,33 @@
+{
+  "name": "ig-api",
+  "version": "1.0.0",
+  "description": "API for a instagram clone app",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DiegoLibonati/Instagram-Clone-App-Page.git"
+  },
+  "author": "Die",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DiegoLibonati/Instagram-Clone-App-Page/issues"
+  },
+  "homepage": "https://github.com/DiegoLibonati/Instagram-Clone-App-Page#readme",
+  "devDependencies": {
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.20"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^6.9.2",
+    "redis": "^4.6.4"
+  }
+}
