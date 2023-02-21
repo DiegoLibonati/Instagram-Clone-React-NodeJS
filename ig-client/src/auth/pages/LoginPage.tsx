@@ -18,7 +18,12 @@ export const LoginPage = () => {
     const request = await instagramApiLogin(formState);
 
     if (request.hasOwnProperty("response")) {
-      return setAlertOpen("error", request.response.data.message);
+      return setAlertOpen(
+        "error",
+        "¡Oh, algo salio mal!",
+        request.response.data.message,
+        "bg-red-600"
+      );
     }
 
     console.log(request);

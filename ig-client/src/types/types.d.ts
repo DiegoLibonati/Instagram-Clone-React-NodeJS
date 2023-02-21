@@ -10,7 +10,9 @@ export type Histories = { className?: string; profileHistories: boolean };
 export type MAlert = {
   isOpen: boolean;
   type: string;
+  title: string;
   message: string;
+  color: string;
 };
 
 export type Modal = {

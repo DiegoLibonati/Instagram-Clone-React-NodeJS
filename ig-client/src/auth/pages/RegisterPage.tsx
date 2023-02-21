@@ -22,10 +22,18 @@ export const RegisterPage = () => {
     const request = await instagramApiRegister(formState);
 
     if (request.hasOwnProperty("response")) {
-      return setAlertOpen("error", request.response.data.message);
+      return setAlertOpen(
+        "error",
+        "¡Oh, algo salio mal!",
+        request.response.data.message,
+        "bg-red-600"
+      );
     }
 
-    console.log(request);
+    const message = request.message;
+    //const data = request.user;
+
+    setAlertOpen("success", "¡Bien, todo esta ok!", message, "bg-green-600");
 
     onResetForm();
 

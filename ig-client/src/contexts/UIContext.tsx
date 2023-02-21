@@ -17,7 +17,9 @@ export const UIProvider: React.FunctionComponent<UIContextProps> = ({
   const [alert, setAlert] = useState<MAlert>({
     isOpen: false,
     type: "",
+    title: "",
     message: "",
+    color: "",
   });
   const [previewSrc, setPreviewSrc] = useState<string>("");
 
@@ -35,15 +37,22 @@ export const UIProvider: React.FunctionComponent<UIContextProps> = ({
   };
 
   const setAlertClose = (): void => {
-    setAlert({ isOpen: false, type: "", message: "" });
+    setAlert({ isOpen: false, type: "", message: "", title: "", color: "" });
   };
 
-  const setAlertOpen = (type: string, message: string): void => {
+  const setAlertOpen = (
+    type: string,
+    title: string,
+    message: string,
+    color: string
+  ): void => {
     return setAlert({
       ...alert,
       isOpen: true,
       type: type,
+      title: title,
       message: message,
+      color: color,
     });
   };
 
@@ -60,7 +69,7 @@ export const UIProvider: React.FunctionComponent<UIContextProps> = ({
     if (isOpen) {
       const timeoutAlert = setTimeout(() => {
         setAlertClose();
-      }, 600000);
+      }, 4000);
 
       return () => clearTimeout(timeoutAlert);
     }
