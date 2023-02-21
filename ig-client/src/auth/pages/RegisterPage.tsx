@@ -1,5 +1,7 @@
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { instagramApiRegister } from "../../api/instagramApiRegister";
+import { UIContext } from "../../contexts/UIContext";
 import { useForm } from "../../hooks/useForm";
 import { AuthLayout } from "../layout/AuthLayout";
 
@@ -13,13 +15,14 @@ const form = {
 export const RegisterPage = () => {
   const { formState, onInputChange, onResetForm } = useForm(form);
   const navigate = useNavigate();
+  const { setAlertOpen } = useContext(UIContext);
 
   const onSubmitRegister = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const request = await instagramApiRegister(formState);
 
     if (request.hasOwnProperty("response")) {
-      return console.log(request.response.data.message);
+      return setAlertOpen("error", request.response.data.message);
     }
 
     console.log(request);

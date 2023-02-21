@@ -7,15 +7,17 @@ import { ProfilePage } from "../instagram/pages/ProfilePage";
 import { PublicationsPage } from "../instagram/pages/PublicationsPage";
 import { ModalNewPublication } from "../ui/components/modal/modalnewpublication/ModalNewPublication";
 import { useContext } from "react";
+import { ModalAlert } from "../ui/components/modal/modalalert/ModalAlert";
 
 export const InstagramRouter = () => {
-  const { modal } = useContext(UIContext);
+  const { modal, alert } = useContext(UIContext);
 
   return (
     <>
       {modal.isOpen && modal.type === "newpublication" && (
         <ModalNewPublication></ModalNewPublication>
       )}
+      {alert.isOpen && <ModalAlert></ModalAlert>}
       <Routes>
         <Route path="/auth/login" element={<LoginPage></LoginPage>}></Route>
         <Route

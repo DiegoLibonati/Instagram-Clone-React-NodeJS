@@ -1,4 +1,5 @@
 import { createContext, useEffect, useState } from "react";
+import { MAlert, Modal } from "../types/types";
 
 interface UIContextProps {
   children: React.ReactNode;
@@ -9,9 +10,14 @@ export const UIContext = createContext<null | any>(null);
 export const UIProvider: React.FunctionComponent<UIContextProps> = ({
   children,
 }) => {
-  const [modal, setModal] = useState({
+  const [modal, setModal] = useState<Modal>({
     isOpen: false,
     type: "",
+  });
+  const [alert, setAlert] = useState<MAlert>({
+    isOpen: false,
+    type: "",
+    message: "",
   });
   const [previewSrc, setPreviewSrc] = useState<string>("");
 
@@ -28,6 +34,19 @@ export const UIProvider: React.FunctionComponent<UIContextProps> = ({
     });
   };
 
+  const setAlertClose = (): void => {
+    setAlert({ isOpen: false, type: "", message: "" });
+  };
+
+  const setAlertOpen = (type: string, message: string): void => {
+    return setAlert({
+      ...alert,
+      isOpen: true,
+      type: type,
+      message: message,
+    });
+  };
+
   // UseEffects
 
   useEffect(() => {
@@ -35,9 +54,30 @@ export const UIProvider: React.FunctionComponent<UIContextProps> = ({
     else document.body.style.overflowY = "auto";
   }, [modal]);
 
+  useEffect(() => {
+    const { isOpen } = alert;
+
+    if (isOpen) {
+      const timeoutAlert = setTimeout(() => {
+        setAlertClose();
+      }, 600000);
+
+      return () => clearTimeout(timeoutAlert);
+    }
+  }, [alert]);
+
   return (
     <UIContext.Provider
-      value={{ modal, previewSrc, setPreviewSrc, setModalClose, setModalOpen }}
+      value={{
+        modal,
+        previewSrc,
+        alert,
+        setPreviewSrc,
+        setModalClose,
+        setModalOpen,
+        setAlertClose,
+        setAlertOpen,
+      }}
     >
       {children}
     </UIContext.Provider>

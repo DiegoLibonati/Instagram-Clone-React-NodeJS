@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import { instagramApiLogin } from "../../api/instagramApiLogin";
+import { UIContext } from "../../contexts/UIContext";
 import { useForm } from "../../hooks/useForm";
 import { AuthLayout } from "../layout/AuthLayout";
 
@@ -9,13 +11,14 @@ const form = {
 
 export const LoginPage = () => {
   const { formState, onInputChange, onResetForm } = useForm(form);
+  const { setAlertOpen } = useContext(UIContext);
 
   const onSubmitLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const request = await instagramApiLogin(formState);
 
     if (request.hasOwnProperty("response")) {
-      return console.log(request.response.data.message);
+      return setAlertOpen("error", request.response.data.message);
     }
 
     console.log(request);
