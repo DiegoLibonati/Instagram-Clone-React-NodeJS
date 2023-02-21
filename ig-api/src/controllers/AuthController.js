@@ -12,7 +12,7 @@ export const Auth = {
     if (!user)
       return res.status(404).json({ message: "¡El usuario no existe!" });
 
-    const validation = user.comparePassword(password);
+    const validation = await user.comparePassword(password);
 
     if (!validation)
       return res
@@ -34,8 +34,9 @@ export const Auth = {
       .status(200)
       .cookie("ig-sess", token, {
         expires: new Date(Date.now() + 1 * 60 * 60 * 1000),
+        httpOnly: false,
       })
-      .json({ payload: payload, token: token });
+      .json({ payload: payload });
   },
   postRegister: async (req, res) => {
     const { name, username, email, password } = req.body;

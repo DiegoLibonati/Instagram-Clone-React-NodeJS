@@ -1,10 +1,41 @@
+import { useNavigate } from "react-router-dom";
+import { instagramApiRegister } from "../../api/instagramApiRegister";
+import { useForm } from "../../hooks/useForm";
 import { AuthLayout } from "../layout/AuthLayout";
 
+const form = {
+  email: "",
+  name: "",
+  username: "",
+  password: "",
+};
+
 export const RegisterPage = () => {
+  const { formState, onInputChange, onResetForm } = useForm(form);
+  const navigate = useNavigate();
+
+  const onSubmitRegister = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const request = await instagramApiRegister(formState);
+
+    if (request.hasOwnProperty("response")) {
+      return console.log(request.response.data.message);
+    }
+
+    console.log(request);
+
+    onResetForm();
+
+    navigate("/auth/login");
+  };
+
   return (
     <>
       <AuthLayout text="¿Tienes una cuenta?" textLink="Inicia sesion">
-        <form className="flex items-center justify-center flex-col w-full h-full my-2">
+        <form
+          className="flex items-center justify-center flex-col w-full h-full my-2"
+          onSubmit={(e) => onSubmitRegister(e)}
+        >
           <p className="text-lg font-semibold text-gray-500 text-center">
             Registrate para ver fotos y videos de tus amigos.
           </p>
@@ -14,19 +45,31 @@ export const RegisterPage = () => {
           <hr className="w-full h-px my-2 bg-gray-200 border-0 dark:bg-gray-700" />
           <input
             className="w-full p-2 text-sm text-black border-gray-300 border my-2 outline-none"
-            placeholder="Numero de celular o correo electronico"
+            placeholder="Correo electronico"
+            name="email"
+            value={formState.email}
+            onChange={onInputChange}
           ></input>
           <input
             className="w-full p-2 text-sm text-black border-gray-300 border my-2 outline-none"
             placeholder="Nombre completo"
+            name="name"
+            value={formState.name}
+            onChange={onInputChange}
           ></input>
           <input
             className="w-full p-2 text-sm text-black border-gray-300 border my-2 outline-none"
             placeholder="Nombre de usuario"
+            name="username"
+            value={formState.username}
+            onChange={onInputChange}
           ></input>
           <input
             className="w-full p-2 text-sm text-black border-gray-300 border my-2 outline-none"
             placeholder="Contraseña"
+            name="password"
+            value={formState.password}
+            onChange={onInputChange}
           ></input>
           <p className="text-center text-gray-500 my-2 text-sm">
             Es posible que las personas que usan nuestro servicio hayan subido
