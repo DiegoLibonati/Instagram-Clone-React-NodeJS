@@ -4,6 +4,26 @@ import config from "../config.js";
 import jwt from "jsonwebtoken";
 
 export const Auth = {
+  getRenew: async (req, res) => {
+    const payload = {
+      id: req.user.id,
+      name: req.user.name,
+      username: req.user.username,
+      email: req.user.email,
+    };
+
+    const token = jwt.sign(payload, config.TOKEN_SECRET, {
+      expiresIn: "1h",
+    });
+
+    return res
+      .status(200)
+      .cookie("ig-sess", token, {
+        expires: new Date(Date.now() + 1 * 60 * 60 * 1000),
+        httpOnly: false,
+      })
+      .json({ payload: payload });
+  },
   postLogin: async (req, res) => {
     const { email, password } = req.body;
 

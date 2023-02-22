@@ -1,13 +1,16 @@
 import { BrowserRouter } from "react-router-dom";
+import { AuthProvider } from "./contexts/AuthContext";
 import { UIProvider } from "./contexts/UIContext";
 import { InstagramRouter } from "./router/InstagramRouter";
 
 function App() {
   return (
     <BrowserRouter>
-      <UIProvider>
-        <InstagramRouter></InstagramRouter>
-      </UIProvider>
+      <AuthProvider>
+        <UIProvider>
+          <InstagramRouter></InstagramRouter>
+        </UIProvider>
+      </AuthProvider>
     </BrowserRouter>
   );
 }

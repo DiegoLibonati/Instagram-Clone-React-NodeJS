@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { instagramApiLogin } from "../../api/instagramApiLogin";
+import { AuthContext } from "../../contexts/AuthContext";
 import { UIContext } from "../../contexts/UIContext";
 import { useForm } from "../../hooks/useForm";
 import { AuthLayout } from "../layout/AuthLayout";
@@ -12,9 +13,11 @@ const form = {
 export const LoginPage = () => {
   const { formState, onInputChange, onResetForm } = useForm(form);
   const { setAlertOpen } = useContext(UIContext);
+  const { user, setUser } = useContext(AuthContext);
 
   const onSubmitLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setUser({ ...user, status: "checking" });
     const request = await instagramApiLogin(formState);
 
     if (request.hasOwnProperty("response")) {
@@ -26,9 +29,10 @@ export const LoginPage = () => {
       );
     }
 
-    console.log(request);
+    const userData = request.payload;
 
     onResetForm();
+    setUser({ ...userData, status: "authenticated" });
   };
 
   return (

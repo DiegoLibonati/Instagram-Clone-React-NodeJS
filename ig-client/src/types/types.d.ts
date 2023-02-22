@@ -19,3 +19,11 @@ export type Modal = {
   isOpen: boolean;
   type: string;
 };
+
+export type User = {
+  status: string;
+  id: string;
+  email: string;
+  name: string;
+  username: string;
+};

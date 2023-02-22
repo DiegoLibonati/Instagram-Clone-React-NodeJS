@@ -1,16 +1,26 @@
-import { Routes, Route } from "react-router-dom";
-import { LoginPage } from "../auth/pages/LoginPage";
-import { RegisterPage } from "../auth/pages/RegisterPage";
+import { Route, Routes } from "react-router-dom";
 import { UIContext } from "../contexts/UIContext";
-import { HomePage } from "../instagram/pages/HomePage";
-import { ProfilePage } from "../instagram/pages/ProfilePage";
-import { PublicationsPage } from "../instagram/pages/PublicationsPage";
 import { ModalNewPublication } from "../ui/components/modal/modalnewpublication/ModalNewPublication";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { ModalAlert } from "../ui/components/modal/modalalert/ModalAlert";
+import { AuthContext } from "../contexts/AuthContext";
+import { AuthRoutes } from "../auth/routes/AuthRoutes";
+import { InstagramRoutes } from "../instagram/routes/InstagramRoutes";
 
 export const InstagramRouter = () => {
   const { modal, alert } = useContext(UIContext);
+
+  const { checkAuthToken, user } = useContext(AuthContext);
+
+  const { status } = user;
+
+  useEffect(() => {
+    checkAuthToken();
+  }, []);
+
+  if (status === "checking") {
+    return <h1>Cargando...</h1>;
+  }
 
   return (
     <>
@@ -19,19 +29,14 @@ export const InstagramRouter = () => {
       )}
       {alert.isOpen && <ModalAlert></ModalAlert>}
       <Routes>
-        <Route path="/auth/login" element={<LoginPage></LoginPage>}></Route>
-        <Route
-          path="/auth/register"
-          element={<RegisterPage></RegisterPage>}
-        ></Route>
-
-        <Route path="/" element={<HomePage></HomePage>}></Route>
-        <Route path="/:profile" element={<ProfilePage></ProfilePage>}></Route>
-        <Route
-          path="/:profile/:profilePublicationsId"
-          element={<PublicationsPage></PublicationsPage>}
-        ></Route>
-        <Route path="/*" element={<HomePage></HomePage>}></Route>
+        {status === "authenticated" ? (
+          <Route
+            path="/*"
+            element={<InstagramRoutes></InstagramRoutes>}
+          ></Route>
+        ) : (
+          <Route path="/*" element={<AuthRoutes></AuthRoutes>}></Route>
+        )}
       </Routes>
     </>
   );

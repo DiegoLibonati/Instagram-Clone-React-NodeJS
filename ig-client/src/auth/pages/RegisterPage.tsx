@@ -31,7 +31,6 @@ export const RegisterPage = () => {
     }
 
     const message = request.message;
-    //const data = request.user;
 
     setAlertOpen("success", "¡Bien, todo esta ok!", message, "bg-green-600");
 
