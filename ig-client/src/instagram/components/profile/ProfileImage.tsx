@@ -18,7 +18,7 @@ export const ProfileImage = ({
       className="relative group h-32 md:h-48 2xl:h-72 w-full cursor-pointer"
       onClick={() => {
         if (matchMediaQuery) setModalOpen("publication");
-        else navigate("/die_libonati/123123142");
+        else navigate("/p/123123142");
       }}
     >
       <div className="opacity-0 group-hover:opacity-75 duration-300 absolute inset-x-0 h-full flex justify-evenly items-center text-xl bg-neutral-800 text-black font-semibold">

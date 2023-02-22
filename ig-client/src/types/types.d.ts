@@ -26,4 +26,7 @@ export type User = {
   email: string;
   name: string;
   username: string;
+  publications: Publication[];
+  followers: User[];
+  following: User[];
 };

@@ -1,4 +1,9 @@
+import { useContext } from "react";
+import { AuthContext } from "../../../contexts/AuthContext";
+
 export const ProfileHeaderNumbers = () => {
+  const { user } = useContext(AuthContext);
+
   return (
     <article className="flex items-center justify-evenly flex-row w-full h-auto">
       <img
@@ -9,15 +14,15 @@ export const ProfileHeaderNumbers = () => {
 
       <div className="flex items-center justify-between flex-row w-2/3 h-auto">
         <div className="flex items-center justify-center flex-col w-full h-auto">
-          <h2 className="font-bold md:text-lg">11</h2>
+          <h2 className="font-bold md:text-lg">{user.publications.length}</h2>
           <p className="text-xs md:text-lg">Publicaciones</p>
         </div>
         <div className="flex items-center justify-center flex-col w-full h-auto">
-          <h2 className="font-bold md:text-lg">11445</h2>
+          <h2 className="font-bold md:text-lg">{user.followers.length}</h2>
           <p className="text-xs md:text-lg">Seguidores</p>
         </div>
         <div className="flex items-center justify-center flex-col w-full h-auto">
-          <h2 className="font-bold md:text-lg">131</h2>
+          <h2 className="font-bold md:text-lg">{user.following.length}</h2>
           <p className="text-xs md:text-lg">Seguidos</p>
         </div>
       </div>

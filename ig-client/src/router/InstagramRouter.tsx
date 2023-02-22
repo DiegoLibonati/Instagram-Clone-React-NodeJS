@@ -6,6 +6,7 @@ import { ModalAlert } from "../ui/components/modal/modalalert/ModalAlert";
 import { AuthContext } from "../contexts/AuthContext";
 import { AuthRoutes } from "../auth/routes/AuthRoutes";
 import { InstagramRoutes } from "../instagram/routes/InstagramRoutes";
+import { Loader } from "../ui/components/loader/Loader";
 
 export const InstagramRouter = () => {
   const { modal, alert } = useContext(UIContext);
@@ -19,7 +20,7 @@ export const InstagramRouter = () => {
   }, []);
 
   if (status === "checking") {
-    return <h1>Cargando...</h1>;
+    return <Loader></Loader>;
   }
 
   return (

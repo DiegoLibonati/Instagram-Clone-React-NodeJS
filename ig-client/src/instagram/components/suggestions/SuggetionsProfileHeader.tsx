@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../../contexts/AuthContext";
 
 export const SuggetionsProfileHeader = () => {
+  const { user } = useContext(AuthContext);
   return (
     <article className="flex items-center justify-start w-full h-16">
       <Link to="/die_libonati">
@@ -13,9 +16,9 @@ export const SuggetionsProfileHeader = () => {
 
       <div className="ml-4">
         <Link to="/die_libonati">
-          <h2 className="text-black font-bold">die_libonati</h2>
+          <h2 className="text-black font-bold">{user.username}</h2>
         </Link>
-        <h3 className="text-black">Diego Libonati</h3>
+        <h3 className="text-black">{user.name}</h3>
       </div>
     </article>
   );

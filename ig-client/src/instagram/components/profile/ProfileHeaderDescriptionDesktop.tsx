@@ -1,6 +1,9 @@
 import { FiSettings } from "react-icons/fi";
+import { AuthContext } from "../../../contexts/AuthContext";
+import { useContext } from "react";
 
 export const ProfileHeaderDescriptionDesktop = () => {
+  const { user } = useContext(AuthContext);
   return (
     <article className="flex items-start justify-start flex-row w-full h-auto 2xl:w-[75%]">
       <img
@@ -11,7 +14,7 @@ export const ProfileHeaderDescriptionDesktop = () => {
 
       <div className="flex items-start justify-center flex-col w-full h-auto">
         <div className="flex items-center justify-start flex-row w-[75%] h-auto">
-          <h2 className="text-lg mr-8">die_libonati</h2>
+          <h2 className="text-lg mr-8">{user.username}</h2>
           <button className="text-sm px-5 py-1 bg-zinc-200 rounded-md cursor-pointer mr-2">
             Editar perfil
           </button>
@@ -19,20 +22,20 @@ export const ProfileHeaderDescriptionDesktop = () => {
         </div>
         <div className="flex items-center justify-evenly flex-row w-full h-auto mt-5">
           <div className="flex items-center justify-center flex-col mr-2 2xl:mr-0 2xl:flex-row">
-            <h2 className="font-bold 2xl:mr-1">444</h2>
+            <h2 className="font-bold 2xl:mr-1">{user.publications.length}</h2>
             <p className="text-sm">publicaciones</p>
           </div>
           <div className="flex items-center justify-center flex-col mr-2 2xl:mr-0 2xl:flex-row">
-            <h2 className="font-bold 2xl:mr-1">444</h2>
+            <h2 className="font-bold 2xl:mr-1">{user.followers.length}</h2>
             <p className="text-sm">seguidores</p>
           </div>
           <div className="flex items-center justify-center flex-col mr-2 2xl:mr-0 2xl:flex-row">
-            <h2 className="font-bold 2xl:mr-1">444</h2>
+            <h2 className="font-bold 2xl:mr-1">{user.following.length}</h2>
             <p className="text-sm">seguidos</p>
           </div>
         </div>
         <div className="flex flex-col items-start justify-center w-[50%] h-auto mt-5">
-          <h2 className="font-bold text-base">Diego Libonati</h2>
+          <h2 className="font-bold text-base">{user.name}</h2>
           <p className="text-sm">
             Villa Luro - 24 Años<br></br>
             "Vive y deja vivir"<br></br>

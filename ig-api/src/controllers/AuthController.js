@@ -10,6 +10,9 @@ export const Auth = {
       name: req.user.name,
       username: req.user.username,
       email: req.user.email,
+      publications: req.user.publications,
+      followers: req.user.followers,
+      following: req.user.following,
     };
 
     const token = jwt.sign(payload, config.TOKEN_SECRET, {
@@ -44,6 +47,9 @@ export const Auth = {
       name: user.name,
       username: user.username,
       email: user.email,
+      publications: user.publications,
+      followers: user.followers,
+      following: user.following,
     };
 
     const token = jwt.sign(payload, config.TOKEN_SECRET, {

@@ -21,6 +21,15 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    publications: {
+      type: Array,
+    },
+    followers: {
+      type: Array,
+    },
+    following: {
+      type: Array,
+    },
   },
   {
     versionKey: false,
