@@ -7,9 +7,9 @@ export const InstagramRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<HomePage></HomePage>}></Route>
-      <Route path=":profile" element={<ProfilePage></ProfilePage>}></Route>
+      <Route path="/:id" element={<ProfilePage></ProfilePage>}></Route>
       <Route
-        path="p/:profilePublicationsId"
+        path="/p/:profilePublicationsId"
         element={<PublicationsPage></PublicationsPage>}
       ></Route>
       <Route path="/*" element={<Navigate to="/"></Navigate>}></Route>

@@ -21,7 +21,7 @@ export type Modal = {
 };
 
 export type User = {
-  status: string;
+  status?: string;
   id: string;
   email: string;
   name: string;
