@@ -12,7 +12,7 @@ export const ModalAlert = (): React.ReactElement => {
   const iconColor = color === "bg-green-600" ? "green" : "red";
 
   return (
-    <div className="flex flex-row items-center justify-start w-screen h-32 shadow-lg fixed bottom-0 bg-white p-2  md:w-[32rem] md:h-28 md:top-2 md:right-2 md:rounded-md">
+    <div className="flex flex-row items-center justify-start w-screen h-32 shadow-lg fixed bottom-0 bg-white p-2 z-[9999999999] md:w-[32rem] md:h-28 md:top-2 md:right-2 md:rounded-md">
       <div className={`w-2 h-full ${color} md:w-1`}></div>
       {type === "error" && (
         <BiError size={25} color={iconColor} className="ml-2"></BiError>
