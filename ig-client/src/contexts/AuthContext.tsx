@@ -56,7 +56,7 @@ export const AuthProvider: React.FunctionComponent<AuthContextProps> = ({
   };
 
   return (
-    <AuthContext.Provider value={{ user, setUser, checkAuthToken }}>
+    <AuthContext.Provider value={{ user, setUser, checkAuthToken, onLogout }}>
       {children}
     </AuthContext.Provider>
   );

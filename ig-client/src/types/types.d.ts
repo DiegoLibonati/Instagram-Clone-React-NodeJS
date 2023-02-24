@@ -30,3 +30,7 @@ export type User = {
   followers: User[];
   following: User[];
 };
+
+export type MConfig = {
+  isOpen: boolean;
+};

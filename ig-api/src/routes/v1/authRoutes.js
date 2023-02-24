@@ -6,6 +6,7 @@ const AuthRouter = express.Router();
 
 AuthRouter.post("/register", Auth.postRegister)
   .post("/login", Auth.postLogin)
-  .get("/renew", verifyToken, Auth.getRenew);
+  .get("/renew", verifyToken, Auth.getRenew)
+  .get("/logout", Auth.getLogout);
 
 export default AuthRouter;

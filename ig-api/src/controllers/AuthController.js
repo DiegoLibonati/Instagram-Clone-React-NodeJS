@@ -27,6 +27,13 @@ export const Auth = {
       })
       .json({ payload: payload });
   },
+  getLogout: async (req, res) => {
+    return res
+      .status(200)
+      .clearCookie("ig-sess")
+      .json({ message: "¡Sesion cerrada!" })
+      .end();
+  },
   postLogin: async (req, res) => {
     const { email, password } = req.body;
 

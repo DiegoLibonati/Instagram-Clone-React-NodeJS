@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { MAlert, Modal } from "../types/types";
+import { MAlert, MConfig, Modal } from "../types/types";
 
 interface UIContextProps {
   children: React.ReactNode;
@@ -20,6 +20,9 @@ export const UIProvider: React.FunctionComponent<UIContextProps> = ({
     title: "",
     message: "",
     color: "",
+  });
+  const [menuConfig, setMenuConfig] = useState<MConfig>({
+    isOpen: false,
   });
   const [previewSrc, setPreviewSrc] = useState<string>("");
 
@@ -56,6 +59,17 @@ export const UIProvider: React.FunctionComponent<UIContextProps> = ({
     });
   };
 
+  const setMenuConfigClose = (): void => {
+    setMenuConfig({ isOpen: false });
+  };
+
+  const setMenuConfigOpen = (): void => {
+    return setMenuConfig({
+      ...menuConfig,
+      isOpen: true,
+    });
+  };
+
   // UseEffects
 
   useEffect(() => {
@@ -81,6 +95,9 @@ export const UIProvider: React.FunctionComponent<UIContextProps> = ({
         modal,
         previewSrc,
         alert,
+        menuConfig,
+        setMenuConfigClose,
+        setMenuConfigOpen,
         setPreviewSrc,
         setModalClose,
         setModalOpen,
