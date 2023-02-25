@@ -1,5 +1,5 @@
-import { Histories } from "./histories/Histories";
-import { Publication } from "./publication/Publication";
+import { Histories } from "../Histories/Histories";
+import { Publication } from "../Publication/Publication";
 
 export const Feed = () => {
   return (

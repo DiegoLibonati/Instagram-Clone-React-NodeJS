@@ -1,8 +1,8 @@
 import { BsArrowLeft } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../../../contexts/AuthContext";
 import { useContext } from "react";
-import { NavBarMobile } from "../../../../ui/components/NavBar/Mobile/NavBarMobile";
+import { AuthContext } from "../../../contexts/AuthContext";
+import { NavBarMobile } from "../../../ui/components/NavBar/Mobile/NavBarMobile";
 
 export const PublicationsHeader = () => {
   const navigate = useNavigate();

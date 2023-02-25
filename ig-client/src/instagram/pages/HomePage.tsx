@@ -9,10 +9,10 @@ import { useMediaMatch } from "../../hooks/useMediaMatch";
 import { FooterMobile } from "../../ui/components/Footer/Mobile/FooterMobile";
 import { NavBarMobile } from "../../ui/components/NavBar/Mobile/NavBarMobile";
 import { Sidebar } from "../../ui/components/Sidebar/Sidebar";
-import { CommentsDesktop } from "../components/feed/comments/commentsdesktop/CommentsDesktop";
-import { CommentsMobile } from "../components/feed/comments/commentsmobile/CommentsMobile";
-import { Feed } from "../components/feed/Feed";
-import { Suggetions } from "../components/suggestions/Suggetions";
+import { CommentsDesktop } from "../components/Comments/Desktop/CommentsDesktop";
+import { CommentsMobile } from "../components/Comments/Mobile/CommentsMobile";
+import { Feed } from "../components/Feed/Feed";
+import { Suggetions } from "../components/Suggestions/Suggetions";
 
 export const HomePage = () => {
   const { matchMediaQuery } = useMediaMatch(1024);

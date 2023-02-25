@@ -1,8 +1,9 @@
 import { useMediaMatch } from "../../../hooks/useMediaMatch";
-import { Histories } from "../feed/histories/Histories";
+import { Histories } from "../Histories/Histories";
+
 import { ProfileHeaderActions } from "./ProfileHeaderActions";
 import { ProfileHeaderDescription } from "./ProfileHeaderDescription";
-import { ProfileHeaderDescriptionDesktop } from "./ProfileHeaderDescriptionDesktop";
+import { ProfileHeaderDescriptionDesktop } from "./Desktop/ProfileHeaderDescriptionDesktop";
 import { ProfileHeaderNumbers } from "./ProfileHeaderNumbers";
 
 export const ProfileHeader = () => {

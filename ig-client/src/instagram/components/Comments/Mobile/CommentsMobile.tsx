@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import { UIContext } from "../../../../../contexts/UIContext";
-import { SliderFullScreen } from "../../../../../ui/components/SliderFullScreen/SliderFullScreen";
+import { UIContext } from "../../../../contexts/UIContext";
+import { SliderFullScreen } from "../../../../ui/components/SliderFullScreen/SliderFullScreen";
 import { CommentsMobileComments } from "./CommentsMobileComments";
 import { CommentsMobileForm } from "./CommentsMobileForm";
 import { CommentsMobileHeader } from "./CommentsMobileHeader";

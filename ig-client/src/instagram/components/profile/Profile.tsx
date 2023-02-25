@@ -1,6 +1,3 @@
-import { ProfileActions } from "./ProfileActions";
-import { ProfileHeader } from "./ProfileHeader";
-import { ProfileImages } from "./ProfileImages";
 import { useState, useEffect, useContext } from "react";
 import { User } from "../../../types/types";
 import { instagramApiGetUser } from "../../../api/instagramApiGetUser";
@@ -9,6 +6,9 @@ import { AuthContext } from "../../../contexts/AuthContext";
 import { UIContext } from "../../../contexts/UIContext";
 import { MenuConfigMobile } from "../../../ui/components/MenuConfig/Mobile/MenuConfigMobile";
 import { useMediaMatch } from "../../../hooks/useMediaMatch";
+import { ProfileHeader } from "./ProfileHeader";
+import { ProfileActions } from "./ProfileActions";
+import { ProfileImages } from "./ProfileImages";
 
 export const Profile = () => {
   const { id: urlUsername } = useParams();

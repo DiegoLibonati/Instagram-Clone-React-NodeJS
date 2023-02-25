@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { CommentsDesktopContainer } from "./CommentsDesktopContainer";
-import { UIContext } from "../../../../../contexts/UIContext";
+import { UIContext } from "../../../../contexts/UIContext";
 
 export const CommentsDesktop = () => {
   const { setModalClose } = useContext(UIContext);

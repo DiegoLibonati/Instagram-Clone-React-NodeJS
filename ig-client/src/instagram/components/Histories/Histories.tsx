@@ -8,8 +8,9 @@ import "swiper/css/pagination";
 
 // import required modules
 import { FreeMode } from "swiper";
-import { Histories as HistoriesType } from "../../../../types/types";
+
 import { VscAdd } from "react-icons/vsc";
+import { Histories as HistoriesType } from "../../../types/types";
 
 const histories: Array<any> = [
   {

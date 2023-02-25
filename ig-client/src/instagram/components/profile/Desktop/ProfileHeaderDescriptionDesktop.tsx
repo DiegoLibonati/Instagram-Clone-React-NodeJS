@@ -1,5 +1,5 @@
 import { FiSettings } from "react-icons/fi";
-import { AuthContext } from "../../../contexts/AuthContext";
+import { AuthContext } from "../../../../contexts/AuthContext";
 import { useContext } from "react";
 import { useParams } from "react-router-dom";
 

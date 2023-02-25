@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { BsArrowLeft } from "react-icons/bs";
 import { FiSend } from "react-icons/fi";
-import { UIContext } from "../../../../../contexts/UIContext";
+import { UIContext } from "../../../../contexts/UIContext";
 
 export const CommentsMobileHeader = () => {
   const { setModalClose } = useContext(UIContext);
