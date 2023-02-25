@@ -1,14 +1,11 @@
-import { useContext } from "react";
-import { useParams } from "react-router-dom";
-import { AuthContext } from "../../../contexts/AuthContext";
+import { useProfileUser } from "../../hooks/useProfileUser";
 
 export const ProfileHeaderActions = () => {
-  const { id: urlUsername } = useParams();
-  const { user } = useContext(AuthContext);
+  const { isMainUser } = useProfileUser();
 
   return (
     <article className="flex items-center justify-evenly flex-row w-full h-auto mt-2 ">
-      {urlUsername === user.username ? (
+      {isMainUser ? (
         <>
           <button className="p-2 text-xs w-[33%] text-black font-bold shadow-sm md:text-lg">
             Editar perfil

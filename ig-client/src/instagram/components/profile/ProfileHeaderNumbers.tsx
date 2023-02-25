@@ -1,8 +1,7 @@
-import { useContext } from "react";
-import { AuthContext } from "../../../contexts/AuthContext";
+import { useProfileUser } from "../../hooks/useProfileUser";
 
 export const ProfileHeaderNumbers = () => {
-  const { user } = useContext(AuthContext);
+  const { user } = useProfileUser();
 
   return (
     <article className="flex items-center justify-evenly flex-row w-full h-auto">

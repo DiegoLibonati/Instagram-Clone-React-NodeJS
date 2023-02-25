@@ -1,11 +1,8 @@
 import { FiSettings } from "react-icons/fi";
-import { AuthContext } from "../../../../contexts/AuthContext";
-import { useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useProfileUser } from "../../../hooks/useProfileUser";
 
 export const ProfileHeaderDescriptionDesktop = () => {
-  const { user } = useContext(AuthContext);
-  const { id: urlUsername } = useParams();
+  const { user, isMainUser } = useProfileUser();
   return (
     <article className="flex items-start justify-start flex-row w-full h-auto 2xl:w-[75%]">
       <img
@@ -16,9 +13,8 @@ export const ProfileHeaderDescriptionDesktop = () => {
 
       <div className="flex items-start justify-center flex-col w-full h-auto">
         <div className="flex items-center justify-start flex-row w-[75%] h-auto">
-          {urlUsername === user.username ? (
+          {isMainUser ? (
             <>
-              {" "}
               <h2 className="text-lg mr-8">{user.username}</h2>
               <button className="text-sm px-5 py-1 bg-zinc-200 rounded-md cursor-pointer mr-2">
                 Editar perfil
@@ -31,6 +27,7 @@ export const ProfileHeaderDescriptionDesktop = () => {
             </>
           ) : (
             <>
+              <h2 className="text-lg mr-8">{user.username}</h2>
               <button className="text-sm px-5 py-1 bg-zinc-200 rounded-md cursor-pointer mr-2">
                 Seguir
               </button>

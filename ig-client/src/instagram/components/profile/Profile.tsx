@@ -1,5 +1,5 @@
-import { useState, useEffect, useContext } from "react";
-import { User } from "../../../types/types";
+import { useEffect, useContext } from "react";
+
 import { instagramApiGetUser } from "../../../api/instagramApiGetUser";
 import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthContext";
@@ -9,22 +9,15 @@ import { useMediaMatch } from "../../../hooks/useMediaMatch";
 import { ProfileHeader } from "./ProfileHeader";
 import { ProfileActions } from "./ProfileActions";
 import { ProfileImages } from "./ProfileImages";
+import { ProfileContext } from "../../../contexts/ProfileContext";
 
 export const Profile = () => {
   const { id: urlUsername } = useParams();
   const { user } = useContext(AuthContext);
   const { setAlertOpen } = useContext(UIContext);
+  const { setUserProfile } = useContext(ProfileContext);
   const { matchMediaQuery } = useMediaMatch(1024);
   const navigate = useNavigate();
-  const [userProfile, setUserProfile] = useState<User>({
-    id: "",
-    email: "",
-    name: "",
-    username: "",
-    publications: [],
-    followers: [],
-    following: [],
-  });
 
   const getProfileUser = async () => {
     const request = await instagramApiGetUser(urlUsername!);
@@ -45,12 +38,8 @@ export const Profile = () => {
   };
 
   useEffect(() => {
-    if (urlUsername === user.username) {
-      return setUserProfile(user);
-    }
-
     getProfileUser();
-  }, []);
+  }, [urlUsername]);
 
   return (
     <>

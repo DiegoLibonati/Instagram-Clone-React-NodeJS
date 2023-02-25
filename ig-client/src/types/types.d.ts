@@ -1,8 +1,8 @@
 export type Publication = {
   id?: string;
   imgLink: string;
-  countLikes: number;
-  countComments: number;
+  likes: [];
+  comments: [];
 };
 
 export type Histories = { className?: string; profileHistories: boolean };
