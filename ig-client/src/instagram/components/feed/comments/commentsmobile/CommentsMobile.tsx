@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { UIContext } from "../../../../../contexts/UIContext";
+import { SliderFullScreen } from "../../../../../ui/components/SliderFullScreen/SliderFullScreen";
 import { CommentsMobileComments } from "./CommentsMobileComments";
 import { CommentsMobileForm } from "./CommentsMobileForm";
 import { CommentsMobileHeader } from "./CommentsMobileHeader";
@@ -9,13 +10,7 @@ export const CommentsMobile = () => {
   const { modal } = useContext(UIContext);
 
   return (
-    <div
-      className={`flex items-start justify-start flex-col bg-white w-screen h-screen fixed z-[999999999] overflow-x-hidden overflow-y-scroll transition transform ${
-        modal.isOpen && modal.type === "publication"
-          ? "translate-x-0"
-          : "translate-x-full"
-      }`}
-    >
+    <SliderFullScreen isTrue={modal.isOpen && modal.type === "publication"}>
       <CommentsMobileHeader></CommentsMobileHeader>
 
       <CommentsMobilePublication></CommentsMobilePublication>
@@ -23,6 +18,6 @@ export const CommentsMobile = () => {
       <CommentsMobileComments></CommentsMobileComments>
 
       <CommentsMobileForm></CommentsMobileForm>
-    </div>
+    </SliderFullScreen>
   );
 };

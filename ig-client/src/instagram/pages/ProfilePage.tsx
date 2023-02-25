@@ -1,19 +1,47 @@
 import { UIContext } from "../../contexts/UIContext";
 import { useMediaMatch } from "../../hooks/useMediaMatch";
-import { FooterMobile } from "../../ui/components/FooterMobile";
-import { NavBarMobileProfile } from "../../ui/components/navbarmobileprofile/NaBarMobileProfile";
-import { Sidebar } from "../../ui/components/sidebar/Sidebar";
+import { FooterMobile } from "../../ui/components/Footer/Mobile/FooterMobile";
+import { Sidebar } from "../../ui/components/Sidebar/Sidebar";
 import { CommentsDesktop } from "../components/feed/comments/commentsdesktop/CommentsDesktop";
 import { Profile } from "../components/profile/Profile";
 import { useContext } from "react";
+import { NavBarMobile } from "../../ui/components/NavBar/Mobile/NavBarMobile";
+import { MdOutlineAddBox } from "react-icons/md";
+import { RxHamburgerMenu } from "react-icons/rx";
+import { AuthContext } from "../../contexts/AuthContext";
 
 export const ProfilePage = () => {
   const { matchMediaQuery } = useMediaMatch(1024);
-  const { modal } = useContext(UIContext);
+  const { modal, setMenuConfigOpen } = useContext(UIContext);
+  const { user } = useContext(AuthContext);
 
   return (
     <>
-      {!matchMediaQuery && <NavBarMobileProfile></NavBarMobileProfile>}
+      {!matchMediaQuery && (
+        <NavBarMobile
+          classNameHeader={
+            "lg:hidden fixed bg-white w-screen top-0 z-[9999999]"
+          }
+          classNameNav={
+            "flex items-center justify-between flex-row w-full p-2 h-14"
+          }
+        >
+          <h2 className="font-bold text-lg">{user.username}</h2>
+
+          <div className="flex items-center justify-between flex-row">
+            <MdOutlineAddBox
+              color="black"
+              size={25}
+              className="mx-2"
+            ></MdOutlineAddBox>
+            <RxHamburgerMenu
+              color="black"
+              size={25}
+              onClick={setMenuConfigOpen}
+            ></RxHamburgerMenu>
+          </div>
+        </NavBarMobile>
+      )}
       {matchMediaQuery && <Sidebar></Sidebar>}
       <Profile></Profile>
       {matchMediaQuery && modal.isOpen && modal.type === "publication" && (

@@ -7,7 +7,7 @@ import { instagramApiGetUser } from "../../../api/instagramApiGetUser";
 import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthContext";
 import { UIContext } from "../../../contexts/UIContext";
-import { MenuConfigMobile } from "../../../ui/components/menuconfig/MenuConfigMobile";
+import { MenuConfigMobile } from "../../../ui/components/MenuConfig/Mobile/MenuConfigMobile";
 import { useMediaMatch } from "../../../hooks/useMediaMatch";
 
 export const Profile = () => {

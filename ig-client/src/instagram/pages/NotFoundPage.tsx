@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useMediaMatch } from "../../hooks/useMediaMatch";
-import { FooterMobile } from "../../ui/components/FooterMobile";
-import { Sidebar } from "../../ui/components/sidebar/Sidebar";
+import { FooterMobile } from "../../ui/components/Footer/Mobile/FooterMobile";
+import { Sidebar } from "../../ui/components/Sidebar/Sidebar";
 
 export const NotFoundPage = () => {
   const { matchMediaQuery } = useMediaMatch(1024);

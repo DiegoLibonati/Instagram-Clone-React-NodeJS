@@ -5,7 +5,7 @@ import {
 } from "react-icons/ai";
 import { RxVideo } from "react-icons/rx";
 import { Link, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../contexts/AuthContext";
+import { AuthContext } from "../../../../contexts/AuthContext";
 import { useContext } from "react";
 
 export const FooterMobile = () => {

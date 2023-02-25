@@ -1,12 +1,12 @@
 import { Route, Routes } from "react-router-dom";
 import { UIContext } from "../contexts/UIContext";
-import { ModalNewPublication } from "../ui/components/modal/modalnewpublication/ModalNewPublication";
+import { ModalNewPublication } from "../ui/components/Modal/ModalNewPublication/ModalNewPublication";
 import { useContext, useEffect } from "react";
-import { ModalAlert } from "../ui/components/modal/modalalert/ModalAlert";
+import { ModalAlert } from "../ui/components/Modal/ModalAlert/ModalAlert";
 import { AuthContext } from "../contexts/AuthContext";
 import { AuthRoutes } from "../auth/routes/AuthRoutes";
 import { InstagramRoutes } from "../instagram/routes/InstagramRoutes";
-import { Loader } from "../ui/components/loader/Loader";
+import { Loader } from "../ui/components/Loader/Loader";
 
 export const InstagramRouter = () => {
   const { modal, alert } = useContext(UIContext);
