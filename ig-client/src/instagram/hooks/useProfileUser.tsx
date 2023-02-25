@@ -8,10 +8,10 @@ export const useProfileUser = () => {
   const { user } = useContext(AuthContext);
   const { userProfile } = useContext(ProfileContext);
 
-  if (urlUsername === user) return { user, isMainUser: urlUsername === user };
+  if (urlUsername === user.username) return { user, isMainUser: true };
 
   return {
     user: userProfile,
-    isMainUser: urlUsername === user,
+    isMainUser: false,
   };
 };

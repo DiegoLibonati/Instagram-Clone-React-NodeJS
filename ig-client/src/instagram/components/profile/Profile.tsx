@@ -1,8 +1,6 @@
-import { useEffect, useContext } from "react";
-
+import { useEffect, useContext, useCallback } from "react";
 import { instagramApiGetUser } from "../../../api/instagramApiGetUser";
 import { useNavigate, useParams } from "react-router-dom";
-import { AuthContext } from "../../../contexts/AuthContext";
 import { UIContext } from "../../../contexts/UIContext";
 import { MenuConfigMobile } from "../../../ui/components/MenuConfig/Mobile/MenuConfigMobile";
 import { useMediaMatch } from "../../../hooks/useMediaMatch";
@@ -10,16 +8,17 @@ import { ProfileHeader } from "./ProfileHeader";
 import { ProfileActions } from "./ProfileActions";
 import { ProfileImages } from "./ProfileImages";
 import { ProfileContext } from "../../../contexts/ProfileContext";
+import { useProfileUser } from "../../hooks/useProfileUser";
 
 export const Profile = () => {
   const { id: urlUsername } = useParams();
-  const { user } = useContext(AuthContext);
   const { setAlertOpen } = useContext(UIContext);
   const { setUserProfile } = useContext(ProfileContext);
+  const { isMainUser } = useProfileUser();
   const { matchMediaQuery } = useMediaMatch(1024);
   const navigate = useNavigate();
 
-  const getProfileUser = async () => {
+  const getProfileUser = useCallback(async () => {
     const request = await instagramApiGetUser(urlUsername!);
 
     if (request.hasOwnProperty("response")) {
@@ -35,11 +34,13 @@ export const Profile = () => {
     const userData = request.payload;
 
     setUserProfile(userData);
-  };
+  }, [navigate, setAlertOpen, setUserProfile, urlUsername]);
 
   useEffect(() => {
-    getProfileUser();
-  }, [urlUsername]);
+    if (!isMainUser) {
+      getProfileUser();
+    }
+  }, [urlUsername, getProfileUser, isMainUser]);
 
   return (
     <>
