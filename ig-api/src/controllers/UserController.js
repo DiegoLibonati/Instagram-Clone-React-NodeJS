@@ -1,5 +1,4 @@
 import { UserModel } from "../models/UserModel.js";
-import config from "../config.js";
 
 export const User = {
   getUser: async (req, res) => {
@@ -20,6 +19,7 @@ export const User = {
       followers: user.followers,
       following: user.following,
       avatar: user.avatar,
+      description: user.description,
     };
 
     return res

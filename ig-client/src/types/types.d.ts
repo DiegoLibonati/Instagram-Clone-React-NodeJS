@@ -30,6 +30,7 @@ export type User = {
   followers: User[];
   following: User[];
   avatar: string;
+  description: string;
 };
 
 export type MConfig = {

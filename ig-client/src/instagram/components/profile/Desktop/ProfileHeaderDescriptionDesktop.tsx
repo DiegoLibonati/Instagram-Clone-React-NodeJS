@@ -55,12 +55,7 @@ export const ProfileHeaderDescriptionDesktop = () => {
         </div>
         <div className="flex flex-col items-start justify-center w-[50%] h-auto mt-5">
           <h2 className="font-bold text-base">{user.name}</h2>
-          <p className="text-sm">
-            Villa Luro - 24 Años<br></br>
-            "Vive y deja vivir"<br></br>
-            Jugador de Futbol<br></br>
-            Desarrollador FullStack en Leafnoise<br></br>
-          </p>
+          <p className="text-sm">{user.description}</p>
         </div>
       </div>
     </article>

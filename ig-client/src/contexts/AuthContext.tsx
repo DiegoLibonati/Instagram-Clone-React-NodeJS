@@ -21,6 +21,7 @@ export const AuthProvider: React.FunctionComponent<AuthContextProps> = ({
     followers: [],
     following: [],
     avatar: "",
+    description: "",
   });
 
   const onLogout = () => {
@@ -34,6 +35,7 @@ export const AuthProvider: React.FunctionComponent<AuthContextProps> = ({
       followers: [],
       following: [],
       avatar: "",
+      description: "",
     });
   };
 
@@ -46,7 +48,7 @@ export const AuthProvider: React.FunctionComponent<AuthContextProps> = ({
     try {
       const request = await instagramApiRenew();
       const userData = request.payload;
-
+      console.log(userData);
       if (request.hasOwnProperty("response")) {
         return onLogout();
       }

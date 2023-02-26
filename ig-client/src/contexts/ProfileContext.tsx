@@ -20,6 +20,7 @@ export const ProfileProvider: React.FunctionComponent<ProfileContextProps> = ({
     followers: [],
     following: [],
     avatar: "",
+    description: "",
   });
 
   return (

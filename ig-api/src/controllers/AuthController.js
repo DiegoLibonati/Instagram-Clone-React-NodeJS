@@ -14,6 +14,7 @@ export const Auth = {
       followers: req.user.followers,
       following: req.user.following,
       avatar: req.user.avatar,
+      description: req.user.description,
     };
 
     const token = jwt.sign(payload, config.TOKEN_SECRET, {
@@ -59,6 +60,7 @@ export const Auth = {
       followers: user.followers,
       following: user.following,
       avatar: user.avatar,
+      description: user.description,
     };
 
     const token = jwt.sign(payload, config.TOKEN_SECRET, {
@@ -114,6 +116,7 @@ export const Auth = {
       name: name,
       username: username,
       email: email,
+      description: `Hola soy ${name} y esta es mi presentacion`,
     });
 
     user.password = await user.generateHash(password);
