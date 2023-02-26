@@ -1,4 +1,5 @@
 import { Navigate, Route, Routes } from "react-router-dom";
+import { EditUserPage } from "../pages/EditUserPage";
 import { HomePage } from "../pages/HomePage";
 import { NotFoundPage } from "../pages/NotFoundPage";
 import { ProfilePage } from "../pages/ProfilePage";
@@ -14,6 +15,10 @@ export const InstagramRoutes = () => {
         element={<PublicationsPage></PublicationsPage>}
       ></Route>
       <Route path="/not-found" element={<NotFoundPage></NotFoundPage>}></Route>
+      <Route
+        path="/accounts/edit"
+        element={<EditUserPage></EditUserPage>}
+      ></Route>
       <Route path="/*" element={<Navigate to="/"></Navigate>}></Route>
     </Routes>
   );

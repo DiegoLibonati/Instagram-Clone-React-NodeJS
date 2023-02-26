@@ -1,9 +1,14 @@
 import { FiSettings } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
 import { useProfileUser } from "../../../hooks/useProfileUser";
 import { UserImage } from "../../UserImage/UserImage";
 
 export const ProfileHeaderDescriptionDesktop = () => {
   const { user, isMainUser } = useProfileUser();
+  const navigate = useNavigate();
+  const handleEditProfile = () => {
+    navigate("/accounts/edit");
+  };
   return (
     <article className="flex items-start justify-start flex-row w-full h-auto 2xl:w-[75%]">
       <UserImage className="w-44 h-4w-44 object-cover rounded-full mr-14"></UserImage>
@@ -13,7 +18,10 @@ export const ProfileHeaderDescriptionDesktop = () => {
           {isMainUser ? (
             <>
               <h2 className="text-lg mr-8">{user.username}</h2>
-              <button className="text-sm px-5 py-1 bg-zinc-200 rounded-md cursor-pointer mr-2">
+              <button
+                className="text-sm px-5 py-1 bg-zinc-200 rounded-md cursor-pointer mr-2"
+                onClick={handleEditProfile}
+              >
                 Editar perfil
               </button>
               <FiSettings
