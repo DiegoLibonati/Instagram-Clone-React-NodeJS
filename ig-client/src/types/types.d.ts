@@ -29,6 +29,7 @@ export type User = {
   publications: Publication[];
   followers: User[];
   following: User[];
+  avatar: string;
 };
 
 export type MConfig = {

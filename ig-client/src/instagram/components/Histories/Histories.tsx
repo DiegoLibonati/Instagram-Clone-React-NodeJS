@@ -15,8 +15,7 @@ import { Histories as HistoriesType } from "../../../types/types";
 const histories: Array<any> = [
   {
     id: "1",
-    imgLink:
-      "https://cdn.domestika.org/c_fill,dpr_1.0,f_auto,h_1200,pg_1,t_base_params,w_1200/v1589759117/project-covers/000/721/921/721921-original.png?1589759117",
+    imgLink: "https://pfpmaker.com/_nuxt/img/profile-3-1.3e702c5.png",
     name: "die_libonati",
   },
 ];

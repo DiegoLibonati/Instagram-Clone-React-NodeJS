@@ -3,6 +3,7 @@ import axios, { InternalAxiosRequestConfig } from "axios";
 const instagramApi = axios.create({
   baseURL: `${process.env.REACT_APP_API_URL}/api/v1`,
   withCredentials: true,
+  headers: { "Access-Control-Allow-Origin": "*" },
 });
 
 instagramApi.interceptors.request.use((config: InternalAxiosRequestConfig) => {

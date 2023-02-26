@@ -13,6 +13,7 @@ export const Auth = {
       publications: req.user.publications,
       followers: req.user.followers,
       following: req.user.following,
+      avatar: req.user.avatar,
     };
 
     const token = jwt.sign(payload, config.TOKEN_SECRET, {
@@ -57,6 +58,7 @@ export const Auth = {
       publications: user.publications,
       followers: user.followers,
       following: user.following,
+      avatar: user.avatar,
     };
 
     const token = jwt.sign(payload, config.TOKEN_SECRET, {

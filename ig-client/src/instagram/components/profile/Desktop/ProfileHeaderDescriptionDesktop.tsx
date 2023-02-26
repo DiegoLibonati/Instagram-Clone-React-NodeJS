@@ -1,15 +1,12 @@
 import { FiSettings } from "react-icons/fi";
 import { useProfileUser } from "../../../hooks/useProfileUser";
+import { UserImage } from "../../UserImage/UserImage";
 
 export const ProfileHeaderDescriptionDesktop = () => {
   const { user, isMainUser } = useProfileUser();
   return (
     <article className="flex items-start justify-start flex-row w-full h-auto 2xl:w-[75%]">
-      <img
-        className="w-44 h-4w-44 object-cover rounded-full mr-14"
-        src="https://cdn.domestika.org/c_fill,dpr_1.0,f_auto,h_1200,pg_1,t_base_params,w_1200/v1589759117/project-covers/000/721/921/721921-original.png?1589759117"
-        alt="perfil"
-      ></img>
+      <UserImage className="w-44 h-4w-44 object-cover rounded-full mr-14"></UserImage>
 
       <div className="flex items-start justify-center flex-col w-full h-auto">
         <div className="flex items-center justify-start flex-row w-[75%] h-auto">
@@ -28,7 +25,7 @@ export const ProfileHeaderDescriptionDesktop = () => {
           ) : (
             <>
               <h2 className="text-lg mr-8">{user.username}</h2>
-              <button className="text-sm px-5 py-1 bg-zinc-200 rounded-md cursor-pointer mr-2">
+              <button className="text-sm px-5 py-1 bg-blue-500 text-white rounded-md cursor-pointer mr-2">
                 Seguir
               </button>
             </>

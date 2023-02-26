@@ -1,17 +1,14 @@
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../../contexts/AuthContext";
+import { UserImage } from "../UserImage/UserImage";
 
 export const SuggetionsProfileHeader = () => {
   const { user } = useContext(AuthContext);
   return (
     <article className="flex items-center justify-start w-full h-16">
       <Link to={`/${user.username}`}>
-        <img
-          className="w-14 h-14 object-cover rounded-full"
-          src="https://cdn.domestika.org/c_fill,dpr_1.0,f_auto,h_1200,pg_1,t_base_params,w_1200/v1589759117/project-covers/000/721/921/721921-original.png?1589759117"
-          alt="perfil"
-        ></img>
+        <UserImage className="w-14 h-14 object-cover rounded-full"></UserImage>
       </Link>
 
       <div className="ml-4">

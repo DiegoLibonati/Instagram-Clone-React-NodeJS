@@ -30,6 +30,9 @@ const userSchema = new mongoose.Schema(
     following: {
       type: Array,
     },
+    avatar: {
+      type: String,
+    },
   },
   {
     versionKey: false,

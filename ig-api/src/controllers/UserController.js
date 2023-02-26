@@ -19,6 +19,7 @@ export const User = {
       publications: user.publications,
       followers: user.followers,
       following: user.following,
+      avatar: user.avatar,
     };
 
     return res

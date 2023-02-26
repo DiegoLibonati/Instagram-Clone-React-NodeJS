@@ -19,6 +19,7 @@ export const ProfileProvider: React.FunctionComponent<ProfileContextProps> = ({
     publications: [],
     followers: [],
     following: [],
+    avatar: "",
   });
 
   return (

@@ -16,7 +16,7 @@ export const ProfileHeaderActions = () => {
         </>
       ) : (
         <>
-          <button className="p-2 text-xs w-[33%] text-black font-bold shadow-sm md:text-lg">
+          <button className="p-2 text-xs w-full text-white font-bold shadow-sm md:text-lg bg-blue-500 rounded-md">
             Seguir
           </button>
         </>

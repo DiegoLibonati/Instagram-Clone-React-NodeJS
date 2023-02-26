@@ -4,5 +4,14 @@ import GooglePlay from "./GooglePlay.png";
 import Microsoft from "./Microsoft.png";
 import InstagramBlack from "./Instagram_logo_black.png";
 import InstagramWhite from "./Instagram_logo_white.png";
+import DefaultUserImage from "./default-profile-user.png";
 
-export { logos, GooglePlay, Microsoft, logos2, InstagramBlack, InstagramWhite };
+export {
+  logos,
+  GooglePlay,
+  Microsoft,
+  logos2,
+  InstagramBlack,
+  InstagramWhite,
+  DefaultUserImage,
+};
