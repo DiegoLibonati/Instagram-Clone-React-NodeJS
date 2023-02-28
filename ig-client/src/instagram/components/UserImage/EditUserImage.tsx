@@ -12,7 +12,7 @@ export const EditUserImage = ({ className }: { className: string }) => {
       src={
         previewSrc ? previewSrc : user.avatar ? user.avatar : DefaultUserImage
       }
-      alt={user.name}
+      alt={user?.name}
       className={className}
     ></img>
   );

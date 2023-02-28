@@ -6,6 +6,7 @@ export const InputTextArea = ({
   value,
   name,
   label,
+  onChange,
 }: {
   id: string;
   placeholder: string;
@@ -14,6 +15,7 @@ export const InputTextArea = ({
   value: string;
   name: string;
   label: string;
+  onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 }) => {
   return (
     <>
@@ -21,6 +23,7 @@ export const InputTextArea = ({
         {label}
       </label>
       <textarea
+        onChange={onChange}
         placeholder={placeholder}
         className={classNameInput}
         value={value}

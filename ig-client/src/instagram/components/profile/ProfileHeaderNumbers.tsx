@@ -6,7 +6,11 @@ export const ProfileHeaderNumbers = () => {
 
   return (
     <article className="flex items-center justify-evenly flex-row w-full h-auto">
-      <UserImage className="w-16 h-16 object-cover rounded-full md:w-20 md:h-20"></UserImage>
+      <UserImage
+        className="w-16 h-16 object-cover rounded-full md:w-20 md:h-20"
+        avatar={user.avatar}
+        name={user.name}
+      ></UserImage>
 
       <div className="flex items-center justify-between flex-row w-2/3 h-auto">
         <div className="flex items-center justify-center flex-col w-full h-auto">

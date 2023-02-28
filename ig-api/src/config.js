@@ -9,4 +9,5 @@ export default {
   CORS_ORIGIN: JSON.parse(process.env.CORS_ORIGIN) || [
     `http://localhost:${PORT}`,
   ],
+  API_BACK_URL: process.env.API_BACK_URL,
 };

@@ -4,9 +4,13 @@ import { UIContext } from "../../../contexts/UIContext";
 export const InputFile = ({
   label,
   classNameLabel,
+  name,
+  onChange,
 }: {
   label: string;
   classNameLabel: string;
+  name?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) => {
   const { setPreviewSrc } = useContext(UIContext);
 
@@ -18,10 +22,12 @@ export const InputFile = ({
       <input
         type="file"
         id="input-file"
+        name={name}
         hidden
-        onChange={(e) =>
-          setPreviewSrc(URL.createObjectURL(e.target!.files![0]))
-        }
+        onChange={(e) => {
+          onChange!(e);
+          setPreviewSrc(URL.createObjectURL(e.target!.files![0]));
+        }}
       ></input>
     </>
   );

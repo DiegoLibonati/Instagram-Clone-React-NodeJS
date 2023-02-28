@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { instagramApiRenew } from "../api/instagramApiRenew";
 import { User } from "../types/types";
 
@@ -39,6 +39,21 @@ export const AuthProvider: React.FunctionComponent<AuthContextProps> = ({
     });
   };
 
+  const onLogin = (payload: User) => {
+    setUser({
+      ...user,
+      status: "authenticated",
+      ...payload,
+    });
+  };
+
+  const onChecking = () => {
+    setUser({
+      ...user,
+      status: "checking",
+    });
+  };
+
   const checkAuthToken = async () => {
     setUser({ ...user, status: "checking" });
     const token = document.cookie?.split("=")[1];
@@ -48,19 +63,24 @@ export const AuthProvider: React.FunctionComponent<AuthContextProps> = ({
     try {
       const request = await instagramApiRenew();
       const userData = request.payload;
-      console.log(userData);
+
       if (request.hasOwnProperty("response")) {
         return onLogout();
       }
 
-      setUser({ ...userData, status: "authenticated" });
+      setUser({
+        ...userData,
+        status: "authenticated",
+      });
     } catch (error) {
       onLogout();
     }
   };
 
   return (
-    <AuthContext.Provider value={{ user, setUser, checkAuthToken, onLogout }}>
+    <AuthContext.Provider
+      value={{ user, setUser, checkAuthToken, onLogout, onLogin, onChecking }}
+    >
       {children}
     </AuthContext.Provider>
   );

@@ -11,7 +11,11 @@ export const ProfileHeaderDescriptionDesktop = () => {
   };
   return (
     <article className="flex items-start justify-start flex-row w-full h-auto 2xl:w-[75%]">
-      <UserImage className="w-44 h-4w-44 object-cover rounded-full mr-14"></UserImage>
+      <UserImage
+        className="w-52 h-52 object-cover rounded-full mr-14"
+        avatar={user.avatar}
+        name={user.name}
+      ></UserImage>
 
       <div className="flex items-start justify-center flex-col w-full h-auto">
         <div className="flex items-center justify-start flex-row w-[75%] h-auto">
@@ -54,7 +58,7 @@ export const ProfileHeaderDescriptionDesktop = () => {
           </div>
         </div>
         <div className="flex flex-col items-start justify-center w-[50%] h-auto mt-5">
-          <h2 className="font-bold text-base">{user.name}</h2>
+          <h2 className="font-bold text-base">{user?.name}</h2>
           <p className="text-sm">{user.description}</p>
         </div>
       </div>

@@ -23,6 +23,7 @@ app.use(
 //Routes
 app.use("/api/v1/auth", AuthRouter);
 app.use("/api/v1/user", UserRouter);
+app.use("/api/v1/images", express.static("src/images"));
 app.use((req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.status(404).json({ message: "Route not found" });

@@ -6,6 +6,7 @@ export const InputText = ({
   value,
   name,
   label,
+  onChange,
 }: {
   id: string;
   placeholder: string;
@@ -14,6 +15,7 @@ export const InputText = ({
   value: string;
   name: string;
   label: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) => {
   return (
     <>
@@ -21,6 +23,7 @@ export const InputText = ({
         {label}
       </label>
       <input
+        onChange={onChange}
         type="text"
         placeholder={placeholder}
         id={id}

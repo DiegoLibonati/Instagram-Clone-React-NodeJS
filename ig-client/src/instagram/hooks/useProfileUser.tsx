@@ -8,6 +8,8 @@ export const useProfileUser = () => {
   const { user } = useContext(AuthContext);
   const { userProfile } = useContext(ProfileContext);
 
+  if (!urlUsername || urlUsername === undefined) return user;
+
   if (urlUsername === user.username) return { user, isMainUser: true };
 
   return {

@@ -38,7 +38,11 @@ export const SidebarItems = () => {
         <MdOutlineAddBox size={25} color="black"></MdOutlineAddBox>
       </SidebarItem>
       <SidebarItem text="Perfil" onClick={() => navigate(`/${user.username}`)}>
-        <UserImage className="w-6 h-6 object-cover rounded-full"></UserImage>
+        <UserImage
+          className="w-6 h-6 object-cover rounded-full"
+          avatar={user.avatar}
+          name={user.name}
+        ></UserImage>
       </SidebarItem>
     </ul>
   );

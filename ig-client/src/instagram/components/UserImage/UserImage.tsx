@@ -1,13 +1,18 @@
 import { DefaultUserImage } from "../../../assets/images";
-import { useProfileUser } from "../../hooks/useProfileUser";
 
-export const UserImage = ({ className }: { className: string }) => {
-  const { user } = useProfileUser();
-
+export const UserImage = ({
+  className,
+  avatar,
+  name,
+}: {
+  className: string;
+  avatar: string;
+  name: string;
+}) => {
   return (
     <img
-      src={user.avatar ? user.avatar : DefaultUserImage}
-      alt={user.name}
+      src={avatar ? avatar : DefaultUserImage}
+      alt={name}
       className={className}
     ></img>
   );

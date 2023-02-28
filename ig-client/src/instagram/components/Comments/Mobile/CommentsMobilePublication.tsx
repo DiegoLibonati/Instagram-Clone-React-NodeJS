@@ -3,7 +3,11 @@ import { UserImage } from "../../UserImage/UserImage";
 export const CommentsMobilePublication = () => {
   return (
     <div className="flex items-start justify-start flex-row w-full h-auto p-2 mt-14">
-      <UserImage className="rounded-full mr-2 h-8 w-8"></UserImage>
+      <UserImage
+        className="rounded-full mr-2 h-8 w-8"
+        avatar=""
+        name=""
+      ></UserImage>
       <div className="flex items-start justify-start flex-col w-full h-auto">
         <div className="flex items-center justify-start flex-row w-full h-auto">
           <h3 className="text-black mr-2 text-sm font-bold">die_libonati</h3>
