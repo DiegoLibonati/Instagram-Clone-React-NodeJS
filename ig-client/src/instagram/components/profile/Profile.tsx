@@ -13,7 +13,7 @@ import { useProfileUser } from "../../hooks/useProfileUser";
 export const Profile = () => {
   const { id: urlUsername } = useParams();
   const { setAlertOpen } = useContext(UIContext);
-  const { setUserProfile } = useContext(ProfileContext);
+  const { setUserForeignProfile } = useContext(ProfileContext);
   const { isMainUser } = useProfileUser();
   const { matchMediaQuery } = useMediaMatch(1024);
   const navigate = useNavigate();
@@ -33,8 +33,8 @@ export const Profile = () => {
 
     const userData = request.payload;
 
-    setUserProfile(userData);
-  }, [navigate, setAlertOpen, setUserProfile, urlUsername]);
+    setUserForeignProfile(userData);
+  }, [navigate, setAlertOpen, setUserForeignProfile, urlUsername]);
 
   useEffect(() => {
     if (!isMainUser) {

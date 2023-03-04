@@ -1,6 +1,6 @@
 import { createContext, useState } from "react";
 
-import { User } from "../types/types";
+import { ForeignUser } from "../types/types";
 
 interface ProfileContextProps {
   children: React.ReactNode;
@@ -11,7 +11,7 @@ export const ProfileContext = createContext<null | any>(null);
 export const ProfileProvider: React.FunctionComponent<ProfileContextProps> = ({
   children,
 }) => {
-  const [userProfile, setUserProfile] = useState<User>({
+  const [userForeignProfile, setUserForeignProfile] = useState<ForeignUser>({
     id: "",
     email: "",
     name: "",
@@ -21,10 +21,14 @@ export const ProfileProvider: React.FunctionComponent<ProfileContextProps> = ({
     following: [],
     avatar: "",
     description: "",
+    userAuthFollowing: false,
+    userForeignFollowing: false,
   });
 
   return (
-    <ProfileContext.Provider value={{ userProfile, setUserProfile }}>
+    <ProfileContext.Provider
+      value={{ userForeignProfile, setUserForeignProfile }}
+    >
       {children}
     </ProfileContext.Provider>
   );

@@ -6,24 +6,36 @@ import fs from "fs";
 
 export const User = {
   getUser: async (req, res) => {
+    const idAuthUser = req.user.id;
+    const followersAuthUser = req.user.followers;
     const { id } = req.params;
 
-    const user = await UserModel.findOne({ username: id });
+    const foreignUser = await UserModel.findOne({ username: id });
 
-    if (!user) {
+    if (!foreignUser) {
       return res.status(404).json({ message: `¡El perfil ${id} no existe!` });
     }
 
+    const userAuthFollowing = Boolean(
+      foreignUser.followers.filter((follower) => follower.id === idAuthUser)[0]
+    );
+
+    const userForeignFollowing = Boolean(
+      followersAuthUser.filter((follower) => follower.id === idAuthUser)[0]
+    );
+
     const payload = {
-      id: user.id,
-      username: user.username,
-      name: user.name,
-      email: user.email,
-      publications: user.publications,
-      followers: user.followers,
-      following: user.following,
-      avatar: user.avatar,
-      description: user.description,
+      id: foreignUser.id,
+      username: foreignUser.username,
+      name: foreignUser.name,
+      email: foreignUser.email,
+      publications: foreignUser.publications,
+      followers: foreignUser.followers,
+      following: foreignUser.following,
+      avatar: foreignUser.avatar,
+      description: foreignUser.description,
+      userAuthFollowing: userAuthFollowing,
+      userForeignFollowing: userForeignFollowing,
     };
 
     return res
@@ -106,5 +118,109 @@ export const User = {
         httpOnly: false,
       })
       .json({ message: "Usuario editado exitosamente", payload: payload });
+  },
+  getFollow: async (req, res) => {
+    const usernameAuthUser = req.user.username;
+
+    const { id: usernameProfile } = req.params;
+
+    const foreignUser = await UserModel.findOne({ username: usernameProfile });
+    const authUser = await UserModel.findOne({ username: usernameAuthUser });
+
+    if (!foreignUser) {
+      return res.status(404).json({ message: `¡El perfil ${id} no existe!` });
+    }
+
+    foreignUser.followers.push({
+      id: authUser._id,
+      username: authUser.username,
+      name: authUser.name,
+      avatar: authUser.avatar,
+    });
+    authUser.following.push({
+      id: foreignUser._id,
+      username: foreignUser.username,
+      name: foreignUser.name,
+      avatar: foreignUser.avatar,
+    });
+
+    foreignUser.save();
+    authUser.save();
+
+    const payload = {
+      id: authUser._id,
+      name: authUser.name,
+      username: authUser.username,
+      email: authUser.email,
+      publications: authUser.publications,
+      followers: authUser.followers,
+      following: authUser.following,
+      avatar: authUser.avatar,
+      description: authUser.description,
+    };
+
+    const token = jwt.sign(payload, config.TOKEN_SECRET, {
+      expiresIn: "1h",
+    });
+
+    return res
+      .status(200)
+      .cookie("ig-sess", token, {
+        expires: new Date(Date.now() + 1 * 60 * 60 * 1000),
+        httpOnly: false,
+      })
+      .json({
+        message: `¡Se comenzo a seguir a ${foreignUser.username} exitosamente!`,
+        payload: payload,
+      });
+  },
+  getUnFollow: async (req, res) => {
+    const usernameAuthUser = req.user.username;
+
+    const { id: usernameProfile } = req.params;
+
+    const foreignUser = await UserModel.findOne({ username: usernameProfile });
+    const authUser = await UserModel.findOne({ username: usernameAuthUser });
+
+    if (!foreignUser) {
+      return res.status(404).json({ message: `¡El perfil ${id} no existe!` });
+    }
+
+    foreignUser.followers = foreignUser.followers.filter(
+      (follower) => follower.id !== authUser.id
+    );
+    authUser.following = authUser.following.filter(
+      (following) => following.id !== foreignUser.id
+    );
+
+    foreignUser.save();
+    authUser.save();
+
+    const payload = {
+      id: authUser._id,
+      name: authUser.name,
+      username: authUser.username,
+      email: authUser.email,
+      publications: authUser.publications,
+      followers: authUser.followers,
+      following: authUser.following,
+      avatar: authUser.avatar,
+      description: authUser.description,
+    };
+
+    const token = jwt.sign(payload, config.TOKEN_SECRET, {
+      expiresIn: "1h",
+    });
+
+    return res
+      .status(200)
+      .cookie("ig-sess", token, {
+        expires: new Date(Date.now() + 1 * 60 * 60 * 1000),
+        httpOnly: false,
+      })
+      .json({
+        message: `¡Se dejo de seguir a ${foreignUser.username} exitosamente!`,
+        payload: payload,
+      });
   },
 };

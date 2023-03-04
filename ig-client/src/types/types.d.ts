@@ -38,6 +38,20 @@ export type User = {
   description: string;
 };
 
+export type ForeignUser = {
+  id: string;
+  email: string;
+  name: string;
+  username: string;
+  publications: Publication[];
+  followers: User[];
+  following: User[];
+  avatar: string;
+  description: string;
+  userAuthFollowing: boolean;
+  userForeignFollowing: boolean;
+};
+
 export type MConfig = {
   isOpen: boolean;
 };

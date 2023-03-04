@@ -9,11 +9,12 @@ import { NavBarMobile } from "../../ui/components/NavBar/Mobile/NavBarMobile";
 import { MdOutlineAddBox } from "react-icons/md";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { AuthContext } from "../../contexts/AuthContext";
+import { useProfileUser } from "../hooks/useProfileUser";
 
 export const ProfilePage = () => {
   const { matchMediaQuery } = useMediaMatch(1024);
   const { modal, setMenuConfigOpen, setModalOpen } = useContext(UIContext);
-  const { user } = useContext(AuthContext);
+  const { user } = useProfileUser();
 
   return (
     <>

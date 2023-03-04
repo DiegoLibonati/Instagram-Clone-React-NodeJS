@@ -34,13 +34,22 @@ const userSchema = new mongoose.Schema(
         name: String,
       },
     ],
-
-    followers: {
-      type: Array,
-    },
-    following: {
-      type: Array,
-    },
+    followers: [
+      {
+        id: String,
+        username: String,
+        name: String,
+        avatar: String,
+      },
+    ],
+    following: [
+      {
+        id: String,
+        username: String,
+        name: String,
+        avatar: String,
+      },
+    ],
     avatar: {
       type: String,
     },

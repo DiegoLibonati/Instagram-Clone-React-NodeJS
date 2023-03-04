@@ -4,11 +4,12 @@ import { useProfileUser } from "../../../hooks/useProfileUser";
 import { UserImage } from "../../UserImage/UserImage";
 
 export const ProfileHeaderDescriptionDesktop = () => {
-  const { user, isMainUser } = useProfileUser();
+  const { user, isMainUser, handleFollow, handleUnFollow } = useProfileUser();
   const navigate = useNavigate();
   const handleEditProfile = () => {
     navigate("/accounts/edit");
   };
+
   return (
     <article className="flex items-start justify-start flex-row w-full h-auto 2xl:w-[75%]">
       <UserImage
@@ -37,9 +38,29 @@ export const ProfileHeaderDescriptionDesktop = () => {
           ) : (
             <>
               <h2 className="text-lg mr-8">{user.username}</h2>
-              <button className="text-sm px-5 py-1 bg-blue-500 text-white rounded-md cursor-pointer mr-2">
-                Seguir
-              </button>
+
+              {user.userAuthFollowing ? (
+                <button
+                  className="text-sm px-5 py-1 bg-zinc-200 text-black rounded-md cursor-pointer mr-2"
+                  onClick={handleUnFollow}
+                >
+                  Siguiendo
+                </button>
+              ) : user.userForeignFollowing ? (
+                <button
+                  className="text-sm px-5 py-1 bg-blue-500 text-white rounded-md cursor-pointer mr-2"
+                  onClick={handleFollow}
+                >
+                  Seguir tambien
+                </button>
+              ) : (
+                <button
+                  className="text-sm px-5 py-1 bg-blue-500 text-white rounded-md cursor-pointer mr-2"
+                  onClick={handleFollow}
+                >
+                  Seguir
+                </button>
+              )}
             </>
           )}
         </div>
