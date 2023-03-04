@@ -29,6 +29,11 @@ export const ProfileImages = () => {
             imgLink={publication.imgLink}
             likes={publication.likes}
             comments={publication.comments}
+            description={publication.description}
+            date={publication.date}
+            username={publication.username}
+            avatar={publication.avatar}
+            name={publication.name}
           ></ProfileImage>
         );
       })}

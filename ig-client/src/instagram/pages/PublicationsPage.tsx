@@ -2,15 +2,15 @@ import { useMediaMatch } from "../../hooks/useMediaMatch";
 import { CommentsMobile } from "../components/Comments/Mobile/CommentsMobile";
 import { Publications } from "../components/Publications/Publications";
 
-import { useEffect, useContext } from "react";
+import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../contexts/AuthContext";
 import { PublicationsHeader } from "../components/Publications/PublicationsHeader";
+import { useProfileUser } from "../hooks/useProfileUser";
 
 export const PublicationsPage = () => {
   const { matchMediaQuery } = useMediaMatch(1024);
   const navigate = useNavigate();
-  const { user } = useContext(AuthContext);
+  const { user } = useProfileUser();
   const { pathname } = useLocation();
 
   useEffect(() => {
@@ -22,7 +22,8 @@ export const PublicationsPage = () => {
   return (
     <>
       <PublicationsHeader></PublicationsHeader>
-      <Publications></Publications>
+
+      <Publications publications={user.publications}></Publications>
 
       {!matchMediaQuery && <CommentsMobile></CommentsMobile>}
     </>

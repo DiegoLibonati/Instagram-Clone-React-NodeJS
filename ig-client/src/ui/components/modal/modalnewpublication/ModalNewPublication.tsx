@@ -5,10 +5,14 @@ import { useContext } from "react";
 import { ModalNewPublicationHeader } from "./ModalNewPublicationHeader";
 import { ModalNewPublicationUpload } from "./ModalNewPublicationUpload";
 import { UserImage } from "../../../../instagram/components/UserImage/UserImage";
+import { PublicationContext } from "../../../../contexts/PublicationContext";
+import { AuthContext } from "../../../../contexts/AuthContext";
 
 export const ModalNewPublication = () => {
   const { matchMediaQuery } = useMediaMatch(1024);
   const { previewSrc, setModalClose } = useContext(UIContext);
+  const { formState, onInputChange } = useContext(PublicationContext);
+  const { user } = useContext(AuthContext);
 
   return (
     <div
@@ -51,14 +55,17 @@ export const ModalNewPublication = () => {
             >
               <div className="flex items-center justify-between w-8 h-auto">
                 <UserImage
-                  className="rounded-full mr-2"
-                  avatar=""
-                  name=""
+                  className="rounded-full mr-2 w-8 h-8"
+                  avatar={user.avatar}
+                  name={user.name}
                 ></UserImage>
-                <h3 className="text-black">die_libonati</h3>
+                <h3 className="text-black">{user.username}</h3>
               </div>
 
               <textarea
+                value={formState.description}
+                name="description"
+                onChange={onInputChange}
                 className="outline-none w-full resize-none mt-4 shadow-sm"
                 rows={5}
                 placeholder="Escribe una descripcion..."

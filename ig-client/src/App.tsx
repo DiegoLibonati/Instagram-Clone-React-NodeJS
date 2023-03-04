@@ -1,6 +1,7 @@
 import { BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
 import { ProfileProvider } from "./contexts/ProfileContext";
+import { PublicationProvider } from "./contexts/PublicationContext";
 import { UIProvider } from "./contexts/UIContext";
 import { InstagramRouter } from "./router/InstagramRouter";
 
@@ -10,7 +11,9 @@ function App() {
       <AuthProvider>
         <UIProvider>
           <ProfileProvider>
-            <InstagramRouter></InstagramRouter>
+            <PublicationProvider>
+              <InstagramRouter></InstagramRouter>
+            </PublicationProvider>
           </ProfileProvider>
         </UIProvider>
       </AuthProvider>

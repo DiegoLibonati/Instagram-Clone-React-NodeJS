@@ -11,7 +11,7 @@ export const InstagramRoutes = () => {
       <Route path="/" element={<HomePage></HomePage>}></Route>
       <Route path="/:id" element={<ProfilePage></ProfilePage>}></Route>
       <Route
-        path="/p/:profilePublicationsId"
+        path="/p/:id"
         element={<PublicationsPage></PublicationsPage>}
       ></Route>
       <Route path="/not-found" element={<NotFoundPage></NotFoundPage>}></Route>

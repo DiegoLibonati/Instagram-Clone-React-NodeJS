@@ -1,8 +1,13 @@
+import { useContext } from "react";
+import { PublicationContext } from "../../../../contexts/PublicationContext";
+
 export const CommentsDesktopImage = () => {
+  const { activePublication } = useContext(PublicationContext);
+
   return (
     <img
-      src="https://www.imagineforest.com/blog/wp-content/uploads/2021/12/asian-woman-5450041_640.jpg"
-      alt="paisaje"
+      src={activePublication.imgLink}
+      alt={activePublication.name}
       className="w-4/6 h-auto object-cover"
     ></img>
   );

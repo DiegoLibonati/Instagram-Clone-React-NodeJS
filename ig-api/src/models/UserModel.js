@@ -21,9 +21,20 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    publications: {
-      type: Array,
-    },
+    publications: [
+      {
+        id: String,
+        imgLink: String,
+        description: String,
+        likes: Array,
+        comments: Array,
+        date: Date,
+        avatar: String,
+        username: String,
+        name: String,
+      },
+    ],
+
     followers: {
       type: Array,
     },

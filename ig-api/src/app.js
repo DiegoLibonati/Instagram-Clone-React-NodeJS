@@ -4,6 +4,7 @@ import cors from "cors";
 import { mongooseConnection } from "./mongo.js";
 import AuthRouter from "./routes/v1/authRoutes.js";
 import UserRouter from "./routes/v1/userRoutes.js";
+import PublicationRouter from "./routes/v1/publicationRouter.js";
 import config from "./config.js";
 
 const app = express();
@@ -23,6 +24,7 @@ app.use(
 //Routes
 app.use("/api/v1/auth", AuthRouter);
 app.use("/api/v1/user", UserRouter);
+app.use("/api/v1/publication", PublicationRouter);
 app.use("/api/v1/images", express.static("src/images"));
 app.use((req, res) => {
   res.header("Access-Control-Allow-Origin", "*");

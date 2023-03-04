@@ -12,7 +12,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 
 export const ProfilePage = () => {
   const { matchMediaQuery } = useMediaMatch(1024);
-  const { modal, setMenuConfigOpen } = useContext(UIContext);
+  const { modal, setMenuConfigOpen, setModalOpen } = useContext(UIContext);
   const { user } = useContext(AuthContext);
 
   return (
@@ -33,6 +33,7 @@ export const ProfilePage = () => {
               color="black"
               size={25}
               className="mx-2"
+              onClick={() => setModalOpen("newpublication")}
             ></MdOutlineAddBox>
             <RxHamburgerMenu
               color="black"

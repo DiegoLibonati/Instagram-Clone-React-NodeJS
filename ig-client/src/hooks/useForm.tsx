@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export const useForm = (initialForm: Record<string, any>) => {
+export const useForm = (initialForm: any) => {
   const [formState, setFormState] = useState(initialForm);
 
   const onInputChange = (e: React.ChangeEvent<any>) => {
