@@ -8,18 +8,19 @@ import { SidebarItem } from "./SidebarItem";
 import { useContext } from "react";
 import { AuthContext } from "../../../contexts/AuthContext";
 import { UserImage } from "../../../instagram/components/UserImage/UserImage";
+import { SearchContext } from "../../../contexts/SearchContext";
 
 export const SidebarItems = () => {
   const navigate = useNavigate();
   const { setModalOpen } = useContext(UIContext);
   const { user } = useContext(AuthContext);
-
+  const { setActiveSearch } = useContext(SearchContext);
   return (
     <ul className="flex flex-col items-start justify-center w-full h-auto pl-4">
       <SidebarItem text="Inicio" onClick={() => navigate("/")}>
         <AiOutlineHome size={25} color="black"></AiOutlineHome>
       </SidebarItem>
-      <SidebarItem text="Buscar">
+      <SidebarItem text="Buscar" onClick={() => setActiveSearch(true)}>
         <BsSearch size={25} color="black"></BsSearch>
       </SidebarItem>
       <SidebarItem text="Explorar">

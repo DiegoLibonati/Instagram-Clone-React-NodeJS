@@ -1,5 +1,3 @@
-import { LegacyRef } from "react";
-
 export const InputText = ({
   id,
   placeholder,

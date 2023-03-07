@@ -4,7 +4,7 @@ import { useForm } from "../../hooks/useForm";
 import { FooterMobile } from "../../ui/components/Footer/Mobile/FooterMobile";
 import { InputText } from "../../ui/components/Input/InputText";
 import { NavBarMobile } from "../../ui/components/NavBar/Mobile/NavBarMobile";
-import { UserImage } from "../components/UserImage/UserImage";
+import { SearchList } from "../components/Search/SearchList";
 
 export const SearchPage = () => {
   const { formState, onInputChange } = useForm({
@@ -47,98 +47,11 @@ export const SearchPage = () => {
 
       {focus && (
         <main className="flex flex-col w-full h-auto items-start justify-center px-3 mt-14">
-          <h2 className="font-medium">Recientes</h2>
-
-          <ul className="flex flex-row flex-wrap w-full h-auto">
-            <li className="flex flex-row items-center justify-start w-full h-14">
-              <UserImage
-                className="rounded-full w-12 h-12"
-                avatar=""
-                name=""
-              ></UserImage>
-              <h3 className="ml-2 font-medium">die_libonati</h3>
-            </li>
-            <li className="flex flex-row items-center justify-start w-full h-14">
-              <UserImage
-                className="rounded-full w-12 h-12"
-                avatar=""
-                name=""
-              ></UserImage>
-              <h3 className="ml-2 font-medium">die_libonati</h3>
-            </li>{" "}
-            <li className="flex flex-row items-center justify-start w-full h-14">
-              <UserImage
-                className="rounded-full w-12 h-12"
-                avatar=""
-                name=""
-              ></UserImage>
-              <h3 className="ml-2 font-medium">die_libonati</h3>
-            </li>{" "}
-            <li className="flex flex-row items-center justify-start w-full h-14">
-              <UserImage
-                className="rounded-full w-12 h-12"
-                avatar=""
-                name=""
-              ></UserImage>
-              <h3 className="ml-2 font-medium">die_libonati</h3>
-            </li>{" "}
-            <li className="flex flex-row items-center justify-start w-full h-14">
-              <UserImage
-                className="rounded-full w-12 h-12"
-                avatar=""
-                name=""
-              ></UserImage>
-              <h3 className="ml-2 font-medium">die_libonati</h3>
-            </li>{" "}
-            <li className="flex flex-row items-center justify-start w-full h-14">
-              <UserImage
-                className="rounded-full w-12 h-12"
-                avatar=""
-                name=""
-              ></UserImage>
-              <h3 className="ml-2 font-medium">die_libonati</h3>
-            </li>{" "}
-            <li className="flex flex-row items-center justify-start w-full h-14">
-              <UserImage
-                className="rounded-full w-12 h-12"
-                avatar=""
-                name=""
-              ></UserImage>
-              <h3 className="ml-2 font-medium">die_libonati</h3>
-            </li>{" "}
-            <li className="flex flex-row items-center justify-start w-full h-14">
-              <UserImage
-                className="rounded-full w-12 h-12"
-                avatar=""
-                name=""
-              ></UserImage>
-              <h3 className="ml-2 font-medium">die_libonati</h3>
-            </li>{" "}
-            <li className="flex flex-row items-center justify-start w-full h-14">
-              <UserImage
-                className="rounded-full w-12 h-12"
-                avatar=""
-                name=""
-              ></UserImage>
-              <h3 className="ml-2 font-medium">die_libonati</h3>
-            </li>{" "}
-            <li className="flex flex-row items-center justify-start w-full h-14">
-              <UserImage
-                className="rounded-full w-12 h-12"
-                avatar=""
-                name=""
-              ></UserImage>
-              <h3 className="ml-2 font-medium">die_libonati</h3>
-            </li>{" "}
-            <li className="flex flex-row items-center justify-start w-full h-14">
-              <UserImage
-                className="rounded-full w-12 h-12"
-                avatar=""
-                name=""
-              ></UserImage>
-              <h3 className="ml-2 font-medium">die_libonati</h3>
-            </li>
-          </ul>
+          <SearchList
+            className="flex flex-row flex-wrap w-full h-auto"
+            title="Recientes"
+            outTitle={true}
+          ></SearchList>
         </main>
       )}
 
