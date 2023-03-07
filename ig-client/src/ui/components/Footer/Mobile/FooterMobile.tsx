@@ -19,7 +19,11 @@ export const FooterMobile = () => {
         size={25}
         onClick={() => navigate("/")}
       ></AiOutlineHome>
-      <AiOutlineSearch color="black" size={25}></AiOutlineSearch>
+      <AiOutlineSearch
+        color="black"
+        size={25}
+        onClick={() => navigate("/search-page")}
+      ></AiOutlineSearch>
       <RxVideo color="black" size={25}></RxVideo>
       <AiOutlineShopping color="black" size={25}></AiOutlineShopping>
       <Link to={`/${user.username}`}>

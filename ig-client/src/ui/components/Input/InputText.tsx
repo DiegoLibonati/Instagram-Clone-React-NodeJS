@@ -1,3 +1,5 @@
+import { LegacyRef } from "react";
+
 export const InputText = ({
   id,
   placeholder,
@@ -6,23 +8,28 @@ export const InputText = ({
   value,
   name,
   label,
+  onFocus,
   onChange,
 }: {
   id: string;
   placeholder: string;
-  classNameLabel: string;
+  classNameLabel?: string;
   classNameInput: string;
   value: string;
   name: string;
-  label: string;
+  label?: string;
+  onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) => {
   return (
     <>
-      <label htmlFor={id} className={classNameLabel}>
-        {label}
-      </label>
+      {label && (
+        <label htmlFor={id} className={classNameLabel}>
+          {label}
+        </label>
+      )}
       <input
+        onFocus={onFocus}
         onChange={onChange}
         type="text"
         placeholder={placeholder}
