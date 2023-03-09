@@ -1,20 +1,45 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import { BsArrowLeft } from "react-icons/bs";
-import { useForm } from "../../hooks/useForm";
+import { instagramApiGetUsers } from "../../api/instagramApiGetUsers";
+import { SearchContext } from "../../contexts/SearchContext";
 import { FooterMobile } from "../../ui/components/Footer/Mobile/FooterMobile";
 import { InputText } from "../../ui/components/Input/InputText";
 import { NavBarMobile } from "../../ui/components/NavBar/Mobile/NavBarMobile";
 import { SearchList } from "../components/Search/SearchList";
 
 export const SearchPage = () => {
-  const { formState, onInputChange } = useForm({
-    query: "",
-  });
+  const {
+    filterUsers,
+    formState,
+    onInputChange,
+    onResetForm,
+    setActiveSearch,
+    setFilterUsers,
+  } = useContext(SearchContext);
   const [focus, setFocus] = useState(false);
 
   const onFocus = () => {
     setFocus(true);
   };
+
+  const getUsers = async () => {
+    const request = await instagramApiGetUsers(formState.query);
+
+    const { users } = request;
+    setFilterUsers(users);
+  };
+
+  useEffect(() => {
+    if (formState.query) {
+      getUsers();
+    } else {
+      setFilterUsers([]);
+    }
+  }, [formState.query]);
+
+  useEffect(() => {
+    setActiveSearch(true);
+  }, []);
 
   return (
     <>
@@ -30,7 +55,10 @@ export const SearchPage = () => {
           <BsArrowLeft
             color="black"
             size={25}
-            onClick={() => setFocus(false)}
+            onClick={() => {
+              setFocus(false);
+              onResetForm();
+            }}
           ></BsArrowLeft>
         )}
         <InputText
@@ -51,6 +79,7 @@ export const SearchPage = () => {
             className="flex flex-row flex-wrap w-full h-auto"
             title="Recientes"
             outTitle={true}
+            users={filterUsers}
           ></SearchList>
         </main>
       )}

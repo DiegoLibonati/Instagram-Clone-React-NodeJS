@@ -223,4 +223,20 @@ export const User = {
         payload: payload,
       });
   },
+  getUsers: async (req, res) => {
+    const { id: username } = req.params;
+
+    const users = await UserModel.find({
+      username: { $regex: username, $options: "i" },
+    });
+
+    const usersPayload = users.map((user) => {
+      return {
+        username: user.username,
+        avatar: user.avatar,
+      };
+    });
+
+    res.status(200).json({ users: usersPayload });
+  },
 };

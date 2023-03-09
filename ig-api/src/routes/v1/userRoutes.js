@@ -8,6 +8,7 @@ const UserRouter = express.Router();
 UserRouter.get("/:id", verifyToken, User.getUser)
   .put("/:id", verifyToken, upload.single("avatar"), User.editUser)
   .get("/follow/:id", verifyToken, User.getFollow)
-  .get("/unfollow/:id", verifyToken, User.getUnFollow);
+  .get("/unfollow/:id", verifyToken, User.getUnFollow)
+  .get("/users/:id", verifyToken, User.getUsers);
 
 export default UserRouter;

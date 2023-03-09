@@ -2,10 +2,33 @@ import { BsArrowLeft } from "react-icons/bs";
 import { SearchContext } from "../../../../contexts/SearchContext";
 import { SearchList } from "../../../../instagram/components/Search/SearchList";
 import { InputText } from "../../Input/InputText";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
+import { instagramApiGetUsers } from "../../../../api/instagramApiGetUsers";
 
 export const SidebarSearch = () => {
-  const { setActiveSearch } = useContext(SearchContext);
+  const {
+    filterUsers,
+    formState,
+    onInputChange,
+    onResetForm,
+    setActiveSearch,
+    setFilterUsers,
+  } = useContext(SearchContext);
+
+  const getUsers = async () => {
+    const request = await instagramApiGetUsers(formState.query);
+
+    const { users } = request;
+    setFilterUsers(users);
+  };
+
+  useEffect(() => {
+    if (formState.query) {
+      getUsers();
+    } else {
+      setFilterUsers([]);
+    }
+  }, [formState.query]);
 
   return (
     <form className="flex flex-col items-start justify-center w-[calc(100%-16px)] h-screen m-2 shadow-sm rounded-md">
@@ -13,15 +36,18 @@ export const SidebarSearch = () => {
         <BsArrowLeft
           size={25}
           className="cursor-pointer"
-          onClick={() => setActiveSearch(false)}
+          onClick={() => {
+            setActiveSearch(false);
+            onResetForm();
+          }}
         ></BsArrowLeft>
         <InputText
           id="query"
           placeholder="Buscar..."
           name="query"
-          value=""
+          value={formState.query}
           classNameInput="ml-2 w-full bg-gray-200 rounded-full p-1 px-2 outline-none"
-          onChange={(e) => {}}
+          onChange={onInputChange}
         ></InputText>
       </div>
 
@@ -29,6 +55,7 @@ export const SidebarSearch = () => {
         inTitle={true}
         title="Recientes"
         className="flex flex-col items-start w-full h-full overflow-y-scroll p-2"
+        users={filterUsers}
       ></SearchList>
     </form>
   );
