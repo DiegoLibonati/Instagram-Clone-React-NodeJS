@@ -26,6 +26,7 @@ export const SearchProvider: React.FunctionComponent<SearchContextProps> = ({
 
   useEffect(() => {
     if (activeSearch) {
+      onResetForm();
       setActiveSearch(false);
     }
   }, [location]);

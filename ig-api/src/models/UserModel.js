@@ -56,6 +56,14 @@ const userSchema = new mongoose.Schema(
     description: {
       type: String,
     },
+    recentUsers: [
+      {
+        id: String,
+        username: String,
+        name: String,
+        avatar: String,
+      },
+    ],
   },
   {
     versionKey: false,

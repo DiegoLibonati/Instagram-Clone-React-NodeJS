@@ -36,6 +36,7 @@ export type User = {
   following: User[];
   avatar: string;
   description: string;
+  recentUsers: { avatar: string; username: string; name: string }[];
 };
 
 export type ForeignUser = {

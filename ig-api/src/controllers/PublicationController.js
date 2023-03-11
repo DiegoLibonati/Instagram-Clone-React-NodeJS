@@ -1,5 +1,4 @@
 import { UserModel } from "../models/UserModel.js";
-import jwt from "jsonwebtoken";
 import config from "../config.js";
 
 export const Publication = {
@@ -36,18 +35,11 @@ export const Publication = {
       following: user.following,
       avatar: user.avatar,
       description: user.description,
+      recentUsers: user.recentUsers,
     };
-
-    const token = jwt.sign(payload, config.TOKEN_SECRET, {
-      expiresIn: "1h",
-    });
 
     return res
       .status(200)
-      .cookie("ig-sess", token, {
-        expires: new Date(Date.now() + 1 * 60 * 60 * 1000),
-        httpOnly: false,
-      })
       .json({ message: "¡Publicacion creada exitosamente!", payload: payload });
   },
 };

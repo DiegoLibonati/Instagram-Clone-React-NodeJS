@@ -5,19 +5,31 @@ import jwt from "jsonwebtoken";
 
 export const Auth = {
   getRenew: async (req, res) => {
-    const payload = {
+    const { username } = req.user;
+
+    const user = await UserModel.findOne({ username });
+
+    const jwtPayload = {
       id: req.user.id,
       name: req.user.name,
       username: req.user.username,
       email: req.user.email,
-      publications: req.user.publications,
-      followers: req.user.followers,
-      following: req.user.following,
-      avatar: req.user.avatar,
-      description: req.user.description,
     };
 
-    const token = jwt.sign(payload, config.TOKEN_SECRET, {
+    const payload = {
+      id: user.id,
+      name: user.name,
+      username: user.username,
+      email: user.email,
+      publications: user.publications,
+      followers: user.followers,
+      following: user.following,
+      avatar: user.avatar,
+      description: user.description,
+      recentUsers: user.recentUsers,
+    };
+
+    const token = jwt.sign(jwtPayload, config.TOKEN_SECRET, {
       expiresIn: "1h",
     });
 
@@ -51,8 +63,15 @@ export const Auth = {
         .status(401)
         .json({ message: "¡La contraseña ingresado es incorrecta!" });
 
+    const jwtPayload = {
+      id: user.id,
+      name: user.name,
+      username: user.username,
+      email: user.email,
+    };
+
     const payload = {
-      id: user._id,
+      id: user.id,
       name: user.name,
       username: user.username,
       email: user.email,
@@ -61,9 +80,10 @@ export const Auth = {
       following: user.following,
       avatar: user.avatar,
       description: user.description,
+      recentUsers: user.recentUsers,
     };
 
-    const token = jwt.sign(payload, config.TOKEN_SECRET, {
+    const token = jwt.sign(jwtPayload, config.TOKEN_SECRET, {
       expiresIn: "1h",
     });
 

@@ -22,6 +22,7 @@ export const AuthProvider: React.FunctionComponent<AuthContextProps> = ({
     following: [],
     avatar: "",
     description: "",
+    recentUsers: [],
   });
 
   const onLogout = () => {
@@ -36,6 +37,7 @@ export const AuthProvider: React.FunctionComponent<AuthContextProps> = ({
       following: [],
       avatar: "",
       description: "",
+      recentUsers: [],
     });
   };
 
