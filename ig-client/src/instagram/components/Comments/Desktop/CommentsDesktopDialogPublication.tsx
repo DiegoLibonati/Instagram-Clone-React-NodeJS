@@ -1,9 +1,15 @@
 import { PublicationContext } from "../../../../contexts/PublicationContext";
 import { UserImage } from "../../UserImage/UserImage";
-import { useContext } from "react";
+import { useContext, useMemo } from "react";
+import { getFormatDate } from "../../../helpers/getFormatDate";
 
 export const CommentsDesktopDialogPublication = () => {
   const { activePublication } = useContext(PublicationContext);
+
+  const date = useMemo(
+    () => getFormatDate(activePublication.date),
+    [activePublication.date]
+  );
 
   return (
     <div className="flex items-start justify-start flex-row w-auto h-auto">
@@ -17,7 +23,7 @@ export const CommentsDesktopDialogPublication = () => {
           <span className="font-medium">{activePublication.username}</span>{" "}
           {activePublication.description}
         </p>
-        <p className="text-gray-400 text-xs mt-1">{activePublication.date}</p>
+        <p className="text-gray-400 text-xs mt-1">{date}</p>
       </div>
     </div>
   );

@@ -2,9 +2,17 @@ import { BsArchive, BsChat, BsSuitHeart } from "react-icons/bs";
 import { FiSend } from "react-icons/fi";
 import { PublicationContext } from "../../../../contexts/PublicationContext";
 import { useContext } from "react";
+import { getFormatDate } from "../../../helpers/getFormatDate";
+import { useMemo } from "react";
 
 export const CommentsDesktopDialogActions = () => {
   const { activePublication } = useContext(PublicationContext);
+
+  const date = useMemo(
+    () => getFormatDate(activePublication.date),
+    [activePublication.date]
+  );
+
   return (
     <div className="flex flex-col items-start justify-start w-2/6 h-auto p-4 shadow-slate-200 shadow-sm fixed bottom-0 right-0 bg-white">
       <div className="flex items-center justify-between w-full h-auto">
@@ -20,9 +28,7 @@ export const CommentsDesktopDialogActions = () => {
         <h2 className="text-sm font-medium">
           {activePublication.likes.length} Me gusta
         </h2>
-        <p className="text-xs text-gray-500 mt-1">
-          HACE {activePublication.date}
-        </p>
+        <p className="text-xs text-gray-500 mt-1">{date}</p>
       </div>
 
       <form className="flex flex-row items-center justify-between w-full h-auto mt-3 shadow-inner p-2">

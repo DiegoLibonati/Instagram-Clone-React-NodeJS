@@ -1,9 +1,15 @@
 import { PublicationContext } from "../../../../contexts/PublicationContext";
 import { UserImage } from "../../UserImage/UserImage";
-import { useContext } from "react";
+import { useContext, useMemo } from "react";
+import { getFormatDate } from "../../../helpers/getFormatDate";
 
 export const CommentsMobilePublication = () => {
   const { activePublication } = useContext(PublicationContext);
+
+  const date = useMemo(
+    () => getFormatDate(activePublication.date),
+    [activePublication.date]
+  );
 
   return (
     <div className="flex items-start justify-start flex-row w-full h-auto p-2 mt-14">
@@ -17,7 +23,7 @@ export const CommentsMobilePublication = () => {
           <h3 className="text-black mr-2 text-sm font-bold">
             {activePublication.username}
           </h3>
-          <h4 className="text-gray-400 text-xs">{activePublication.date}</h4>
+          <h4 className="text-gray-400 text-xs">{date}</h4>
         </div>
         <p className="text-sm">{activePublication.description}</p>
       </div>
