@@ -6,7 +6,7 @@ import { ModalAlert } from "../ui/components/Modal/ModalAlert/ModalAlert";
 import { AuthContext } from "../contexts/AuthContext";
 import { AuthRoutes } from "../auth/routes/AuthRoutes";
 import { InstagramRoutes } from "../instagram/routes/InstagramRoutes";
-import { Loader } from "../ui/components/Loader/Loader";
+import { Loader } from "../ui/components/Loader/Loader1/Loader";
 
 export const InstagramRouter = () => {
   const { modal, alert } = useContext(UIContext);

@@ -10,6 +10,6 @@ PublicationRouter.post(
   verifyToken,
   upload.single("imgLink"),
   Publication.createPublication
-);
+).get("/", verifyToken, Publication.getFeed);
 
 export default PublicationRouter;

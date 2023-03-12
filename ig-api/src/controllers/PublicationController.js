@@ -42,4 +42,41 @@ export const Publication = {
       .status(200)
       .json({ message: "¡Publicacion creada exitosamente!", payload: payload });
   },
+  getFeed: async (req, res) => {
+    const { username } = req.user;
+
+    const user = await UserModel.findOne({ username });
+
+    const following = user.following;
+
+    const usernamesFollowing = following.map(
+      (userFollowed) => userFollowed.username
+    );
+
+    const newFeed = [];
+
+    for (const username of usernamesFollowing) {
+      const userFollowed = await UserModel.findOne({ username });
+
+      const publicationsOfUserFollowed = userFollowed.publications;
+
+      if (publicationsOfUserFollowed.length === 0) {
+        return null;
+      }
+
+      publicationsOfUserFollowed.forEach((publication) => {
+        const currentDate = new Date();
+        const isNew = (currentDate - publication.date) / 86400000 <= 3;
+
+        if (isNew) return newFeed.push(publication);
+
+        return null;
+      });
+    }
+
+    res.status(200).json({
+      message: "Feed actualizado con exito",
+      payload: newFeed,
+    });
+  },
 };
