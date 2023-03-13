@@ -1,4 +1,5 @@
 import { SlOptionsVertical } from "react-icons/sl";
+import { Link } from "react-router-dom";
 import { UserImage } from "../UserImage/UserImage";
 
 export const PublicationHeader = ({
@@ -18,7 +19,9 @@ export const PublicationHeader = ({
           avatar={avatar}
           name={name}
         ></UserImage>
-        <h3 className="text-black">{username}</h3>
+        <Link to={`/${username}`}>
+          <h3 className="text-black">{username}</h3>
+        </Link>
       </div>
 
       <SlOptionsVertical color="black" size={25}></SlOptionsVertical>
