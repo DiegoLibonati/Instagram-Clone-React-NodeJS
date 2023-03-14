@@ -6,12 +6,15 @@ import { UIContext } from "../../../contexts/UIContext";
 import { SidebarItems } from "./SidebarItems";
 import { SearchContext } from "../../../contexts/SearchContext";
 import { SidebarSearch } from "./SidebarSearch/SidebarSearch";
+import { SidebarNotifications } from "./SidebarNotifications/SidebarNotifications";
+import { NotificationsContext } from "../../../contexts/NotificationsContext";
 
 export const SidebarNav = () => {
   const { menuConfig, setMenuConfigOpen, setMenuConfigClose } =
     useContext(UIContext);
 
   const { activeSearch } = useContext(SearchContext);
+  const { openNotifications } = useContext(NotificationsContext);
 
   const handleMore = () => {
     if (!menuConfig.isOpen) return setMenuConfigOpen();
@@ -21,7 +24,7 @@ export const SidebarNav = () => {
 
   return (
     <nav className="flex items-start justify-start h-screen w-full flex-col relative">
-      {!activeSearch && (
+      {!activeSearch && !openNotifications && (
         <>
           <SidebarHeader></SidebarHeader>
           <SidebarItems></SidebarItems>
@@ -34,6 +37,7 @@ export const SidebarNav = () => {
       )}
 
       {activeSearch && <SidebarSearch></SidebarSearch>}
+      {openNotifications && <SidebarNotifications></SidebarNotifications>}
     </nav>
   );
 };

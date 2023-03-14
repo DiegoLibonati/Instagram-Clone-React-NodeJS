@@ -7,8 +7,8 @@ export const CommentsMobilePublication = () => {
   const { activePublication } = useContext(PublicationContext);
 
   const date = useMemo(
-    () => getFormatDate(activePublication.date),
-    [activePublication.date]
+    () => getFormatDate(activePublication?.date),
+    [activePublication?.date]
   );
 
   return (

@@ -4,6 +4,7 @@ import { BsSuitHeart } from "react-icons/bs";
 import { MdOutlineAddBox } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { InstagramBlack } from "../../assets/images";
+import { NotificationsContext } from "../../contexts/NotificationsContext";
 import { UIContext } from "../../contexts/UIContext";
 import { useMediaMatch } from "../../hooks/useMediaMatch";
 import { FooterMobile } from "../../ui/components/Footer/Mobile/FooterMobile";
@@ -12,11 +13,13 @@ import { Sidebar } from "../../ui/components/Sidebar/Sidebar";
 import { CommentsDesktop } from "../components/Comments/Desktop/CommentsDesktop";
 import { CommentsMobile } from "../components/Comments/Mobile/CommentsMobile";
 import { Feed } from "../components/Feed/Feed";
+import { Notifications } from "../components/Notifications/Mobile/Notifications";
 import { Suggetions } from "../components/Suggestions/Suggetions";
 
 export const HomePage = () => {
   const { matchMediaQuery } = useMediaMatch(1024);
   const { modal, setModalOpen } = useContext(UIContext);
+  const { setOpenNotifications } = useContext(NotificationsContext);
 
   return (
     <>
@@ -41,7 +44,12 @@ export const HomePage = () => {
             className="mx-2"
             onClick={() => setModalOpen("newpublication")}
           ></MdOutlineAddBox>
-          <BsSuitHeart color="black" size={25} className="mx-2"></BsSuitHeart>
+          <BsSuitHeart
+            color="black"
+            size={25}
+            className="mx-2"
+            onClick={() => setOpenNotifications(true)}
+          ></BsSuitHeart>
           <AiOutlineMessage
             color="black"
             size={25}
@@ -56,7 +64,7 @@ export const HomePage = () => {
 
         {matchMediaQuery && <Suggetions></Suggetions>}
       </main>
-
+      {!matchMediaQuery && <Notifications></Notifications>}
       {!matchMediaQuery && <CommentsMobile></CommentsMobile>}
       {matchMediaQuery && modal.isOpen && modal.type === "publication" && (
         <CommentsDesktop></CommentsDesktop>

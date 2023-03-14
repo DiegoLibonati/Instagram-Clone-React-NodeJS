@@ -9,12 +9,14 @@ import { useContext } from "react";
 import { AuthContext } from "../../../contexts/AuthContext";
 import { UserImage } from "../../../instagram/components/UserImage/UserImage";
 import { SearchContext } from "../../../contexts/SearchContext";
+import { NotificationsContext } from "../../../contexts/NotificationsContext";
 
 export const SidebarItems = () => {
   const navigate = useNavigate();
   const { setModalOpen } = useContext(UIContext);
   const { user } = useContext(AuthContext);
   const { setActiveSearch } = useContext(SearchContext);
+  const { setOpenNotifications } = useContext(NotificationsContext);
   return (
     <ul className="flex flex-col items-start justify-center w-full h-auto pl-4">
       <SidebarItem text="Inicio" onClick={() => navigate("/")}>
@@ -32,7 +34,10 @@ export const SidebarItems = () => {
       <SidebarItem text="Mensajes">
         <AiOutlineMessage size={25} color="black"></AiOutlineMessage>
       </SidebarItem>
-      <SidebarItem text="Notificaciones">
+      <SidebarItem
+        text="Notificaciones"
+        onClick={() => setOpenNotifications(true)}
+      >
         <BsSuitHeart size={25} color="black"></BsSuitHeart>
       </SidebarItem>
       <SidebarItem text="Crear" onClick={() => setModalOpen("newpublication")}>
