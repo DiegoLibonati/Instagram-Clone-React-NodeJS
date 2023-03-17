@@ -8,7 +8,7 @@ export const ProfileImages = () => {
 
   if (user.publications.length === 0) {
     return (
-      <section className="flex pb-14 w-full h-full lg:pb-5 2xl:w-[75%] h-60">
+      <section className="flex pb-14 w-full lg:pb-5 2xl:w-[75%] h-60">
         <article className="flex items-center justify-center flex-col w-full h-full relative">
           <AiOutlineCamera
             className="rounded-full p-2 border-black border-2"
