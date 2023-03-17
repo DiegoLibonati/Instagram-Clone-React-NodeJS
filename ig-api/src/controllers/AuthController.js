@@ -27,6 +27,7 @@ export const Auth = {
       avatar: user.avatar,
       description: user.description,
       recentUsers: user.recentUsers,
+      notifications: user.notifications,
     };
 
     const token = jwt.sign(jwtPayload, config.TOKEN_SECRET, {
@@ -81,6 +82,7 @@ export const Auth = {
       avatar: user.avatar,
       description: user.description,
       recentUsers: user.recentUsers,
+      notifications: user.notifications,
     };
 
     const token = jwt.sign(jwtPayload, config.TOKEN_SECRET, {

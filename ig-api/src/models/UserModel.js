@@ -64,6 +64,16 @@ const userSchema = new mongoose.Schema(
         avatar: String,
       },
     ],
+    notifications: [
+      {
+        id: String,
+        username: String,
+        name: String,
+        avatar: String,
+        notificationType: String,
+        wasViewed: Boolean,
+      },
+    ],
   },
   {
     versionKey: false,

@@ -36,6 +36,7 @@ export const Publication = {
       avatar: user.avatar,
       description: user.description,
       recentUsers: user.recentUsers,
+      notifications: user.notifications,
     };
 
     return res

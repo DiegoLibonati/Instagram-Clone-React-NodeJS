@@ -36,7 +36,8 @@ export type User = {
   following: User[];
   avatar: string;
   description: string;
-  recentUsers: { avatar: string; username: string; name: string }[];
+  recentUsers: Record<string, string>[];
+  notifications: Record<string, string>[];
 };
 
 export type ForeignUser = {
@@ -49,8 +50,6 @@ export type ForeignUser = {
   following: User[];
   avatar: string;
   description: string;
-  userAuthFollowing: boolean;
-  userForeignFollowing: boolean;
 };
 
 export type MConfig = {

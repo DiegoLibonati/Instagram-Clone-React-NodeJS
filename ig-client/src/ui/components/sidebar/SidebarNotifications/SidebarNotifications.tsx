@@ -16,7 +16,7 @@ export const SidebarNotifications = () => {
           }}
         ></BsArrowLeft>
 
-        <h2 className="absolute right-2 font-semibold text-lg">
+        <h2 className="absolute right-4 font-semibold text-lg">
           Notificaciones
         </h2>
       </div>

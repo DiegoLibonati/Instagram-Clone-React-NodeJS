@@ -1,9 +1,11 @@
-import { useContext } from "react";
+import { useContext, useMemo } from "react";
 import { AiOutlineMessage } from "react-icons/ai";
-import { BsSuitHeart } from "react-icons/bs";
+import { BsSuitHeart, BsFillSuitHeartFill } from "react-icons/bs";
 import { MdOutlineAddBox } from "react-icons/md";
 import { Link } from "react-router-dom";
+import { instagramApiEditNotifications } from "../../api/instagramApiEditNotifications";
 import { InstagramBlack } from "../../assets/images";
+import { AuthContext } from "../../contexts/AuthContext";
 import { NotificationsContext } from "../../contexts/NotificationsContext";
 import { UIContext } from "../../contexts/UIContext";
 import { useMediaMatch } from "../../hooks/useMediaMatch";
@@ -15,11 +17,27 @@ import { CommentsMobile } from "../components/Comments/Mobile/CommentsMobile";
 import { Feed } from "../components/Feed/Feed";
 import { Notifications } from "../components/Notifications/Mobile/Notifications";
 import { Suggetions } from "../components/Suggestions/Suggetions";
+import { areThereNotifications } from "../helpers/areThereNotifications";
 
 export const HomePage = () => {
   const { matchMediaQuery } = useMediaMatch(1024);
   const { modal, setModalOpen } = useContext(UIContext);
   const { setOpenNotifications } = useContext(NotificationsContext);
+  const { user, onLogin } = useContext(AuthContext);
+
+  const areThereNotificationsMemo = useMemo(
+    () => areThereNotifications(user?.notifications),
+    [user?.notifications]
+  );
+
+  const handleOpenNotifications = async () => {
+    setOpenNotifications(true);
+    const request = await instagramApiEditNotifications();
+
+    const notifications = request.notifications;
+
+    onLogin({ ...user, notifications });
+  };
 
   return (
     <>
@@ -44,12 +62,24 @@ export const HomePage = () => {
             className="mx-2"
             onClick={() => setModalOpen("newpublication")}
           ></MdOutlineAddBox>
-          <BsSuitHeart
-            color="black"
-            size={25}
-            className="mx-2"
-            onClick={() => setOpenNotifications(true)}
-          ></BsSuitHeart>
+          {!areThereNotificationsMemo.length && (
+            <BsSuitHeart
+              color="black"
+              size={25}
+              className="mx-2"
+              onClick={handleOpenNotifications}
+            ></BsSuitHeart>
+          )}
+
+          {areThereNotificationsMemo.length > 0 && (
+            <BsFillSuitHeartFill
+              color="red"
+              size={25}
+              className="mx-2 animate-pulse"
+              onClick={() => setOpenNotifications(true)}
+            ></BsFillSuitHeartFill>
+          )}
+
           <AiOutlineMessage
             color="black"
             size={25}

@@ -3,11 +3,12 @@ import React from "react";
 export const SidebarItem: React.FC<{
   children: React.ReactNode;
   text: string;
+  className?: string;
   onClick?: () => void;
-}> = ({ children, text, onClick }) => {
+}> = ({ children, text, className, onClick }) => {
   return (
     <li
-      className="flex flex-row w-5/6 py-3 rounded-full px-2 h-auto items-center justify-start cursor-pointer hover:bg-gray-200"
+      className={`flex flex-row relative w-5/6 py-3 rounded-full px-2 h-auto items-center justify-start cursor-pointer hover:bg-gray-200 ${className}`}
       onClick={onClick}
     >
       {children}

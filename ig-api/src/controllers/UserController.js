@@ -1,28 +1,20 @@
 import { UserModel } from "../models/UserModel.js";
 import { regexEmail, regexUsername } from "../utils/regex.js";
+import { handleNewNotification } from "../utils/handleNewNotification.js";
+import { handleRemoveNotification } from "../utils/handleRemoveNotification.js";
 import jwt from "jsonwebtoken";
 import config from "../config.js";
 import fs from "fs";
 
 export const User = {
   getUser: async (req, res) => {
-    const { username } = req.user;
     const { id } = req.params;
 
     const foreignUser = await UserModel.findOne({ username: id });
-    const authUser = await UserModel.findOne({ username });
 
     if (!foreignUser) {
       return res.status(404).json({ message: `¡El perfil ${id} no existe!` });
     }
-
-    const userAuthFollowing = Boolean(
-      foreignUser.followers.filter((follower) => follower.id === authUser.id)[0]
-    );
-
-    const userForeignFollowing = Boolean(
-      authUser.followers.filter((follower) => follower.id === authUser.id)[0]
-    );
 
     const payload = {
       id: foreignUser.id,
@@ -34,8 +26,6 @@ export const User = {
       following: foreignUser.following,
       avatar: foreignUser.avatar,
       description: foreignUser.description,
-      userAuthFollowing: userAuthFollowing,
-      userForeignFollowing: userForeignFollowing,
     };
 
     return res
@@ -113,6 +103,7 @@ export const User = {
       avatar: user.avatar,
       description: user.description,
       recentUsers: user.recentUsers,
+      notifications: user.notifications,
     };
 
     const token = jwt.sign(jwtPayload, config.TOKEN_SECRET, {
@@ -152,6 +143,8 @@ export const User = {
       avatar: foreignUser.avatar,
     });
 
+    handleNewNotification(foreignUser, authUser, "follow");
+
     foreignUser.save();
     authUser.save();
 
@@ -166,11 +159,17 @@ export const User = {
       avatar: authUser.avatar,
       description: authUser.description,
       recentUsers: authUser.recentUsers,
+      notifications: authUser.notifications,
+    };
+
+    const payloadForeignUser = {
+      followers: foreignUser.followers,
     };
 
     return res.status(200).json({
       message: `¡Se comenzo a seguir a ${foreignUser.username} exitosamente!`,
       payload: payload,
+      payloadForeignUser: payloadForeignUser,
     });
   },
   getUnFollow: async (req, res) => {
@@ -192,6 +191,8 @@ export const User = {
       (following) => following.id !== foreignUser.id
     );
 
+    handleRemoveNotification(foreignUser, authUser);
+
     foreignUser.save();
     authUser.save();
 
@@ -206,11 +207,17 @@ export const User = {
       avatar: authUser.avatar,
       description: authUser.description,
       recentUsers: authUser.recentUsers,
+      notifications: authUser.notifications,
+    };
+
+    const payloadForeignUser = {
+      followers: foreignUser.followers,
     };
 
     return res.status(200).json({
       message: `¡Se dejo de seguir a ${foreignUser.username} exitosamente!`,
       payload: payload,
+      payloadForeignUser: payloadForeignUser,
     });
   },
   getUsers: async (req, res) => {
@@ -267,10 +274,24 @@ export const User = {
       avatar: authUser.avatar,
       description: authUser.description,
       recentUsers: authUser.recentUsers,
+      notifications: authUser.notifications,
     };
 
     return res.status(200).json({
       payload: payload,
+    });
+  },
+  editNotifications: async (req, res) => {
+    const { username } = req.user;
+
+    const user = await UserModel.findOne({ username });
+
+    user.notifications = user.notifications.map(
+      (notification) => (notification.wasViewed = true)
+    );
+
+    res.status(201).json({
+      notifications: user.notifications,
     });
   },
 };

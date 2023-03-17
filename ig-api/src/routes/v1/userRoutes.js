@@ -10,6 +10,7 @@ UserRouter.get("/:id", verifyToken, User.getUser)
   .get("/follow/:id", verifyToken, User.getFollow)
   .get("/unfollow/:id", verifyToken, User.getUnFollow)
   .get("/users/:id", verifyToken, User.getUsers)
-  .get("/recentsearch/:id", verifyToken, User.getRecentSearchUser);
+  .get("/recentsearch/:id", verifyToken, User.getRecentSearchUser)
+  .put("/notifications/edit_view", verifyToken, User.editNotifications);
 
 export default UserRouter;

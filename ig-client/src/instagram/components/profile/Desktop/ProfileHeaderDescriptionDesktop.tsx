@@ -2,13 +2,34 @@ import { FiSettings } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import { useProfileUser } from "../../../hooks/useProfileUser";
 import { UserImage } from "../../UserImage/UserImage";
+import { useContext, useMemo } from "react";
+import { UIContext } from "../../../../contexts/UIContext";
+import { AuthContext } from "../../../../contexts/AuthContext";
+import { handleUnFollow } from "../../../helpers/handleUnFollow";
+import { handleFollow } from "../../../helpers/handleFollow";
+import { isUserFollow } from "../../../helpers/isUserFollow";
+import { ProfileContext } from "../../../../contexts/ProfileContext";
 
 export const ProfileHeaderDescriptionDesktop = () => {
-  const { user, isMainUser, handleFollow, handleUnFollow } = useProfileUser();
+  const { user, isMainUser } = useProfileUser();
+  const { setAlertOpen } = useContext(UIContext);
+  const { user: authUser, onLogin } = useContext(AuthContext);
+  const { userForeignProfile, setUserForeignProfile } =
+    useContext(ProfileContext);
   const navigate = useNavigate();
   const handleEditProfile = () => {
     navigate("/accounts/edit");
   };
+
+  const isForeignUserFollowMemo = useMemo(
+    () => isUserFollow(authUser, user.username, "followers"),
+    [authUser, user.username]
+  );
+
+  const isAuthUserFollowMemo = useMemo(
+    () => isUserFollow(user, authUser.username, "followers"),
+    [user, authUser.username]
+  );
 
   return (
     <article className="flex items-start justify-start flex-row w-full h-auto 2xl:w-[75%]">
@@ -39,24 +60,48 @@ export const ProfileHeaderDescriptionDesktop = () => {
             <>
               <h2 className="text-lg mr-8">{user.username}</h2>
 
-              {user.userAuthFollowing ? (
+              {isAuthUserFollowMemo.length > 0 ? (
                 <button
                   className="text-sm px-5 py-1 bg-zinc-200 text-black rounded-md cursor-pointer mr-2"
-                  onClick={handleUnFollow}
+                  onClick={() =>
+                    handleUnFollow(
+                      setAlertOpen,
+                      onLogin,
+                      userForeignProfile,
+                      setUserForeignProfile,
+                      user.username
+                    )
+                  }
                 >
                   Siguiendo
                 </button>
-              ) : user.userForeignFollowing ? (
+              ) : isForeignUserFollowMemo.length > 0 ? (
                 <button
                   className="text-sm px-5 py-1 bg-blue-500 text-white rounded-md cursor-pointer mr-2"
-                  onClick={handleFollow}
+                  onClick={() =>
+                    handleFollow(
+                      setAlertOpen,
+                      onLogin,
+                      userForeignProfile,
+                      setUserForeignProfile,
+                      user.username
+                    )
+                  }
                 >
                   Seguir tambien
                 </button>
               ) : (
                 <button
                   className="text-sm px-5 py-1 bg-blue-500 text-white rounded-md cursor-pointer mr-2"
-                  onClick={handleFollow}
+                  onClick={() =>
+                    handleFollow(
+                      setAlertOpen,
+                      onLogin,
+                      userForeignProfile,
+                      setUserForeignProfile,
+                      user.username
+                    )
+                  }
                 >
                   Seguir
                 </button>

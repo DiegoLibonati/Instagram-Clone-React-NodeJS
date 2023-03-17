@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { instagramApiGetFeed } from "../../../api/instagramApiGetFeed";
 import { instagramCheck } from "../../../assets/images";
+
 import { usePagination } from "../../../hooks/usePagination";
 import { Publication as PublicationType } from "../../../types/types";
 import { Loader2 } from "../../../ui/components/Loader/Loader2/Loader2";
+import { useProfileUser } from "../../hooks/useProfileUser";
 import { Histories } from "../Histories/Histories";
 import { Publication } from "../Publication/Publication";
 
@@ -14,6 +16,8 @@ export const Feed = () => {
     feed,
     5
   );
+
+  const { user } = useProfileUser();
 
   const getFeed = async () => {
     const request = await instagramApiGetFeed();
@@ -44,7 +48,7 @@ export const Feed = () => {
           );
         })}
 
-      {!arrayPagination?.length && (
+      {!user.following?.length && (
         <div className="flex flex-col items-center justify-center w-full h-auto p-2 mb-2">
           <img
             src={instagramCheck}
@@ -60,7 +64,8 @@ export const Feed = () => {
 
       {loading && <Loader2></Loader2>}
 
-      {allViewed && !loading && arrayPagination?.length && (
+      {((allViewed && !loading && arrayPagination?.length) ||
+        (!arrayPagination?.length && user.following?.length > 0)) && (
         <div className="flex flex-col items-center justify-center w-full h-auto p-2 mb-2">
           <img
             src={instagramCheck}

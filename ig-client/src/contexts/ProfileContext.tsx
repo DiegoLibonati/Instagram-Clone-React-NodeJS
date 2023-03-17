@@ -21,8 +21,6 @@ export const ProfileProvider: React.FunctionComponent<ProfileContextProps> = ({
     following: [],
     avatar: "",
     description: "",
-    userAuthFollowing: false,
-    userForeignFollowing: false,
   });
 
   return (
