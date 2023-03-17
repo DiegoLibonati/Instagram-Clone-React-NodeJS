@@ -1,7 +1,13 @@
+import { NextFunction, Response } from "express";
 import jwt from "jsonwebtoken";
-import config from "../config.js";
+import config from "../config";
+import { NewRequest } from "../types/types";
 
-export const verifyToken = (req, res, next) => {
+export const verifyToken = (
+  req: NewRequest,
+  res: Response,
+  next: NextFunction
+) => {
   const token = req.header("Authorization");
 
   if (!token)

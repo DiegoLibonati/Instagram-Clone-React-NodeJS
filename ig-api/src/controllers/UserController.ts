@@ -1,13 +1,15 @@
-import { UserModel } from "../models/UserModel.js";
-import { regexEmail, regexUsername } from "../utils/regex.js";
-import { handleNewNotification } from "../utils/handleNewNotification.js";
-import { handleRemoveNotification } from "../utils/handleRemoveNotification.js";
+import { UserModel } from "../models/UserModel";
+import { regexEmail, regexUsername } from "../utils/regex";
+import { handleNewNotification } from "../utils/handleNewNotification";
+import { handleRemoveNotification } from "../utils/handleRemoveNotification";
 import jwt from "jsonwebtoken";
-import config from "../config.js";
+import config from "../config";
 import fs from "fs";
+import { NewRequest } from "../types/types";
+import { Response } from "express";
 
 export const User = {
-  getUser: async (req, res) => {
+  getUser: async (req: NewRequest, res: Response) => {
     const { id } = req.params;
 
     const foreignUser = await UserModel.findOne({ username: id });
@@ -32,10 +34,10 @@ export const User = {
       .status(201)
       .json({ message: "¡Usuario encontrado!", payload: payload });
   },
-  editUser: async (req, res) => {
+  editUser: async (req: NewRequest, res: Response) => {
     const { id: idUsername } = req.params;
     const { name, username, email, description } = req.body;
-    const { path } = req.file;
+    const { path } = req.file!;
 
     if (!name || !username || !email)
       return res.status(400).json({
@@ -54,7 +56,7 @@ export const User = {
 
     const user = await UserModel.findOne({ username: idUsername });
 
-    if (username !== user.username) {
+    if (username !== user?.username) {
       const isUsernameExist = await UserModel.findOne({ username });
 
       if (isUsernameExist)
@@ -63,7 +65,7 @@ export const User = {
         });
     }
 
-    if (email !== user.email) {
+    if (email !== user?.email) {
       const isEmailExist = await UserModel.findOne({ email });
 
       if (isEmailExist)
@@ -72,38 +74,38 @@ export const User = {
         });
     }
 
-    if (user.avatar.startsWith(config.API_BACK_URL)) {
-      console.log(user.avatar.split("/images\\")[1]);
-      fs.unlinkSync(`src/images/${user.avatar.split("/images\\")[1]}`);
+    if (user?.avatar!.startsWith(config.API_BACK_URL!)) {
+      console.log(user?.avatar!.split("/images\\")[1]);
+      fs.unlinkSync(`src/images/${user?.avatar!.split("/images\\")[1]}`);
     }
 
-    user.name = name;
-    user.username = username;
-    user.email = email;
-    user.description = description;
-    user.avatar = `${config.API_BACK_URL}${path.replace("src\\", "")}`;
+    user!.name = name;
+    user!.username = username;
+    user!.email = email;
+    user!.description = description;
+    user!.avatar = `${config.API_BACK_URL}${path.replace("src\\", "")}`;
 
-    await user.save();
+    await user?.save();
 
     const jwtPayload = {
-      id: user._id,
-      name: user.name,
-      username: user.username,
-      email: user.email,
+      id: user?._id,
+      name: user?.name,
+      username: user?.username,
+      email: user?.email,
     };
 
     const payload = {
-      id: user._id,
-      name: user.name,
-      username: user.username,
-      email: user.email,
-      publications: user.publications,
-      followers: user.followers,
-      following: user.following,
-      avatar: user.avatar,
-      description: user.description,
-      recentUsers: user.recentUsers,
-      notifications: user.notifications,
+      id: user?._id,
+      name: user?.name,
+      username: user?.username,
+      email: user?.email,
+      publications: user?.publications,
+      followers: user?.followers,
+      following: user?.following,
+      avatar: user?.avatar,
+      description: user?.description,
+      recentUsers: user?.recentUsers,
+      notifications: user?.notifications,
     };
 
     const token = jwt.sign(jwtPayload, config.TOKEN_SECRET, {
@@ -118,7 +120,7 @@ export const User = {
       })
       .json({ message: "Usuario editado exitosamente", payload: payload });
   },
-  getFollow: async (req, res) => {
+  getFollow: async (req: NewRequest, res: Response) => {
     const usernameAuthUser = req.user.username;
 
     const { id: usernameProfile } = req.params;
@@ -127,39 +129,47 @@ export const User = {
     const authUser = await UserModel.findOne({ username: usernameAuthUser });
 
     if (!foreignUser) {
-      return res.status(404).json({ message: `¡El perfil ${id} no existe!` });
+      return res
+        .status(404)
+        .json({ message: `¡El perfil ${usernameProfile} no existe!` });
     }
 
     foreignUser.followers.push({
-      id: authUser._id,
-      username: authUser.username,
-      name: authUser.name,
-      avatar: authUser.avatar,
+      id: authUser!._id.toString(),
+      username: authUser!.username,
+      name: authUser!.name,
+      avatar: authUser!.avatar,
     });
-    authUser.following.push({
-      id: foreignUser._id,
+    authUser?.following.push({
+      id: foreignUser._id.toString(),
       username: foreignUser.username,
       name: foreignUser.name,
       avatar: foreignUser.avatar,
     });
 
-    handleNewNotification(foreignUser, authUser, "follow");
+    handleNewNotification(
+      foreignUser.notifications,
+      authUser!.username,
+      authUser!.name,
+      authUser!.avatar!,
+      "follow"
+    );
 
     foreignUser.save();
-    authUser.save();
+    authUser?.save();
 
     const payload = {
-      id: authUser._id,
-      name: authUser.name,
-      username: authUser.username,
-      email: authUser.email,
-      publications: authUser.publications,
-      followers: authUser.followers,
-      following: authUser.following,
-      avatar: authUser.avatar,
-      description: authUser.description,
-      recentUsers: authUser.recentUsers,
-      notifications: authUser.notifications,
+      id: authUser?._id,
+      name: authUser?.name,
+      username: authUser?.username,
+      email: authUser?.email,
+      publications: authUser?.publications,
+      followers: authUser?.followers,
+      following: authUser?.following,
+      avatar: authUser?.avatar,
+      description: authUser?.description,
+      recentUsers: authUser?.recentUsers,
+      notifications: authUser?.notifications,
     };
 
     const payloadForeignUser = {
@@ -172,7 +182,7 @@ export const User = {
       payloadForeignUser: payloadForeignUser,
     });
   },
-  getUnFollow: async (req, res) => {
+  getUnFollow: async (req: NewRequest, res: Response) => {
     const usernameAuthUser = req.user.username;
 
     const { id: usernameProfile } = req.params;
@@ -181,33 +191,38 @@ export const User = {
     const authUser = await UserModel.findOne({ username: usernameAuthUser });
 
     if (!foreignUser) {
-      return res.status(404).json({ message: `¡El perfil ${id} no existe!` });
+      return res
+        .status(404)
+        .json({ message: `¡El perfil ${usernameProfile} no existe!` });
     }
 
     foreignUser.followers = foreignUser.followers.filter(
-      (follower) => follower.id !== authUser.id
+      (follower) => follower.id !== authUser?.id
     );
-    authUser.following = authUser.following.filter(
+    authUser!.following = authUser!.following.filter(
       (following) => following.id !== foreignUser.id
     );
 
-    handleRemoveNotification(foreignUser, authUser);
+    foreignUser.notifications = handleRemoveNotification(
+      foreignUser.notifications,
+      authUser!.username
+    );
 
-    foreignUser.save();
-    authUser.save();
+    foreignUser?.save();
+    authUser?.save();
 
     const payload = {
-      id: authUser._id,
-      name: authUser.name,
-      username: authUser.username,
-      email: authUser.email,
-      publications: authUser.publications,
-      followers: authUser.followers,
-      following: authUser.following,
-      avatar: authUser.avatar,
-      description: authUser.description,
-      recentUsers: authUser.recentUsers,
-      notifications: authUser.notifications,
+      id: authUser?._id,
+      name: authUser?.name,
+      username: authUser?.username,
+      email: authUser?.email,
+      publications: authUser?.publications,
+      followers: authUser?.followers,
+      following: authUser?.following,
+      avatar: authUser?.avatar,
+      description: authUser?.description,
+      recentUsers: authUser?.recentUsers,
+      notifications: authUser?.notifications,
     };
 
     const payloadForeignUser = {
@@ -220,7 +235,7 @@ export const User = {
       payloadForeignUser: payloadForeignUser,
     });
   },
-  getUsers: async (req, res) => {
+  getUsers: async (req: NewRequest, res: Response) => {
     const { id: username } = req.params;
 
     const users = await UserModel.find({
@@ -236,7 +251,7 @@ export const User = {
 
     res.status(200).json({ users: usersPayload });
   },
-  getRecentSearchUser: async (req, res) => {
+  getRecentSearchUser: async (req: NewRequest, res: Response) => {
     const { id: foreignUsername } = req.params;
     const { username: authUsername } = req.user;
 
@@ -244,54 +259,60 @@ export const User = {
     const authUser = await UserModel.findOne({ username: authUsername });
 
     const recentUserObject = {
-      id: foreignUser.id,
-      username: foreignUser.username,
-      name: foreignUser.name,
-      avatar: foreignUser.avatar,
+      id: foreignUser?.id,
+      username: foreignUser?.username,
+      name: foreignUser?.name,
+      avatar: foreignUser?.avatar,
     };
 
-    if (authUser.recentUsers.length === 20) {
-      authUser.recentUsers.shift();
+    if (authUser?.recentUsers.length === 20) {
+      authUser?.recentUsers.shift();
     }
 
     const userInRecentUsers = Boolean(
-      authUser.recentUsers.filter((user) => user.id === foreignUser.id)[0]
+      authUser?.recentUsers.filter((user) => user.id === foreignUser?.id)[0]
     );
 
     if (!userInRecentUsers) {
-      authUser.recentUsers.push(recentUserObject);
-      authUser.save();
+      authUser?.recentUsers.push(recentUserObject);
+      authUser?.save();
     }
 
     const payload = {
-      id: authUser._id,
-      name: authUser.name,
-      username: authUser.username,
-      email: authUser.email,
-      publications: authUser.publications,
-      followers: authUser.followers,
-      following: authUser.following,
-      avatar: authUser.avatar,
-      description: authUser.description,
-      recentUsers: authUser.recentUsers,
-      notifications: authUser.notifications,
+      id: authUser?._id,
+      name: authUser?.name,
+      username: authUser?.username,
+      email: authUser?.email,
+      publications: authUser?.publications,
+      followers: authUser?.followers,
+      following: authUser?.following,
+      avatar: authUser?.avatar,
+      description: authUser?.description,
+      recentUsers: authUser?.recentUsers,
+      notifications: authUser?.notifications,
     };
 
     return res.status(200).json({
       payload: payload,
     });
   },
-  editNotifications: async (req, res) => {
+  editNotifications: async (req: NewRequest, res: Response) => {
     const { username } = req.user;
 
     const user = await UserModel.findOne({ username });
 
-    user.notifications = user.notifications.map(
-      (notification) => (notification.wasViewed = true)
-    );
+    user!.notifications = user!.notifications.map((notification) => {
+      if (!notification.wasViewed) {
+        notification.wasViewed = true;
+        return notification;
+      }
+      return notification;
+    });
+
+    user?.save();
 
     res.status(201).json({
-      notifications: user.notifications,
+      notifications: user?.notifications,
     });
   },
 };

@@ -1,7 +1,7 @@
 import express from "express";
-import { Publication } from "../../controllers/PublicationController.js";
-import { upload } from "../../middlewares/uploadImage.js";
-import { verifyToken } from "../../middlewares/verifyToken.js";
+import { Publication } from "../../controllers/PublicationController";
+import { upload } from "../../middlewares/uploadImage";
+import { verifyToken } from "../../middlewares/verifyToken";
 
 const PublicationRouter = express.Router();
 

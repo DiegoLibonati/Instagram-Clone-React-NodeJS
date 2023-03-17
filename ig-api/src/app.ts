@@ -1,13 +1,13 @@
-import express from "express";
+import express, { Express } from "express";
 import morgan from "morgan";
 import cors from "cors";
-import { mongooseConnection } from "./mongo.js";
-import AuthRouter from "./routes/v1/authRoutes.js";
-import UserRouter from "./routes/v1/userRoutes.js";
-import PublicationRouter from "./routes/v1/publicationRouter.js";
-import config from "./config.js";
+import { mongooseConnection } from "./mongo";
+import AuthRouter from "./routes/v1/authRoutes";
+import UserRouter from "./routes/v1/userRoutes";
+import PublicationRouter from "./routes/v1/publicationRouter";
+import config from "./config";
 
-const app = express();
+const app: Express = express();
 mongooseConnection();
 
 //Middlewares

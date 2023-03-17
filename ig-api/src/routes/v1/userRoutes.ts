@@ -1,7 +1,7 @@
 import express from "express";
-import { User } from "../../controllers/UserController.js";
-import { upload } from "../../middlewares/uploadImage.js";
-import { verifyToken } from "../../middlewares/verifyToken.js";
+import { User } from "../../controllers/UserController";
+import { upload } from "../../middlewares/uploadImage";
+import { verifyToken } from "../../middlewares/verifyToken";
 
 const UserRouter = express.Router();
 

@@ -1,10 +1,12 @@
-import { regexEmail, regexPassword, regexUsername } from "../utils/regex.js";
-import { UserModel } from "../models/UserModel.js";
-import config from "../config.js";
+import { regexEmail, regexPassword, regexUsername } from "../utils/regex";
+import { UserModel } from "../models/UserModel";
+import config from "../config";
 import jwt from "jsonwebtoken";
+import { NewRequest } from "../types/types";
+import { Response } from "express";
 
 export const Auth = {
-  getRenew: async (req, res) => {
+  getRenew: async (req: NewRequest, res: Response) => {
     const { username } = req.user;
 
     const user = await UserModel.findOne({ username });
@@ -17,17 +19,17 @@ export const Auth = {
     };
 
     const payload = {
-      id: user.id,
-      name: user.name,
-      username: user.username,
-      email: user.email,
-      publications: user.publications,
-      followers: user.followers,
-      following: user.following,
-      avatar: user.avatar,
-      description: user.description,
-      recentUsers: user.recentUsers,
-      notifications: user.notifications,
+      id: user?.id,
+      name: user?.name,
+      username: user?.username,
+      email: user?.email,
+      publications: user?.publications,
+      followers: user?.followers,
+      following: user?.following,
+      avatar: user?.avatar,
+      description: user?.description,
+      recentUsers: user?.recentUsers,
+      notifications: user?.notifications,
     };
 
     const token = jwt.sign(jwtPayload, config.TOKEN_SECRET, {
@@ -42,14 +44,14 @@ export const Auth = {
       })
       .json({ payload: payload });
   },
-  getLogout: async (req, res) => {
+  getLogout: async (req: NewRequest, res: Response) => {
     return res
       .status(200)
       .clearCookie("ig-sess")
       .json({ message: "¡Sesion cerrada!" })
       .end();
   },
-  postLogin: async (req, res) => {
+  postLogin: async (req: NewRequest, res: Response) => {
     const { email, password } = req.body;
 
     const user = await UserModel.findOne({ email });
@@ -97,7 +99,7 @@ export const Auth = {
       })
       .json({ payload: payload });
   },
-  postRegister: async (req, res) => {
+  postRegister: async (req: NewRequest, res: Response) => {
     const { name, username, email, password } = req.body;
 
     if (!name || !username || !email || !password)
