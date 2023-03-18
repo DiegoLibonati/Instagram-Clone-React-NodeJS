@@ -1,10 +1,10 @@
 import { BrowserRouter } from "react-router-dom";
-import { AuthProvider } from "./contexts/AuthContext";
-import { NotificationsProvider } from "./contexts/NotificationsContext";
-import { ProfileProvider } from "./contexts/ProfileContext";
-import { PublicationProvider } from "./contexts/PublicationContext";
-import { SearchProvider } from "./contexts/SearchContext";
-import { UIProvider } from "./contexts/UIContext";
+import { AuthProvider } from "./contexts/Auth/AuthContext";
+import { NotificationsProvider } from "./contexts/Notifications/NotificationsContext";
+import { ProfileProvider } from "./contexts/Profile/ProfileContext";
+import { PublicationProvider } from "./contexts/Publications/PublicationContext";
+import { SearchProvider } from "./contexts/Search/SearchContext";
+import { UIProvider } from "./contexts/Ui/UIContext";
 
 import { InstagramRouter } from "./router/InstagramRouter";
 

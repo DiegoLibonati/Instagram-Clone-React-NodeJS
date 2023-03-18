@@ -4,8 +4,8 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        logos: "url('./assets/logos2.png')",
-        mobile: "url('./auth/assets/mobile.png')",
+        logos: "url('./assets/Global/logos2.png')",
+        mobile: "url('./assets/Auth/mobile.png')",
       },
       backgroundPosition: {
         instagramLogoBlack: "0px 4px",

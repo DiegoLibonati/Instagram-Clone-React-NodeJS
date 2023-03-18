@@ -40,6 +40,14 @@ export type User = {
   notifications: Record<string, string | boolean>[];
 };
 
+export type UserEdit = {
+  avatar: File;
+  name: string;
+  username: string;
+  description: string;
+  email: string;
+};
+
 export type ForeignUser = {
   id: string;
   email: string;
