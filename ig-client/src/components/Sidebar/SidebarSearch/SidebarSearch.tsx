@@ -28,6 +28,7 @@ export const SidebarSearch = () => {
     } else {
       setFilterUsers([]);
     }
+    // eslint-disable-next-line
   }, [formState.query]);
 
   return (

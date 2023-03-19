@@ -35,10 +35,12 @@ export const SearchPage = () => {
     } else {
       setFilterUsers([]);
     }
+    // eslint-disable-next-line
   }, [formState.query]);
 
   useEffect(() => {
     setActiveSearch(true);
+    // eslint-disable-next-line
   }, []);
 
   return (

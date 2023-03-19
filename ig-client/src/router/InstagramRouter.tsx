@@ -17,6 +17,7 @@ export const InstagramRouter = () => {
 
   useEffect(() => {
     checkAuthToken();
+    // eslint-disable-next-line
   }, []);
 
   if (status === "checking") {

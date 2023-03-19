@@ -39,6 +39,7 @@ export const Profile = () => {
 
     setUserForeignProfile(foreignUserData);
     onLogin(authUserData);
+    // eslint-disable-next-line
   }, [navigate, setAlertOpen, setUserForeignProfile, urlUsername]);
 
   useEffect(() => {
@@ -51,7 +52,7 @@ export const Profile = () => {
     <>
       {!matchMediaQuery && <MenuConfigMobile></MenuConfigMobile>}
 
-      <main className="flex items-start justify-start flex-col w-full h-full pt-14 lg:w-[80%] lg:absolute lg:right-0 lg:px-20 2xl:px-40 lg:pt-5 lg:items-center">
+      <main className="flex items-start justify-start flex-col w-full h-full pt-14 overflow-x-hidden lg:overflow-x-visible lg:w-[80%] lg:absolute lg:right-0 lg:px-20 2xl:px-40 lg:pt-5 lg:items-center">
         <ProfileHeader></ProfileHeader>
         <ProfileActions></ProfileActions>
         <ProfileImages></ProfileImages>

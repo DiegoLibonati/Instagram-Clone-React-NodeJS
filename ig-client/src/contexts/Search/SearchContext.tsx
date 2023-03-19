@@ -29,6 +29,7 @@ export const SearchProvider: React.FunctionComponent<SearchContextProps> = ({
       onResetForm();
       setActiveSearch(false);
     }
+    // eslint-disable-next-line
   }, [location]);
 
   useEffect(() => {
@@ -40,6 +41,7 @@ export const SearchProvider: React.FunctionComponent<SearchContextProps> = ({
     if (!matchMediaQuery && activeSearch) {
       navigate("/search-page");
     }
+    // eslint-disable-next-line
   }, [matchMediaQuery]);
   return (
     <SearchContext.Provider
