@@ -22,13 +22,13 @@ export const ProfileHeaderDescriptionDesktop = () => {
   };
 
   const isForeignUserFollowMemo = useMemo(
-    () => isUserFollow(authUser, user.username, "followers"),
-    [authUser, user.username]
+    () => isUserFollow(authUser, user.id, "followers"),
+    [authUser, user.id]
   );
 
   const isAuthUserFollowMemo = useMemo(
-    () => isUserFollow(user, authUser.username, "followers"),
-    [user, authUser.username]
+    () => isUserFollow(user, authUser.id, "followers"),
+    [user, authUser.id]
   );
 
   return (
@@ -66,10 +66,10 @@ export const ProfileHeaderDescriptionDesktop = () => {
                   onClick={() =>
                     handleUnFollow(
                       setAlertOpen,
+                      authUser,
                       onLogin,
                       userForeignProfile,
-                      setUserForeignProfile,
-                      user.username
+                      setUserForeignProfile
                     )
                   }
                 >
@@ -81,10 +81,10 @@ export const ProfileHeaderDescriptionDesktop = () => {
                   onClick={() =>
                     handleFollow(
                       setAlertOpen,
+                      authUser,
                       onLogin,
                       userForeignProfile,
-                      setUserForeignProfile,
-                      user.username
+                      setUserForeignProfile
                     )
                   }
                 >
@@ -96,10 +96,10 @@ export const ProfileHeaderDescriptionDesktop = () => {
                   onClick={() =>
                     handleFollow(
                       setAlertOpen,
+                      authUser,
                       onLogin,
                       userForeignProfile,
-                      setUserForeignProfile,
-                      user.username
+                      setUserForeignProfile
                     )
                   }
                 >

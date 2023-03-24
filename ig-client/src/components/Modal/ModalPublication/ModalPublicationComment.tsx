@@ -1,7 +1,7 @@
 import { BsSuitHeart } from "react-icons/bs";
 import { UserImage } from "../../UserImage/UserImage";
 
-export const CommentsDesktopDialogComment = () => {
+export const ModalPublicationComment = () => {
   return (
     <li className="flex items-start justify-start flex-row w-full h-auto mb-6">
       <UserImage

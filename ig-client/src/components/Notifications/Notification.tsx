@@ -9,11 +9,13 @@ import { ProfileContext } from "../../contexts/Profile/ProfileContext";
 import { Link } from "react-router-dom";
 
 export const Notification = ({
+  idAuthor,
   avatar,
   name,
   username,
   type,
 }: {
+  idAuthor: string;
   avatar: string;
   name: string;
   username: string;
@@ -25,8 +27,8 @@ export const Notification = ({
     useContext(ProfileContext);
 
   const isForeignUserFollowMemo = useMemo(
-    () => isUserFollow(user, username, "following"),
-    [user, username]
+    () => isUserFollow(user, idAuthor, "following"),
+    [user, idAuthor]
   );
 
   return (
@@ -72,10 +74,11 @@ export const Notification = ({
           onClick={() =>
             handleFollow(
               setAlertOpen,
+              user,
               onLogin,
               userForeignProfile,
               setUserForeignProfile,
-              username
+              idAuthor
             )
           }
         >
@@ -89,10 +92,11 @@ export const Notification = ({
           onClick={() =>
             handleUnFollow(
               setAlertOpen,
+              user,
               onLogin,
               userForeignProfile,
               setUserForeignProfile,
-              username
+              idAuthor
             )
           }
         >

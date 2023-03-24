@@ -3,7 +3,7 @@ import { useContext, useMemo } from "react";
 import { getFormatDate } from "../../../helpers/getFormatDate";
 import { PublicationContext } from "../../../contexts/Publications/PublicationContext";
 
-export const CommentsDesktopDialogPublication = () => {
+export const ModalPublicationDescription = () => {
   const { activePublication } = useContext(PublicationContext);
 
   const date = useMemo(

@@ -1,4 +1,4 @@
-import { instagramApiGetUnFollow } from "../api/User/instagramApiGetUnFollow";
+import { instagramApiGetUnFollow } from "../api/Follow/instagramApiGetUnFollow";
 import { ForeignUser, User } from "../types/types";
 
 export const handleUnFollow = async (
@@ -8,12 +8,15 @@ export const handleUnFollow = async (
     message: string,
     color: string
   ) => void,
+  user: User,
   onLogin: (payload: User) => void,
   userForeignProfile: ForeignUser,
   setUserForeignProfile: (payload: ForeignUser["followers"]) => void,
-  username: string
+  idAuthorNotification?: string
 ) => {
-  const request = await instagramApiGetUnFollow(username);
+  const request = await instagramApiGetUnFollow(
+    idAuthorNotification || userForeignProfile.id
+  );
 
   if (request.hasOwnProperty("response")) {
     return setAlertOpen(
@@ -24,8 +27,8 @@ export const handleUnFollow = async (
     );
   }
 
-  const userData = request.payload;
-  const foreignUserData = request.payloadForeignUser;
-  onLogin(userData);
-  setUserForeignProfile({ ...userForeignProfile, ...foreignUserData });
+  const following = request.payload;
+  const followers = request.payloadForeignUser;
+  onLogin({ ...user, ...following });
+  setUserForeignProfile({ ...userForeignProfile, ...followers });
 };

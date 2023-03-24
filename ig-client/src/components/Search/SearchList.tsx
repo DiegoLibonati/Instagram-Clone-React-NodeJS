@@ -38,12 +38,14 @@ export const SearchList = ({
             .reverse()
             .map(
               (recentUser: {
+                id: string;
                 avatar: string;
                 username: string;
                 name: string;
               }) => {
                 return (
                   <SearchListItem
+                    key={recentUser.id}
                     username={recentUser.username}
                     avatar={recentUser.avatar}
                   ></SearchListItem>

@@ -30,10 +30,13 @@ export const ModalNewPublicationHeader = () => {
         size={20}
         className="text-blue-500 cursor-pointer"
         onClick={async () => {
-          const request = await handleNewPublication(user.username);
+          const request = await handleNewPublication();
 
           setModalClose();
-          onLogin(request.payload);
+          onLogin({
+            ...user,
+            publications: [...user.publications, request.publication],
+          });
           setAlertOpen(
             "success",
             "¡Bien, todo esta ok!",

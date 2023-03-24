@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import { MdOutlineAddBox } from "react-icons/md";
 import { RxHamburgerMenu } from "react-icons/rx";
-import { CommentsDesktop } from "../../../components/Comments/Desktop/CommentsDesktop";
 import { FooterMobile } from "../../../components/Footer/Mobile/FooterMobile";
+import { ModalPublication } from "../../../components/Modal/ModalPublication/ModalPublication";
 import { NavBarMobile } from "../../../components/NavBar/Mobile/NavBarMobile";
 import { Profile } from "../../../components/Profile/Profile";
 import { Sidebar } from "../../../components/Sidebar/Sidebar";
@@ -46,7 +46,7 @@ export const ProfilePage = () => {
       {matchMediaQuery && <Sidebar></Sidebar>}
       <Profile></Profile>
       {matchMediaQuery && modal.isOpen && modal.type === "publication" && (
-        <CommentsDesktop></CommentsDesktop>
+        <ModalPublication></ModalPublication>
       )}
       {!matchMediaQuery && <FooterMobile></FooterMobile>}
     </>

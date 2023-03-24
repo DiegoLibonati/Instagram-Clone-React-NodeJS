@@ -1,8 +1,8 @@
 import instagramApi from "../instagramApi";
 
-export const instagramApiGetFeed = async () => {
+export const instagramApiGetRecentUsersSearch = async () => {
   try {
-    const request = await instagramApi.get(`/feed`);
+    const request = await instagramApi.get(`/search/get`);
 
     const { data } = request;
 

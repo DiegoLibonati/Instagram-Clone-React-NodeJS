@@ -1,9 +1,9 @@
 import { BsArrowLeft } from "react-icons/bs";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { SearchContext } from "../../../contexts/Search/SearchContext";
-import { instagramApiGetUsers } from "../../../api/User/instagramApiGetUsers";
 import { InputText } from "../../Input/InputText/InputText";
 import { SearchList } from "../../Search/SearchList";
+import { useSearchWithAuth } from "../../../hooks/useSearchWithAuth";
 
 export const SidebarSearch = () => {
   const {
@@ -12,24 +12,9 @@ export const SidebarSearch = () => {
     onInputChange,
     onResetForm,
     setActiveSearch,
-    setFilterUsers,
   } = useContext(SearchContext);
 
-  const getUsers = async () => {
-    const request = await instagramApiGetUsers(formState.query);
-
-    const { users } = request;
-    setFilterUsers(users);
-  };
-
-  useEffect(() => {
-    if (formState.query) {
-      getUsers();
-    } else {
-      setFilterUsers([]);
-    }
-    // eslint-disable-next-line
-  }, [formState.query]);
+  useSearchWithAuth();
 
   return (
     <form className="flex flex-col items-start justify-center w-[calc(100%-16px)] h-screen m-2 shadow-sm rounded-md">

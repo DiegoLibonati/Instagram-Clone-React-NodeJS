@@ -10,8 +10,8 @@ import { ProfileContext } from "../../contexts/Profile/ProfileContext";
 
 export const ProfileHeaderActions = () => {
   const { user, isMainUser } = useProfileUser();
-  const { user: authUser, setAlertOpen } = useContext(UIContext);
-  const { onLogin } = useContext(AuthContext);
+  const { setAlertOpen } = useContext(UIContext);
+  const { user: authUser, onLogin } = useContext(AuthContext);
   const { userForeignProfile, setUserForeignProfile } =
     useContext(ProfileContext);
   const navigate = useNavigate();
@@ -20,13 +20,13 @@ export const ProfileHeaderActions = () => {
   };
 
   const isForeignUserFollowMemo = useMemo(
-    () => isUserFollow(authUser, user?.username, "following"),
-    [authUser, user?.username]
+    () => isUserFollow(authUser, user.id, "followers"),
+    [authUser, user.id]
   );
 
   const isAuthUserFollowMemo = useMemo(
-    () => isUserFollow(user, authUser?.username, "followers"),
-    [user, authUser?.username]
+    () => isUserFollow(user, authUser.id, "followers"),
+    [user, authUser.id]
   );
 
   return (
@@ -51,10 +51,10 @@ export const ProfileHeaderActions = () => {
               onClick={() =>
                 handleUnFollow(
                   setAlertOpen,
+                  authUser,
                   onLogin,
                   userForeignProfile,
-                  setUserForeignProfile,
-                  user.username
+                  setUserForeignProfile
                 )
               }
             >
@@ -66,10 +66,10 @@ export const ProfileHeaderActions = () => {
               onClick={() =>
                 handleFollow(
                   setAlertOpen,
+                  authUser,
                   onLogin,
                   userForeignProfile,
-                  setUserForeignProfile,
-                  user.username
+                  setUserForeignProfile
                 )
               }
             >
@@ -81,10 +81,10 @@ export const ProfileHeaderActions = () => {
               onClick={() =>
                 handleFollow(
                   setAlertOpen,
+                  authUser,
                   onLogin,
                   userForeignProfile,
-                  setUserForeignProfile,
-                  user.username
+                  setUserForeignProfile
                 )
               }
             >

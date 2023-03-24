@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { PublicationContext } from "../../../contexts/Publications/PublicationContext";
 
-export const CommentsDesktopImage = () => {
+export const ModalPublicationImage = () => {
   const { activePublication } = useContext(PublicationContext);
 
   return (

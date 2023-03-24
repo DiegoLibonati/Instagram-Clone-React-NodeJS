@@ -7,6 +7,7 @@ import { useMediaMatch } from "../../hooks/useMediaMatch";
 import { Publication } from "../../types/types";
 
 export const ProfileImage = ({
+  id,
   imgLink,
   likes,
   comments,
@@ -26,6 +27,7 @@ export const ProfileImage = ({
       onClick={() => {
         if (matchMediaQuery) {
           setActivePublication({
+            id,
             imgLink,
             likes,
             comments,
@@ -42,11 +44,11 @@ export const ProfileImage = ({
       <div className="opacity-0 group-hover:opacity-75 duration-300 absolute inset-x-0 h-full flex justify-evenly items-center text-xl bg-neutral-800 text-black font-semibold">
         <p className="text-white text-center">
           <BsSuitHeart color="white" size={25}></BsSuitHeart>
-          {likes.length}
+          {likes?.length}
         </p>
         <p className="text-white text-center">
           <BsChat color="white" size={25}></BsChat>
-          {comments.length}
+          {comments?.length}
         </p>
       </div>
 

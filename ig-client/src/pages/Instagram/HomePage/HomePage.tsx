@@ -5,10 +5,10 @@ import { MdOutlineAddBox } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { instagramApiEditNotifications } from "../../../api/Notifications/instagramApiEditNotifications";
 import { InstagramBlack } from "../../../assets/Global/images";
-import { CommentsDesktop } from "../../../components/Comments/Desktop/CommentsDesktop";
 import { CommentsMobile } from "../../../components/Comments/Mobile/CommentsMobile";
 import { Feed } from "../../../components/Feed/Feed";
 import { FooterMobile } from "../../../components/Footer/Mobile/FooterMobile";
+import { ModalPublication } from "../../../components/Modal/ModalPublication/ModalPublication";
 import { NavBarMobile } from "../../../components/NavBar/Mobile/NavBarMobile";
 import { Notifications } from "../../../components/Notifications/Mobile/Notifications";
 import { Sidebar } from "../../../components/Sidebar/Sidebar";
@@ -97,7 +97,7 @@ export const HomePage = () => {
       {!matchMediaQuery && <Notifications></Notifications>}
       {!matchMediaQuery && <CommentsMobile></CommentsMobile>}
       {matchMediaQuery && modal.isOpen && modal.type === "publication" && (
-        <CommentsDesktop></CommentsDesktop>
+        <ModalPublication></ModalPublication>
       )}
 
       <FooterMobile></FooterMobile>

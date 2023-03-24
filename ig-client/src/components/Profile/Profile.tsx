@@ -9,14 +9,14 @@ import { ProfileContext } from "../../contexts/Profile/ProfileContext";
 import { AuthContext } from "../../contexts/Auth/AuthContext";
 import { useMediaMatch } from "../../hooks/useMediaMatch";
 import { instagramApiGetUser } from "../../api/User/instagramApiGetUser";
-import { instagramApiSetRecentUserSearch } from "../../api/User/instagramApiSetRecentUserSearch";
+import { instagramApiSetRecentUserSearch } from "../../api/Search/instagramApiSetRecentUserSearch";
 import { MenuConfigMobile } from "../MenuConfig/Mobile/MenuConfigMobile";
 
 export const Profile = () => {
   const { id: urlUsername } = useParams();
   const { setAlertOpen } = useContext(UIContext);
   const { setUserForeignProfile } = useContext(ProfileContext);
-  const { onLogin } = useContext(AuthContext);
+  const { user, onLogin } = useContext(AuthContext);
   const { isMainUser } = useProfileUser();
   const { matchMediaQuery } = useMediaMatch(1024);
   const navigate = useNavigate();
@@ -35,10 +35,16 @@ export const Profile = () => {
     }
 
     const foreignUserData = foreignRequest.payload;
-    const authUserData = authRequest.payload;
+    const idsRecentSearched = authRequest.payload;
 
     setUserForeignProfile(foreignUserData);
-    onLogin(authUserData);
+
+    if (idsRecentSearched) {
+      onLogin({
+        ...user,
+        recentUsers: [...user.recentUsers, ...idsRecentSearched],
+      });
+    }
     // eslint-disable-next-line
   }, [navigate, setAlertOpen, setUserForeignProfile, urlUsername]);
 

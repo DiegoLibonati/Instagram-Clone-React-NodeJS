@@ -2,16 +2,12 @@ import { ForeignUser, User } from "../types/types";
 
 export const isUserFollow = (
   user: User | ForeignUser,
-  username: string,
+  id: string,
   arrayName: string
 ) => {
   if (user === undefined) return [];
   if (arrayName === "following") {
-    return user.following?.filter(
-      (user: User | ForeignUser) => user.username === username
-    );
+    return user.following?.filter((follow: any) => follow.idProfile === id);
   }
-  return user.followers?.filter(
-    (user: User | ForeignUser) => user.username === username
-  );
+  return user.followers?.filter((follow: any) => follow.idFollower === id);
 };

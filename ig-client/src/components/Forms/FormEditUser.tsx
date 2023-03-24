@@ -28,7 +28,7 @@ export const FormEditUser = () => {
   const handleSendForm = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const request = await instagramApiEditUser(user.username, formState);
+    const request = await instagramApiEditUser(formState);
 
     if (request.hasOwnProperty("response")) {
       return setAlertOpen(

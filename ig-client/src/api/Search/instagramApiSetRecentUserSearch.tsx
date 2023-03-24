@@ -2,7 +2,7 @@ import instagramApi from "../instagramApi";
 
 export const instagramApiSetRecentUserSearch = async (username: string) => {
   try {
-    const request = await instagramApi.get(`/user/recentsearch/${username}`);
+    const request = await instagramApi.get(`/search/set/${username}`);
 
     const { data } = request;
 

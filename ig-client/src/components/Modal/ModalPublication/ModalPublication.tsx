@@ -2,9 +2,9 @@ import { useContext } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { PublicationContext } from "../../../contexts/Publications/PublicationContext";
 import { UIContext } from "../../../contexts/Ui/UIContext";
-import { CommentsDesktopContainer } from "./CommentsDesktopContainer";
+import { ModalPublicationContainer } from "./ModalPublicationContainer";
 
-export const CommentsDesktop = () => {
+export const ModalPublication = () => {
   const { setModalClose } = useContext(UIContext);
   const { setActivePublication } = useContext(PublicationContext);
   return (
@@ -30,7 +30,7 @@ export const CommentsDesktop = () => {
           });
         }}
       ></AiOutlineClose>
-      <CommentsDesktopContainer></CommentsDesktopContainer>
+      <ModalPublicationContainer></ModalPublicationContainer>
     </div>
   );
 };

@@ -13,6 +13,7 @@ export const NotificationList = () => {
         return (
           <Notification
             key={notification.id}
+            idAuthor={notification.idAuthor}
             avatar={notification.avatar}
             name={notification.name}
             username={notification.username}

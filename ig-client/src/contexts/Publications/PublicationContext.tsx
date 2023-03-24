@@ -25,28 +25,24 @@ export const PublicationProvider: React.FunctionComponent<
   });
 
   const { formState, onInputChange, onResetForm } = useForm({
-    id: "",
     imgLink: "",
     description: "",
-    likes: JSON.stringify([]),
-    comments: JSON.stringify([]),
     date: "",
   });
 
-  const handleNewPublication = async (username: string) => {
-    formState["id"] = (new Date().getTime() * 2).toString();
+  const handleNewPublication = async () => {
     formState["date"] = new Date().getTime();
 
-    const request = await instagramApiCreatePublication(username, formState);
+    const request = await instagramApiCreatePublication(formState);
 
     const message = request.message;
-    const payload = request.payload;
+    const publication = request.publication;
 
     onResetForm();
 
     return {
       message,
-      payload,
+      publication,
     };
   };
 

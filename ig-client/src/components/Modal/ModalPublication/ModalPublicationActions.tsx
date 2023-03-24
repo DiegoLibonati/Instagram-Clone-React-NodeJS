@@ -4,9 +4,12 @@ import { useContext } from "react";
 import { getFormatDate } from "../../../helpers/getFormatDate";
 import { useMemo } from "react";
 import { PublicationContext } from "../../../contexts/Publications/PublicationContext";
+import { instagramApiLikePublication } from "../../../api/Publication/instagramApiLikePublication";
+import { AuthContext } from "../../../contexts/Auth/AuthContext";
 
-export const CommentsDesktopDialogActions = () => {
+export const ModalPublicationActions = () => {
   const { activePublication } = useContext(PublicationContext);
+  const { user } = useContext(AuthContext);
 
   const date = useMemo(
     () => getFormatDate(activePublication.date),
@@ -17,9 +20,31 @@ export const CommentsDesktopDialogActions = () => {
     <div className="flex flex-col items-start justify-start w-2/6 h-auto p-4 shadow-slate-200 shadow-sm fixed bottom-0 right-0 bg-white">
       <div className="flex items-center justify-between w-full h-auto">
         <div className="flex items-center justify-between h-auto">
-          <BsSuitHeart color="black" size={25} className="mr-4"></BsSuitHeart>
-          <BsChat color="black" size={25} className="mr-4"></BsChat>
-          <FiSend color="black" size={25} className="mr-4"></FiSend>
+          <BsSuitHeart
+            color="black"
+            size={25}
+            className="mr-4 cursor-pointer"
+            onClick={async () => {
+              const request = await instagramApiLikePublication(
+                user.id,
+                activePublication.id
+              );
+
+              const payload = request.payload;
+
+              console.log(payload);
+            }}
+          ></BsSuitHeart>
+          <BsChat
+            color="black"
+            size={25}
+            className="mr-4 cursor-pointer"
+          ></BsChat>
+          <FiSend
+            color="black"
+            size={25}
+            className="mr-4 cursor-pointer"
+          ></FiSend>
         </div>
         <BsArchive color="black" size={25}></BsArchive>
       </div>

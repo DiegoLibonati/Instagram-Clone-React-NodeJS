@@ -1,8 +1,8 @@
 import instagramApi from "../instagramApi";
 
-export const instagramApiGetUnFollow = async (username: string) => {
+export const instagramApiGetFollow = async (idProfile: string) => {
   try {
-    const request = await instagramApi.get(`/user/unfollow/${username}`);
+    const request = await instagramApi.get(`/follow/follow/${idProfile}`);
 
     const { data } = request;
 

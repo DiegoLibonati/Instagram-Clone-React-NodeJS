@@ -6,6 +6,7 @@ import { InputText } from "../../../components/Input/InputText/InputText";
 import { NavBarMobile } from "../../../components/NavBar/Mobile/NavBarMobile";
 import { SearchList } from "../../../components/Search/SearchList";
 import { SearchContext } from "../../../contexts/Search/SearchContext";
+import { useSearchWithAuth } from "../../../hooks/useSearchWithAuth";
 
 export const SearchPage = () => {
   const {
@@ -14,29 +15,15 @@ export const SearchPage = () => {
     onInputChange,
     onResetForm,
     setActiveSearch,
-    setFilterUsers,
   } = useContext(SearchContext);
+
+  useSearchWithAuth();
+
   const [focus, setFocus] = useState(false);
 
   const onFocus = () => {
     setFocus(true);
   };
-
-  const getUsers = async () => {
-    const request = await instagramApiGetUsers(formState.query);
-
-    const { users } = request;
-    setFilterUsers(users);
-  };
-
-  useEffect(() => {
-    if (formState.query) {
-      getUsers();
-    } else {
-      setFilterUsers([]);
-    }
-    // eslint-disable-next-line
-  }, [formState.query]);
 
   useEffect(() => {
     setActiveSearch(true);

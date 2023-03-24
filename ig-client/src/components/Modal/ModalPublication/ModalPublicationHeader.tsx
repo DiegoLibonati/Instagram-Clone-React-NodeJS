@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { PublicationContext } from "../../../contexts/Publications/PublicationContext";
 import { UIContext } from "../../../contexts/Ui/UIContext";
 
-export const CommentsDesktopDialogHeader = () => {
+export const ModalPublicationHeader = () => {
   const { activePublication, setActivePublication } =
     useContext(PublicationContext);
   const { setModalClose } = useContext(UIContext);

@@ -26,6 +26,7 @@ export const ProfileImages = () => {
         return (
           <ProfileImage
             key={publication.id}
+            id={publication.id}
             imgLink={publication.imgLink}
             likes={publication.likes}
             comments={publication.comments}

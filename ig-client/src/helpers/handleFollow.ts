@@ -1,4 +1,4 @@
-import { instagramApiGetFollow } from "../api/User/instagramApiGetFollow";
+import { instagramApiGetFollow } from "../api/Follow/instagramApiGetFollow";
 import { ForeignUser, User } from "../types/types";
 
 export const handleFollow = async (
@@ -8,12 +8,15 @@ export const handleFollow = async (
     message: string,
     color: string
   ) => void,
+  user: User,
   onLogin: (payload: User) => void,
   userForeignProfile: ForeignUser,
   setUserForeignProfile: (payload: ForeignUser["followers"]) => void,
-  username: string
+  idAuthorNotification?: string
 ) => {
-  const request = await instagramApiGetFollow(username);
+  const request = await instagramApiGetFollow(
+    idAuthorNotification || userForeignProfile.id
+  );
 
   if (request.hasOwnProperty("response")) {
     return setAlertOpen(
@@ -24,8 +27,8 @@ export const handleFollow = async (
     );
   }
 
-  const userData = request.payload;
-  const foreignUserData = request.payloadForeignUser;
-  onLogin(userData);
-  setUserForeignProfile({ ...userForeignProfile, ...foreignUserData });
+  const following = request.payload;
+  const followers = request.payloadForeignUser;
+  onLogin({ ...user, ...following });
+  setUserForeignProfile({ ...userForeignProfile, ...followers });
 };
