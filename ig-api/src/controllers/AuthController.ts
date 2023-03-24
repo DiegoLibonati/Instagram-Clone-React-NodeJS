@@ -4,12 +4,29 @@ import config from "../config";
 import jwt from "jsonwebtoken";
 import { NewRequest } from "../types/types";
 import { Response } from "express";
+import { PublicationModel } from "../models/PublicationModel";
+import { FollowModel } from "../models/FollowModel";
+import { setPublication } from "../utils/setPublication";
+import { NotificationModel } from "../models/NotificationModel";
 
 export const Auth = {
   getRenew: async (req: NewRequest, res: Response) => {
-    const { username } = req.user;
+    const { id } = req.user;
 
-    const user = await UserModel.findOne({ username });
+    const user = await UserModel.findOne({ _id: id });
+    let publications = await PublicationModel.find({ idAuthor: id });
+
+    publications = await Promise.all(
+      publications.map((publication) => {
+        return setPublication(user, publication);
+      })
+    );
+
+    const followers = await FollowModel.find({ idProfile: id });
+    const following = await FollowModel.find({ idFollower: id });
+    const notifications = await NotificationModel.find({
+      idProfile: user!._id,
+    });
 
     const jwtPayload = {
       id: req.user.id,
@@ -23,13 +40,13 @@ export const Auth = {
       name: user?.name,
       username: user?.username,
       email: user?.email,
-      publications: user?.publications,
-      followers: user?.followers,
-      following: user?.following,
+      publications: publications,
+      followers: followers,
+      following: following,
       avatar: user?.avatar,
       description: user?.description,
       recentUsers: user?.recentUsers,
-      notifications: user?.notifications,
+      notifications: notifications,
     };
 
     const token = jwt.sign(jwtPayload, config.TOKEN_SECRET, {
@@ -59,12 +76,26 @@ export const Auth = {
     if (!user)
       return res.status(404).json({ message: "¡El usuario no existe!" });
 
-    const validation = await user.comparePassword(password);
+    const validation = user.comparePassword(password);
 
     if (!validation)
       return res
         .status(401)
         .json({ message: "¡La contraseña ingresado es incorrecta!" });
+
+    let publications = await PublicationModel.find({ idAuthor: user!._id });
+
+    publications = await Promise.all(
+      publications.map((publication) => {
+        return setPublication(user, publication);
+      })
+    );
+
+    const followers = await FollowModel.find({ idProfile: user!._id });
+    const following = await FollowModel.find({ idFollower: user!._id });
+    const notifications = await NotificationModel.find({
+      idProfile: user!._id,
+    });
 
     const jwtPayload = {
       id: user.id,
@@ -78,13 +109,13 @@ export const Auth = {
       name: user.name,
       username: user.username,
       email: user.email,
-      publications: user.publications,
-      followers: user.followers,
-      following: user.following,
+      publications: publications,
+      followers: followers,
+      following: following,
       avatar: user.avatar,
       description: user.description,
       recentUsers: user.recentUsers,
-      notifications: user.notifications,
+      notifications: notifications,
     };
 
     const token = jwt.sign(jwtPayload, config.TOKEN_SECRET, {

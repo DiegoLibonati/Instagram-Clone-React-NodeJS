@@ -5,12 +5,8 @@ import { verifyToken } from "../../middlewares/verifyToken";
 
 const UserRouter = express.Router();
 
-UserRouter.get("/:id", verifyToken, User.getUser)
-  .put("/:id", verifyToken, upload.single("avatar"), User.editUser)
-  .get("/follow/:id", verifyToken, User.getFollow)
-  .get("/unfollow/:id", verifyToken, User.getUnFollow)
-  .get("/users/:id", verifyToken, User.getUsers)
-  .get("/recentsearch/:id", verifyToken, User.getRecentSearchUser)
-  .put("/notifications/edit_view", verifyToken, User.editNotifications);
+UserRouter.get("/:username", verifyToken, User.getUser)
+  .put("/", verifyToken, upload.single("avatar"), User.editUser)
+  .get("/users/:username", verifyToken, User.getUsers);
 
 export default UserRouter;

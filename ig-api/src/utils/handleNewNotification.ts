@@ -1,22 +1,27 @@
+import { NotificationModel } from "../models/NotificationModel";
 import { User } from "../types/types";
 
-export const handleNewNotification = (
-  notifications: User["notifications"],
-  username: string,
-  name: string,
-  avatar: string,
+export const handleNewNotification = async (
+  idAuthor: string,
+  idProfile: string,
   notificationType: string
 ) => {
+  const notifications = await NotificationModel.find({ idProfile: idProfile });
+
   if (notifications.length === 20) {
-    notifications.shift();
+    const notification = await NotificationModel.find({ idProfile: idProfile })
+      .sort({ field: "asc", _id: -1 })
+      .limit(1);
+
+    await NotificationModel.deleteOne({ id: notification[0].id });
   }
 
-  notifications.push({
-    username: username,
-    name: name,
-    avatar: avatar,
+  const notification = new NotificationModel({
+    idAuthor: idAuthor,
+    idProfile: idProfile,
     notificationType: notificationType,
     wasViewed: false,
   });
-  return notifications;
+
+  return notification.save();
 };

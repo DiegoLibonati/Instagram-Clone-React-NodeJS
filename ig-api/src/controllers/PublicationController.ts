@@ -1,87 +1,70 @@
 import { UserModel } from "../models/UserModel";
 import config from "../config";
 import { Response } from "express";
-import { NewRequest, User } from "../types/types";
+import { NewRequest } from "../types/types";
+import { PublicationModel } from "../models/PublicationModel";
 
 export const Publication = {
   createPublication: async (req: NewRequest, res: Response) => {
-    const { id: idUsername } = req.params;
-    const { id, description, likes, comments, date } = req.body;
+    const { id } = req.user;
+    const { description, date } = req.body;
     const { path } = req.file!;
 
-    const user = await UserModel.findOne({ username: idUsername });
-
-    const publication = {
-      id: id,
+    const publication = new PublicationModel({
       imgLink: `${config.API_BACK_URL}${path.replace("src\\", "")}`,
       description: description,
-      likes: JSON.parse(likes),
-      comments: JSON.parse(comments),
       date: date,
-      name: user?.name,
-      username: user?.username,
-      avatar: user?.avatar,
-    };
+      idAuthor: id,
+    });
 
-    user?.publications.push(publication);
+    await publication.save();
 
-    await user?.save();
+    const user = await UserModel.findOne({ _id: id });
 
     const payload = {
-      id: user?._id,
-      name: user?.name,
-      username: user?.username,
-      email: user?.email,
-      publications: user?.publications,
-      followers: user?.followers,
-      following: user?.following,
-      avatar: user?.avatar,
-      description: user?.description,
-      recentUsers: user?.recentUsers,
-      notifications: user?.notifications,
+      id: publication._id,
+      imgLink: publication.imgLink,
+      description: publication.description,
+      likes: [],
+      comments: [],
+      date: publication.date,
+      username: user!.username,
+      avatar: user!.avatar,
+      name: user!.name,
     };
 
-    return res
-      .status(200)
-      .json({ message: "¡Publicacion creada exitosamente!", payload: payload });
+    return res.status(200).json({
+      message: "¡Publicacion creada exitosamente!",
+      publication: payload,
+    });
   },
-  getFeed: async (req: NewRequest, res: Response) => {
-    const { username } = req.user;
+  likePublication: async (req: NewRequest, res: Response) => {
+    const { username, idPublication } = req.body;
+    // const { username: usernameLike } = req.user;
 
-    const user = await UserModel.findOne({ username });
+    // const authorLike = await UserModel.findOne({ username: usernameLike });
+    const userPublication = await UserModel.findOne({ username });
 
-    const following = user?.following;
+    // userPublication!.publications = userPublication!.publications.map(
+    //   (publication) => {
+    //     console.log(publication._id);
+    //     if (publication._id == idPublication) {
+    //       publication.likes.push({
+    //         username: username,
+    //       });
 
-    const usernamesFollowing = following?.map(
-      (userFollowed) => userFollowed.username
-    );
+    //       return publication;
+    //     }
 
-    const newFeed: User["publications"] = [];
+    //     return publication;
+    //   }
+    // );
 
-    for (const username of usernamesFollowing!) {
-      const userFollowed = await UserModel.findOne({ username });
+    await userPublication!.save();
 
-      const publicationsOfUserFollowed = userFollowed?.publications;
-
-      if (publicationsOfUserFollowed!.length === 0) {
-        return null;
-      }
-
-      publicationsOfUserFollowed!.forEach((publication) => {
-        const currentDate = new Date();
-        const publicationDate = new Date(publication.date!);
-        const isNew =
-          (currentDate.getTime() - publicationDate.getTime()) / 86400000 <= 3;
-
-        if (isNew) return newFeed.push(publication);
-
-        return null;
-      });
-    }
-
-    res.status(200).json({
-      message: "Feed actualizado con exito",
-      payload: newFeed,
+    res.status(201).json({
+      message: "¡Publicacion Likeada con Exito!",
+      payload: userPublication,
     });
   },
 };

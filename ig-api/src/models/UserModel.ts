@@ -21,35 +21,6 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    publications: [
-      {
-        id: String,
-        imgLink: String,
-        description: String,
-        likes: Array,
-        comments: Array,
-        date: Date,
-        avatar: String,
-        username: String,
-        name: String,
-      },
-    ],
-    followers: [
-      {
-        id: String,
-        username: String,
-        name: String,
-        avatar: String,
-      },
-    ],
-    following: [
-      {
-        id: String,
-        username: String,
-        name: String,
-        avatar: String,
-      },
-    ],
     avatar: {
       type: String,
     },
@@ -58,20 +29,10 @@ const userSchema = new mongoose.Schema(
     },
     recentUsers: [
       {
-        id: String,
+        idSearched: String,
         username: String,
         name: String,
         avatar: String,
-      },
-    ],
-    notifications: [
-      {
-        id: String,
-        username: String,
-        name: String,
-        avatar: String,
-        notificationType: String,
-        wasViewed: Boolean,
       },
     ],
   },

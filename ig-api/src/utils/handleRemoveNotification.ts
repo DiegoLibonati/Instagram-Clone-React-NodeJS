@@ -1,20 +1,15 @@
-import { User } from "../types/types";
+import { NotificationModel } from "../models/NotificationModel";
 
-export const handleRemoveNotification = (
-  notifications: User["notifications"],
-  username: string
+export const handleRemoveNotification = async (
+  idAuthor: string,
+  idProfile: string,
+  notificationType: string
 ) => {
-  const authUserInNotification = notifications.filter(
-    (notification) => notification.username === username
-  );
-
-  if (authUserInNotification.length) {
-    notifications = notifications.filter(
-      (notification) => notification.username !== username
-    );
-
-    return notifications;
-  }
-
-  return notifications;
+  await NotificationModel.deleteOne({
+    $and: [
+      { idAuthor: idAuthor },
+      { idProfile: idProfile },
+      { notificationType: notificationType },
+    ],
+  });
 };

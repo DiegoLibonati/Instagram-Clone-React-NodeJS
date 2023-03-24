@@ -6,10 +6,10 @@ import { verifyToken } from "../../middlewares/verifyToken";
 const PublicationRouter = express.Router();
 
 PublicationRouter.post(
-  "/:id",
+  "/new",
   verifyToken,
   upload.single("imgLink"),
   Publication.createPublication
-).get("/", verifyToken, Publication.getFeed);
+).post("/like/publication", verifyToken, Publication.likePublication);
 
 export default PublicationRouter;
