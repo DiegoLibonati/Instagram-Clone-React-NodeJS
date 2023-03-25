@@ -38,33 +38,4 @@ export const Publication = {
       publication: payload,
     });
   },
-  likePublication: async (req: NewRequest, res: Response) => {
-    const { username, idPublication } = req.body;
-    // const { username: usernameLike } = req.user;
-
-    // const authorLike = await UserModel.findOne({ username: usernameLike });
-    const userPublication = await UserModel.findOne({ username });
-
-    // userPublication!.publications = userPublication!.publications.map(
-    //   (publication) => {
-    //     console.log(publication._id);
-    //     if (publication._id == idPublication) {
-    //       publication.likes.push({
-    //         username: username,
-    //       });
-
-    //       return publication;
-    //     }
-
-    //     return publication;
-    //   }
-    // );
-
-    await userPublication!.save();
-
-    res.status(201).json({
-      message: "¡Publicacion Likeada con Exito!",
-      payload: userPublication,
-    });
-  },
 };

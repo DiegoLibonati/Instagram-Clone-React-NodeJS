@@ -5,16 +5,19 @@ import { ProfileContext } from "../contexts/Profile/ProfileContext";
 
 export const useProfileUser = () => {
   const { id: urlUsername } = useParams();
-  const { user } = useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext);
 
-  const { userForeignProfile } = useContext(ProfileContext);
+  const { userForeignProfile, setUserForeignProfile } =
+    useContext(ProfileContext);
 
-  if (!urlUsername || urlUsername === undefined) return { user };
+  if (!urlUsername || urlUsername === undefined || urlUsername === null)
+    return { user, isMainUser: true, setUser };
 
-  if (urlUsername === user.username) return { user, isMainUser: true };
+  if (urlUsername === user.username) return { user, isMainUser: true, setUser };
 
   return {
     user: userForeignProfile,
     isMainUser: false,
+    setUser: setUserForeignProfile,
   };
 };

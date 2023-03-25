@@ -1,17 +1,4 @@
-export type Publication = {
-  id?: string;
-  imgLink: string;
-  description: string;
-  likes: [];
-  comments: [];
-  date: date;
-  username: string;
-  avatar: string;
-  name: string;
-};
-
-export type Histories = { className?: string; profileHistories: boolean };
-
+// UI
 export type MAlert = {
   isOpen: boolean;
   type: string;
@@ -25,6 +12,78 @@ export type Modal = {
   type: string;
 };
 
+export type MConfig = {
+  isOpen: boolean;
+};
+
+// Comment
+export type Comment = {
+  id: string;
+  username: string;
+  avatar: string;
+  description: string;
+  date: string;
+  idPost: string;
+  idAuthor: string;
+};
+
+// Follow
+export type Follow = {
+  id: string;
+  name: string;
+  username: string;
+  avatar: string;
+  idProfile: string;
+  idFollower: string;
+};
+
+// Like
+export type Like = {
+  id?: string;
+  _id?: string;
+  name: string;
+  username: string;
+  avatar: string;
+  idPost: string;
+  idAuthor: string;
+};
+
+// Notification
+export type Notification = {
+  id: string;
+  name: string;
+  username: string;
+  avatar: string;
+  notificationType: string;
+  wasViewed: boolean;
+  idProfile: string;
+  idAuthor: string;
+  idPost?: string;
+};
+
+// Publication
+export type Publication = {
+  id?: string;
+  _id?: string;
+  name: string;
+  username: string;
+  avatar: string;
+  imgLink: string;
+  description: string;
+  date: string;
+  likes: Like[];
+  comments: Comment[];
+  idAuthor?: string;
+  context?: string;
+};
+
+// Histories
+export type Histories = {
+  className?: string;
+  profileHistories: boolean;
+};
+
+// User
 export type User = {
   status?: string;
   id: string;
@@ -32,12 +91,12 @@ export type User = {
   name: string;
   username: string;
   publications: Publication[];
-  followers: User[];
-  following: User[];
+  followers: Follow[];
+  following: Follow[];
   avatar: string;
   description: string;
-  recentUsers: Record<string, string>[];
-  notifications: Record<string, string | boolean>[];
+  recentUsers: RecentSearch[];
+  notifications: Notification[];
 };
 
 export type UserEdit = {
@@ -54,12 +113,16 @@ export type ForeignUser = {
   name: string;
   username: string;
   publications: Publication[];
-  followers: User[];
-  following: User[];
+  followers: Follow[];
+  following: Follow[];
   avatar: string;
   description: string;
 };
 
-export type MConfig = {
-  isOpen: boolean;
+// Search
+export type RecentSearch = {
+  idSearched: string;
+  username: string;
+  name: string;
+  avatar: string;
 };

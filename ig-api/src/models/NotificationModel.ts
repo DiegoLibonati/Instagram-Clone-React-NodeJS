@@ -11,6 +11,9 @@ const notificationSchema = new mongoose.Schema(
     avatar: {
       type: String,
     },
+    idPost: {
+      type: String,
+    },
     notificationType: {
       type: String,
       require: true,

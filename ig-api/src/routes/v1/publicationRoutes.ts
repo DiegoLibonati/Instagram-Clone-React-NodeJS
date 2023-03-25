@@ -10,6 +10,6 @@ PublicationRouter.post(
   verifyToken,
   upload.single("imgLink"),
   Publication.createPublication
-).post("/like/publication", verifyToken, Publication.likePublication);
+);
 
 export default PublicationRouter;

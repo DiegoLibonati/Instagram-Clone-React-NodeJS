@@ -1,11 +1,13 @@
 import { NotificationModel } from "../models/NotificationModel";
-import { User } from "../types/types";
 
 export const handleNewNotification = async (
-  idAuthor: string,
-  idProfile: string,
-  notificationType: string
+  idAuthor: string | undefined,
+  idProfile: string | undefined,
+  notificationType: string | undefined,
+  idPost?: string | undefined
 ) => {
+  if (idAuthor === idProfile) return;
+
   const notifications = await NotificationModel.find({ idProfile: idProfile });
 
   if (notifications.length === 20) {
@@ -21,7 +23,8 @@ export const handleNewNotification = async (
     idProfile: idProfile,
     notificationType: notificationType,
     wasViewed: false,
+    idPost: idPost ? idPost : "",
   });
 
-  return notification.save();
+  return await notification.save();
 };

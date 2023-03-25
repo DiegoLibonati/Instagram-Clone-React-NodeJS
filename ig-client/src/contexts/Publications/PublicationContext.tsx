@@ -22,6 +22,7 @@ export const PublicationProvider: React.FunctionComponent<
     username: "",
     avatar: "",
     name: "",
+    idAuthor: "",
   });
 
   const { formState, onInputChange, onResetForm } = useForm({

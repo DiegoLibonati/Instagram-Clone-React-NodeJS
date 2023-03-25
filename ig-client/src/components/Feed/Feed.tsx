@@ -1,15 +1,14 @@
-import { useEffect, useState } from "react";
-import { Publication as PublicationType } from "../../types/types";
-import { instagramApiGetFeed } from "../../api/Feed/instagramApiGetFeed";
 import { usePagination } from "../../hooks/usePagination";
 import { useProfileUser } from "../../hooks/useProfileUser";
 import { Histories } from "../Histories/Histories";
 import { Publication } from "../Publication/Publication";
 import { instagramCheck } from "../../assets/Global/images";
 import { Loader2 } from "../Loader/Loader2/Loader2";
+import { useContext } from "react";
+import { FeedContext } from "../../contexts/Feed/FeedContext";
 
 export const Feed = () => {
-  const [feed, setFeed] = useState<PublicationType[]>([]);
+  const { feed } = useContext(FeedContext);
 
   const { arrayPagination, allViewed, loading, elementRef } = usePagination(
     feed,
@@ -17,18 +16,6 @@ export const Feed = () => {
   );
 
   const { user } = useProfileUser();
-
-  const getFeed = async () => {
-    const request = await instagramApiGetFeed();
-
-    const { payload } = request;
-
-    setFeed(payload);
-  };
-
-  useEffect(() => {
-    getFeed();
-  }, []);
 
   return (
     <section
@@ -41,8 +28,9 @@ export const Feed = () => {
         arrayPagination!.map((publication) => {
           return (
             <Publication
-              key={publication.id}
+              key={publication._id}
               publication={publication}
+              context={"feed"}
             ></Publication>
           );
         })}

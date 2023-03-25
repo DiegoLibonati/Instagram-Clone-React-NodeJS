@@ -8,8 +8,10 @@ import { useMemo } from "react";
 
 export const Publication = ({
   publication,
+  context,
 }: {
   publication: PublicationType;
+  context?: string;
 }) => {
   const {
     imgLink,
@@ -36,7 +38,10 @@ export const Publication = ({
         alt={description}
         className="w-full h-auto max-h-[600px] object-cover"
       ></img>
-      <PublicationActions></PublicationActions>
+      <PublicationActions
+        publication={publication}
+        context={context}
+      ></PublicationActions>
       <PublicationInformation
         likes={likes}
         username={username}

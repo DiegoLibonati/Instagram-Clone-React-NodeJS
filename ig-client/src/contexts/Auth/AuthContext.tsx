@@ -69,7 +69,9 @@ export const AuthProvider: React.FunctionComponent<AuthContextProps> = ({
       const userData = request.payload;
 
       if (request.hasOwnProperty("response")) {
-        return onLogout();
+        console.log("Token Invalido");
+        onLogout();
+        return;
       }
 
       setUser({

@@ -22,7 +22,7 @@ export const Feed = {
         $and: [{ idAuthor: idProfile }, { date: { $gt: new Date(lteDate) } }],
       });
 
-      const user = await UserModel.findOne({ id: idProfile });
+      const user = await UserModel.findOne({ _id: idProfile });
 
       if (publications!.length === 0) {
         return null;

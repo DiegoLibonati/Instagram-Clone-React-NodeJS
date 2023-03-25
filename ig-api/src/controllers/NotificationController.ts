@@ -16,25 +16,11 @@ export const Notification = {
 
     const finalNotifications = await Promise.all(
       notifications.map(async (notification) => {
-        const {
-          _id,
-          notificationType,
-          wasViewed,
-          idProfile,
-          idAuthor,
-          createdAt,
-          updatedAt,
-        } = notification.toObject();
-
-        const { username, name, avatar } = await getUserProperties(idAuthor!);
+        const { username, name, avatar } = await getUserProperties(
+          notification.toObject().idAuthor!
+        );
         return {
-          _id,
-          notificationType,
-          wasViewed,
-          idProfile,
-          idAuthor,
-          createdAt,
-          updatedAt,
+          ...notification.toObject(),
           username,
           name,
           avatar,

@@ -7,6 +7,7 @@ import { UIContext } from "../../contexts/Ui/UIContext";
 import { AuthContext } from "../../contexts/Auth/AuthContext";
 import { ProfileContext } from "../../contexts/Profile/ProfileContext";
 import { Link } from "react-router-dom";
+import { Publication } from "../../types/types";
 
 export const Notification = ({
   idAuthor,
@@ -14,12 +15,14 @@ export const Notification = ({
   name,
   username,
   type,
+  idPost,
 }: {
   idAuthor: string;
   avatar: string;
   name: string;
   username: string;
   type: string;
+  idPost?: string;
 }) => {
   const { setAlertOpen } = useContext(UIContext);
   const { user, onLogin } = useContext(AuthContext);
@@ -30,6 +33,15 @@ export const Notification = ({
     () => isUserFollow(user, idAuthor, "following"),
     [user, idAuthor]
   );
+
+  const getImage = (idPublication: string) => {
+    if (!idPublication) return "";
+    const publication = user.publications.find(
+      (publication: Publication) => publication._id === idPublication
+    );
+
+    return publication.imgLink;
+  };
 
   return (
     <li className="flex flex-row items-center justify-start relative w-full h-16 mt-1 pr-1">
@@ -62,13 +74,13 @@ export const Notification = ({
 
       {type === "like" && (
         <img
-          src="https://www.pngall.com/wp-content/uploads/12/Yellow-Camaro-PNG-Photos.png"
+          src={getImage(idPost!)}
           alt="auto"
           className="w-10 h-10 object-contain ml-auto"
         ></img>
       )}
 
-      {!isForeignUserFollowMemo.length && (
+      {!isForeignUserFollowMemo.length && type === "follow" && (
         <button
           className="p-2 text-xs w-16 text-white font-bold shadow-sm bg-blue-500 rounded-md ml-auto"
           onClick={() =>
@@ -86,7 +98,7 @@ export const Notification = ({
         </button>
       )}
 
-      {isForeignUserFollowMemo.length > 0 && (
+      {isForeignUserFollowMemo.length > 0 && type === "follow" && (
         <button
           className="p-2 text-xs w-18 text-black font-bold shadow-sm bg-zinc-200 rounded-md ml-auto"
           onClick={() =>

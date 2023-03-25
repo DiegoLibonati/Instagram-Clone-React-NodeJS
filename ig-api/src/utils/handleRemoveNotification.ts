@@ -1,9 +1,9 @@
 import { NotificationModel } from "../models/NotificationModel";
 
 export const handleRemoveNotification = async (
-  idAuthor: string,
-  idProfile: string,
-  notificationType: string
+  idAuthor: string | undefined,
+  idProfile: string | undefined,
+  notificationType: string | undefined
 ) => {
   await NotificationModel.deleteOne({
     $and: [

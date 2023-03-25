@@ -25,8 +25,8 @@ export const ProfileImages = () => {
       {[...user.publications].reverse()?.map((publication: Publication) => {
         return (
           <ProfileImage
-            key={publication.id}
-            id={publication.id}
+            key={publication._id}
+            id={publication._id}
             imgLink={publication.imgLink}
             likes={publication.likes}
             comments={publication.comments}

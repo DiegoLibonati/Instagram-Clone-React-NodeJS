@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/Auth/AuthContext";
+import { Notification as NotificationType } from "../../types/types";
 import { Notification } from "./Notification";
 
 export const NotificationList = () => {
@@ -9,7 +10,7 @@ export const NotificationList = () => {
 
   return (
     <ul className="flex flex-col items-center justify-start w-full h-auto">
-      {user.notifications?.map((notification: Record<string, string>) => {
+      {user.notifications?.map((notification: NotificationType) => {
         return (
           <Notification
             key={notification.id}
@@ -18,6 +19,7 @@ export const NotificationList = () => {
             name={notification.name}
             username={notification.username}
             type={notification.notificationType}
+            idPost={notification.idPost}
           ></Notification>
         );
       })}
