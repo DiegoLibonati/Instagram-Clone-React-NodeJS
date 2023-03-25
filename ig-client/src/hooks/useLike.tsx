@@ -3,12 +3,14 @@ import { useProfileUser } from "./useProfileUser";
 import { useContext } from "react";
 import { PublicationContext } from "../contexts/Publications/PublicationContext";
 import { instagramApiRemoveLike } from "../api/Like/instagramApiRemoveLike";
-import { Like } from "../types/types";
+import { Like, Publication } from "../types/types";
+import { FeedContext } from "../contexts/Feed/FeedContext";
 
 export const useLike = () => {
   const { user, setUser } = useProfileUser();
   const { activePublication, setActivePublication } =
     useContext(PublicationContext);
+  const { feed, getFeed } = useContext(FeedContext);
 
   const handleAddLike = async ({
     idPublication,
@@ -34,6 +36,16 @@ export const useLike = () => {
     }
 
     // LIKE IN FEED
+
+    const feedUpdated = feed.map((publication: Publication) => {
+      if (publication._id === payload.like.idPost) {
+        publication.likes.push(payload.like);
+        return publication;
+      }
+      return publication;
+    });
+
+    return getFeed(feedUpdated);
   };
 
   const handleRemoveLike = async ({
@@ -62,6 +74,18 @@ export const useLike = () => {
     }
 
     // REMOVE LIKE IN FEED
+
+    const feedUpdated = feed.map((publication: Publication) => {
+      if (publication._id === payload.like.idPost) {
+        publication.likes = publication.likes.filter(
+          (like: Like) => like._id !== payload.like._id
+        );
+        return publication;
+      }
+      return publication;
+    });
+
+    return getFeed(feedUpdated);
   };
 
   return {

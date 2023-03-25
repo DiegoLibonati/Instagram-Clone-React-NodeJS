@@ -6,14 +6,12 @@ import { Notification } from "./Notification";
 export const NotificationList = () => {
   const { user } = useContext(AuthContext);
 
-  console.log("Hola");
-
   return (
     <ul className="flex flex-col items-center justify-start w-full h-auto">
       {user.notifications?.map((notification: NotificationType) => {
         return (
           <Notification
-            key={notification.id}
+            key={notification._id}
             idAuthor={notification.idAuthor}
             avatar={notification.avatar}
             name={notification.name}

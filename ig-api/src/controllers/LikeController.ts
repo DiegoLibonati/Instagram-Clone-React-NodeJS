@@ -12,9 +12,6 @@ export const Like = {
     const { id } = req.user;
     const { idPublication, context } = req.body;
 
-    if (context === "feed") {
-    }
-
     const like = new LikeModel({
       idPost: idPublication,
       idAuthor: id,
@@ -23,6 +20,21 @@ export const Like = {
     await like.save();
 
     const publication = await PublicationModel.findOne({ _id: like.idPost });
+
+    await handleNewNotification(
+      like.idAuthor,
+      publication?.idAuthor,
+      "like",
+      publication?.id
+    );
+
+    if (context === "feed") {
+      return res.status(201).json({
+        payload: {
+          like: like,
+        },
+      });
+    }
 
     const user = await UserModel.findOne({ _id: publication?.idAuthor });
 
@@ -34,13 +46,6 @@ export const Like = {
       publications.map((publication) => {
         return setPublication(user, publication);
       })
-    );
-
-    await handleNewNotification(
-      like.idAuthor,
-      publication?.idAuthor,
-      "like",
-      publication?.id
     );
 
     return res.status(201).json({
@@ -54,9 +59,6 @@ export const Like = {
     const { id } = req.user;
     const { idPublication, context } = req.params;
 
-    if (context === "feed") {
-    }
-
     const like = await LikeModel.findOne({
       $and: [{ idPost: idPublication }, { idAuthor: id }],
     });
@@ -67,13 +69,21 @@ export const Like = {
       });
     }
 
-    const publication = await PublicationModel.findOne({ _id: like.idPost });
-
     await LikeModel.deleteOne({
       $and: [{ idPost: idPublication }, { idAuthor: id }],
     });
 
+    const publication = await PublicationModel.findOne({ _id: like.idPost });
+
     handleRemoveNotification(like.idAuthor, publication?.idAuthor, "like");
+
+    if (context === "feed") {
+      return res.status(201).json({
+        payload: {
+          like,
+        },
+      });
+    }
 
     const user = await UserModel.findOne({ _id: publication?.idAuthor });
 
@@ -87,7 +97,7 @@ export const Like = {
       })
     );
 
-    res.status(201).json({
+    return res.status(201).json({
       payload: {
         idLike: like!.id,
         publications: publications,

@@ -9,35 +9,35 @@ export const Feed = {
   getFeed: async (req: NewRequest, res: Response) => {
     const { id } = req.user;
 
+    const currentDate = new Date();
+    const lteDate = currentDate.getTime() - 259200000;
+
     const userFollowing = await FollowModel.find({ idFollower: id });
 
-    const profilesFollowing = userFollowing!.map((follow) => follow.idProfile);
+    let newFeed: any[] = [];
 
-    let newFeed: PublicationType[] = [];
-
-    for (const idProfile of profilesFollowing!) {
-      const currentDate = new Date();
-      const lteDate = currentDate.getTime() - 259200000;
+    for (const follow of userFollowing) {
       const publications = await PublicationModel.find({
-        $and: [{ idAuthor: idProfile }, { date: { $gt: new Date(lteDate) } }],
+        $and: [
+          { idAuthor: follow.idProfile },
+          { date: { $gt: new Date(lteDate) } },
+        ],
       });
 
-      const user = await UserModel.findOne({ _id: idProfile });
+      if (!publications.length) continue;
 
-      if (publications!.length === 0) {
-        return null;
+      const user = await UserModel.findOne({ _id: follow.idProfile });
+
+      for (const publication of publications) {
+        newFeed.push(await setPublication(user, publication));
       }
-
-      newFeed = await Promise.all(
-        publications.map((publication) => {
-          return setPublication(user, publication);
-        })
-      );
     }
 
     return res.status(200).json({
       message: "Feed actualizado con exito",
-      payload: newFeed,
+      payload: newFeed.sort(
+        (publication1, publication2) => publication2.date - publication1.date
+      ),
     });
   },
 };

@@ -1,4 +1,5 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { instagramApiGetFeed } from "../../api/Feed/instagramApiGetFeed";
 import { Publication } from "../../types/types";
 
@@ -12,6 +13,7 @@ export const FeedProvider: React.FunctionComponent<FeedContextProps> = ({
   children,
 }) => {
   const [feed, setFeed] = useState<Publication[]>([]);
+  const location = useLocation();
 
   const getFeed = async () => {
     const request = await instagramApiGetFeed();
@@ -22,10 +24,11 @@ export const FeedProvider: React.FunctionComponent<FeedContextProps> = ({
   };
 
   useEffect(() => {
-    getFeed();
-  }, []);
+    setFeed([]);
+  }, [location]);
+
   return (
-    <FeedContext.Provider value={{ feed, setFeed }}>
+    <FeedContext.Provider value={{ feed, setFeed, getFeed }}>
       {children}
     </FeedContext.Provider>
   );

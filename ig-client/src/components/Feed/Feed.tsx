@@ -4,11 +4,11 @@ import { Histories } from "../Histories/Histories";
 import { Publication } from "../Publication/Publication";
 import { instagramCheck } from "../../assets/Global/images";
 import { Loader2 } from "../Loader/Loader2/Loader2";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { FeedContext } from "../../contexts/Feed/FeedContext";
 
 export const Feed = () => {
-  const { feed } = useContext(FeedContext);
+  const { feed, getFeed } = useContext(FeedContext);
 
   const { arrayPagination, allViewed, loading, elementRef } = usePagination(
     feed,
@@ -16,6 +16,10 @@ export const Feed = () => {
   );
 
   const { user } = useProfileUser();
+
+  useEffect(() => {
+    getFeed();
+  }, []);
 
   return (
     <section

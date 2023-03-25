@@ -11,7 +11,7 @@ export const Publications = ({
       {publications.map((publication) => {
         return (
           <Publication
-            key={publication.id}
+            key={publication._id}
             publication={publication}
           ></Publication>
         );

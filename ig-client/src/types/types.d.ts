@@ -51,6 +51,7 @@ export type Like = {
 // Notification
 export type Notification = {
   id: string;
+  _id?: string;
   name: string;
   username: string;
   avatar: string;

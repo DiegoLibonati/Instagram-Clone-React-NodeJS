@@ -59,7 +59,7 @@ export const usePagination = (
   }, [onBottom, allViewed]);
 
   useEffect(() => {
-    if (array.length && !arrayRef.current!.length) {
+    if (array.length) {
       setArr(array);
     }
   }, [array, setArr]);
@@ -68,13 +68,14 @@ export const usePagination = (
     if (
       arrayRef.current?.length &&
       arrayPagination?.length &&
-      arrayRef.current!.length === arrayPagination!.length
+      arrayRef.current!.length === arrayPagination!.length &&
+      loading
     ) {
       setAllViewed(() => {
         return true;
       });
     }
-  }, [arrayPagination]);
+  }, [arrayPagination, loading]);
 
   return {
     arrayPagination: arrayPagination,
