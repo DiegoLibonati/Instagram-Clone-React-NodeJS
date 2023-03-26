@@ -61,6 +61,15 @@ export const Notification = ({
           </>
         )}
 
+        {type === "comment" && (
+          <>
+            <Link to={`/${username}`}>
+              <span className="font-semibold cursor-pointer">{username}</span>
+            </Link>{" "}
+            comento tu publicacion.
+          </>
+        )}
+
         {type === "like" && (
           <>
             A{" "}
@@ -72,7 +81,7 @@ export const Notification = ({
         )}
       </p>
 
-      {type === "like" && (
+      {(type === "like" || type === "comment") && (
         <img
           src={getImage(idPost!)}
           alt="auto"

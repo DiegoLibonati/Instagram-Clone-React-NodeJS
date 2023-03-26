@@ -7,7 +7,7 @@ export const NotificationList = () => {
   const { user } = useContext(AuthContext);
 
   return (
-    <ul className="flex flex-col items-center justify-start w-full h-auto">
+    <ul className="flex flex-col items-center justify-start w-full h-full overflow-y-scroll">
       {user.notifications?.map((notification: NotificationType) => {
         return (
           <Notification

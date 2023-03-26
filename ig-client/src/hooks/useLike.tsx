@@ -10,7 +10,7 @@ export const useLike = () => {
   const { user, setUser } = useProfileUser();
   const { activePublication, setActivePublication } =
     useContext(PublicationContext);
-  const { feed, getFeed } = useContext(FeedContext);
+  const { feed, setFeed } = useContext(FeedContext);
 
   const handleAddLike = async ({
     idPublication,
@@ -23,14 +23,18 @@ export const useLike = () => {
 
     const payload = request.payload;
 
-    // LIKE IN MODAL DESKTOP - MOBILE PROFILES
-    if (!context) {
-      setUser!({ ...user, publications: payload.publications });
+    // LIKE IN ACTIVE PUBLICATION MODAL
 
+    if (activePublication) {
       setActivePublication!({
         ...activePublication,
         likes: [...activePublication.likes, payload.like],
       });
+    }
+
+    // LIKE PROFILES UPDATE
+    if (!context) {
+      setUser!({ ...user, publications: payload.publications });
 
       return;
     }
@@ -45,7 +49,7 @@ export const useLike = () => {
       return publication;
     });
 
-    return getFeed(feedUpdated);
+    return setFeed(feedUpdated);
   };
 
   const handleRemoveLike = async ({
@@ -59,22 +63,25 @@ export const useLike = () => {
 
     const payload = request.payload;
 
-    // REMOVE LIKE IN MODAL DESKTOP - MOBILE PROFILES
-    if (!context) {
-      setUser!({ ...user, publications: payload.publications });
-
+    // LIKE IN ACTIVE PUBLICATION MODAL
+    if (activePublication) {
       const likes = activePublication.likes.filter(
-        (like: Like) => like._id !== payload.idLike
+        (like: Like) => like._id !== payload.like._id
       );
       setActivePublication!({
         ...activePublication,
         likes: likes,
       });
+    }
+
+    // LIKES PROFILE UPDATE
+    if (!context) {
+      setUser!({ ...user, publications: payload.publications });
+
       return;
     }
 
     // REMOVE LIKE IN FEED
-
     const feedUpdated = feed.map((publication: Publication) => {
       if (publication._id === payload.like.idPost) {
         publication.likes = publication.likes.filter(
@@ -85,7 +92,7 @@ export const useLike = () => {
       return publication;
     });
 
-    return getFeed(feedUpdated);
+    return setFeed(feedUpdated);
   };
 
   return {

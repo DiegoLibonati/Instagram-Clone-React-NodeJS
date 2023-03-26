@@ -17,17 +17,7 @@ export const ModalPublication = () => {
         className="absolute top-2 right-2 cursor-pointer"
         onClick={() => {
           setModalClose();
-          setActivePublication({
-            id: "",
-            imgLink: "",
-            description: "",
-            likes: [],
-            comments: [],
-            date: "",
-            name: "",
-            username: "",
-            avatar: "",
-          });
+          setActivePublication(null);
         }}
       ></AiOutlineClose>
       <ModalPublicationContainer></ModalPublicationContainer>

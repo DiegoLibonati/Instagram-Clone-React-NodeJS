@@ -16,7 +16,7 @@ export const ModalPublicationDescription = () => {
       <UserImage
         className="rounded-full mr-4 h-8 w-8"
         avatar={activePublication.avatar}
-        name={activePublication.id}
+        name={activePublication.name}
       ></UserImage>
       <div className="flex items-start justify-start flex-col w-[80%] h-auto">
         <p className="text-black text-sm ">

@@ -10,7 +10,10 @@ export const ModalPublicationComments = () => {
     <ul className="flex items-start justify-start flex-col w-auto h-full mt-5">
       {activePublication.comments?.map((comment: Comment) => {
         return (
-          <ModalPublicationComment key={comment.id}></ModalPublicationComment>
+          <ModalPublicationComment
+            key={comment._id}
+            comment={comment}
+          ></ModalPublicationComment>
         );
       })}
     </ul>

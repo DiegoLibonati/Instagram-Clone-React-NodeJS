@@ -13,17 +13,7 @@ export const CommentsMobileHeader = () => {
       <button
         onClick={() => {
           setModalClose();
-          setActivePublication({
-            id: "",
-            imgLink: "",
-            description: "",
-            likes: [],
-            comments: [],
-            date: "",
-            username: "",
-            avatar: "",
-            name: "",
-          });
+          setActivePublication(null);
         }}
       >
         <BsArrowLeft color="black" size={25}>

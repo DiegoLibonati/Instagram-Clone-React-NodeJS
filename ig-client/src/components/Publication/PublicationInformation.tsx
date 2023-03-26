@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { useLocation } from "react-router-dom";
 import { PublicationContext } from "../../contexts/Publications/PublicationContext";
 import { UIContext } from "../../contexts/Ui/UIContext";
 import { Publication } from "../../types/types";
@@ -19,6 +20,8 @@ export const PublicationInformation = ({
   const { setModalOpen } = useContext(UIContext);
   const { setActivePublication } = useContext(PublicationContext);
 
+  const location = useLocation();
+
   return (
     <div className="flex items-start justify-center flex-col w-full p-2">
       <h3 className="text-black text-sm font-medium my-[2px]">
@@ -32,7 +35,10 @@ export const PublicationInformation = ({
           className="text-gray-500 text-sm my-[2px]"
           onClick={() => {
             setModalOpen("publication");
-            setActivePublication({ ...publication });
+            setActivePublication({
+              ...publication,
+              context: location.pathname === "/" ? "feed" : "",
+            });
           }}
         >
           ver los {comments.length} comentarios

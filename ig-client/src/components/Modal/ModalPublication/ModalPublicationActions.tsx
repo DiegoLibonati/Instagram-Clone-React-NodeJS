@@ -12,11 +12,18 @@ import { PublicationContext } from "../../../contexts/Publications/PublicationCo
 import { AuthContext } from "../../../contexts/Auth/AuthContext";
 import { isPublicationLikedByUser } from "../../../helpers/isPublicationLikedByUser";
 import { useLike } from "../../../hooks/useLike";
+import { useComment } from "../../../hooks/useComment";
+import { useForm } from "../../../hooks/useForm";
+import { InputText } from "../../Input/InputText/InputText";
 
 export const ModalPublicationActions = () => {
   const { activePublication } = useContext(PublicationContext);
   const { user } = useContext(AuthContext);
   const { handleAddLike, handleRemoveLike } = useLike();
+  const { handleAddComment } = useComment();
+  const { formState, onInputChange, onResetForm } = useForm({
+    comment: "",
+  });
 
   const date = useMemo(
     () => getFormatDate(activePublication.date),
@@ -39,7 +46,8 @@ export const ModalPublicationActions = () => {
               className="mr-4 cursor-pointer"
               onClick={() =>
                 handleRemoveLike({
-                  idPublication: activePublication.id,
+                  idPublication: activePublication._id,
+                  context: activePublication.context,
                 })
               }
             ></BsSuitHeartFill>
@@ -50,7 +58,8 @@ export const ModalPublicationActions = () => {
               className="mr-4 cursor-pointer"
               onClick={() =>
                 handleAddLike({
-                  idPublication: activePublication.id,
+                  idPublication: activePublication._id,
+                  context: activePublication.context,
                 })
               }
             ></BsSuitHeart>
@@ -76,11 +85,26 @@ export const ModalPublicationActions = () => {
         <p className="text-xs text-gray-500 mt-1">{date}</p>
       </div>
 
-      <form className="flex flex-row items-center justify-between w-full h-auto mt-3 shadow-inner p-2">
-        <input
-          className="outline-none w-2/3"
+      <form
+        className="flex flex-row items-center justify-between w-full h-auto mt-3 shadow-inner p-2"
+        onSubmit={(e) =>
+          handleAddComment(
+            e,
+            activePublication._id,
+            formState.comment,
+            activePublication.context,
+            onResetForm
+          )
+        }
+      >
+        <InputText
+          id="commentInput"
+          value={formState.comment}
+          name="comment"
+          classNameInput="outline-none w-2/3"
           placeholder="Agrega un comentario..."
-        ></input>
+          onChange={onInputChange}
+        ></InputText>
         <button className="text-blue-700 w-1/3 text-end">Publicar</button>
       </form>
     </div>

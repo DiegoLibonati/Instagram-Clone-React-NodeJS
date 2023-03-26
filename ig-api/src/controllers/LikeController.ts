@@ -99,7 +99,7 @@ export const Like = {
 
     return res.status(201).json({
       payload: {
-        idLike: like!.id,
+        like: like,
         publications: publications,
       },
     });

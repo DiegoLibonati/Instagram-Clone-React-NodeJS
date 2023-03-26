@@ -19,8 +19,10 @@ export type MConfig = {
 // Comment
 export type Comment = {
   id: string;
+  _id?: string;
   username: string;
   avatar: string;
+  name: string;
   description: string;
   date: string;
   idPost: string;
@@ -30,6 +32,7 @@ export type Comment = {
 // Follow
 export type Follow = {
   id: string;
+  _id?: string;
   name: string;
   username: string;
   avatar: string;
@@ -88,6 +91,7 @@ export type Histories = {
 export type User = {
   status?: string;
   id: string;
+  _id?: string;
   email: string;
   name: string;
   username: string;
@@ -110,6 +114,7 @@ export type UserEdit = {
 
 export type ForeignUser = {
   id: string;
+  _id?: string;
   email: string;
   name: string;
   username: string;

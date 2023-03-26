@@ -13,7 +13,7 @@ export const PublicationProvider: React.FunctionComponent<
   PublicationContextProps
 > = ({ children }) => {
   const [activePublication, setActivePublication] = useState<Publication>({
-    id: "",
+    _id: "",
     imgLink: "",
     description: "",
     likes: [],
@@ -23,6 +23,7 @@ export const PublicationProvider: React.FunctionComponent<
     avatar: "",
     name: "",
     idAuthor: "",
+    context: "",
   });
 
   const { formState, onInputChange, onResetForm } = useForm({

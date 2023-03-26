@@ -27,7 +27,7 @@ export const ProfileImage = ({
       onClick={() => {
         if (matchMediaQuery) {
           setActivePublication({
-            id,
+            _id: id,
             imgLink,
             likes,
             comments,

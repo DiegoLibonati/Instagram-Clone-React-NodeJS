@@ -10,6 +10,9 @@ import { useLike } from "../../hooks/useLike";
 import { Publication } from "../../types/types";
 import { useContext, useMemo } from "react";
 import { isPublicationLikedByUser } from "../../helpers/isPublicationLikedByUser";
+import { UIContext } from "../../contexts/Ui/UIContext";
+import { PublicationContext } from "../../contexts/Publications/PublicationContext";
+import { useLocation } from "react-router-dom";
 
 export const PublicationActions = ({
   publication,
@@ -20,16 +23,22 @@ export const PublicationActions = ({
 }) => {
   const { handleAddLike, handleRemoveLike } = useLike();
   const { user } = useContext(AuthContext);
+  const { setModalOpen } = useContext(UIContext);
+  const { setActivePublication } = useContext(PublicationContext);
+  const location = useLocation();
 
-  const isPublicationLikedByUserMemo = useMemo(
-    () => isPublicationLikedByUser(publication, user.id),
-    [publication, user.id]
-  );
+  const handleOpenComments = () => {
+    setModalOpen("publication");
+    setActivePublication({
+      ...publication,
+      context: location.pathname === "/" ? "feed" : "",
+    });
+  };
 
   return (
     <div className="flex items-center justify-between w-full p-2 h-auto">
       <div className="flex items-center justify-between h-auto">
-        {isPublicationLikedByUserMemo ? (
+        {isPublicationLikedByUser(publication, user.id) ? (
           <BsSuitHeartFill
             color="red"
             size={25}
@@ -59,6 +68,7 @@ export const PublicationActions = ({
           color="black"
           size={25}
           className="mr-4 cursor-pointer"
+          onClick={handleOpenComments}
         ></BsChat>
         <FiSend color="black" size={25} className="mr-4"></FiSend>
       </div>

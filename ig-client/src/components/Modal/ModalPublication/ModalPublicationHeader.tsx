@@ -20,17 +20,7 @@ export const ModalPublicationHeader = () => {
       <Link
         to={`/${activePublication.username}`}
         onClick={() => {
-          setActivePublication({
-            id: "",
-            imgLink: "",
-            description: "",
-            likes: [],
-            comments: [],
-            date: "",
-            username: "",
-            avatar: "",
-            name: "",
-          });
+          setActivePublication(null);
           setModalClose();
         }}
       >

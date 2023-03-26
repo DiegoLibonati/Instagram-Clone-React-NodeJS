@@ -8,8 +8,13 @@ export const CommentsMobileComments = () => {
 
   return (
     <ul className="flex items-center justify-start flex-col w-full min-h-[calc(h-screen - h-14)] mb-24">
-      {activePublication.comments?.map((comment: Comment) => {
-        return <CommentsMobileComment key={comment.id}></CommentsMobileComment>;
+      {activePublication?.comments?.map((comment: Comment) => {
+        return (
+          <CommentsMobileComment
+            key={comment._id}
+            comment={comment}
+          ></CommentsMobileComment>
+        );
       })}
     </ul>
   );
