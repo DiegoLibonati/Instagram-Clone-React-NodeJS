@@ -1,4 +1,4 @@
-import { ForeignUser, User } from "../types/types";
+import { Follow, ForeignUser, User } from "../types/types";
 
 export const isUserFollow = (
   user: User | ForeignUser,
@@ -7,7 +7,7 @@ export const isUserFollow = (
 ) => {
   if (user === undefined) return [];
   if (arrayName === "following") {
-    return user.following?.filter((follow: any) => follow.idProfile === id);
+    return user.following?.some((follow: Follow) => follow.idProfile === id);
   }
-  return user.followers?.filter((follow: any) => follow.idFollower === id);
+  return user.followers?.some((follow: Follow) => follow.idFollower === id);
 };

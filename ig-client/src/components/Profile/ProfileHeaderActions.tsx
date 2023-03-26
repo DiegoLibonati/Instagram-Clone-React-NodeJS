@@ -45,7 +45,7 @@ export const ProfileHeaderActions = () => {
         </>
       ) : (
         <>
-          {isAuthUserFollowMemo.length > 0 ? (
+          {isAuthUserFollowMemo ? (
             <button
               className="p-2 text-xs w-full text-black font-bold shadow-sm md:text-lg bg-zinc-200 rounded-md"
               onClick={() =>
@@ -60,7 +60,7 @@ export const ProfileHeaderActions = () => {
             >
               Siguiendo
             </button>
-          ) : isForeignUserFollowMemo.length > 0 ? (
+          ) : isForeignUserFollowMemo ? (
             <button
               className="p-2 text-xs w-full text-white font-bold shadow-sm md:text-lg bg-blue-500 rounded-md"
               onClick={() =>

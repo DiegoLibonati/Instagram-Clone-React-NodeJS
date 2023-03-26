@@ -9,10 +9,14 @@ import "swiper/css/pagination";
 // import required modules
 import { FreeMode } from "swiper";
 
-import { VscAdd } from "react-icons/vsc";
 import { Histories as HistoriesType } from "../../types/types";
+import { UserImage } from "../UserImage/UserImage";
+import { AuthContext } from "../../contexts/Auth/AuthContext";
+import { useContext } from "react";
+import { MdOutlineAddCircleOutline } from "react-icons/md";
+import { useLocation } from "react-router-dom";
 
-const histories: Array<any> = [
+const histories: Array<Record<string, string>> = [
   {
     id: "1",
     imgLink: "https://pfpmaker.com/_nuxt/img/profile-3-1.3e702c5.png",
@@ -24,6 +28,20 @@ export const Histories = ({
   className = "",
   profileHistories = false,
 }: HistoriesType) => {
+  const { user } = useContext(AuthContext);
+  const location = useLocation();
+
+  if (
+    profileHistories &&
+    user.username !== location.pathname.replace("/", "")
+  ) {
+    return (
+      <div className="flex items-center justify-center w-full h-24">
+        <h2>¡Hey este usuario no tiene historias destacadas!</h2>
+      </div>
+    );
+  }
+
   return (
     <article className={`bg-white w-screen lg:w-full h-24 ${className}`}>
       <Swiper
@@ -84,34 +102,43 @@ export const Histories = ({
           },
         }}
       >
-        {histories.map((history) => {
-          return (
-            <SwiperSlide
-              className="flex items-center justify-center flex-col"
-              key={history.id}
-            >
-              <img
-                src={history.imgLink}
-                alt="perfil"
-                className="w-14 h-14 rounded-full"
-              ></img>
-              <h3 className="text-black text-xs text-ellipsis w-18 overflow-hidden">
-                {history.name}
-              </h3>
-            </SwiperSlide>
-          );
-        })}
-
-        {profileHistories && (
+        {location.pathname === "/" && (
           <SwiperSlide className="flex items-center justify-center flex-col">
-            <div className="flex items-center justify-center rounded-full border-2 border-black w-14 h-14 cursor-pointer">
-              <VscAdd size={30}></VscAdd>
+            <div className="flex items-center justify-center relative cursor-pointer">
+              <UserImage
+                avatar={user.avatar}
+                name={user.name}
+                className="w-14 h-14 rounded-full"
+              ></UserImage>
+              <MdOutlineAddCircleOutline
+                className="absolute bottom-3"
+                size={25}
+                color={"white"}
+              ></MdOutlineAddCircleOutline>
             </div>
-            <h3 className="text-black text-xs text-ellipsis w-18 overflow-hidden">
-              Nueva
-            </h3>
+            {histories.map((history) => {
+              return <></>;
+            })}
           </SwiperSlide>
         )}
+
+        {profileHistories &&
+          user.username === location.pathname.replace("/", "") && (
+            <SwiperSlide className="flex items-center justify-center flex-col">
+              <div className="flex items-center justify-center relative cursor-pointer">
+                <UserImage
+                  avatar={user.avatar}
+                  name={user.name}
+                  className="w-14 h-14 rounded-full"
+                ></UserImage>
+                <MdOutlineAddCircleOutline
+                  className="absolute bottom-3"
+                  size={25}
+                  color={"white"}
+                ></MdOutlineAddCircleOutline>
+              </div>
+            </SwiperSlide>
+          )}
       </Swiper>
     </article>
   );

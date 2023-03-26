@@ -1,8 +1,10 @@
-import { BsSuitHeart } from "react-icons/bs";
+import { getFormatDate } from "../../../helpers/getFormatDate";
 import { Comment } from "../../../types/types";
 import { UserImage } from "../../UserImage/UserImage";
+import { useMemo } from "react";
 
 export const CommentsMobileComment = ({ comment }: { comment: Comment }) => {
+  const memoDate = useMemo(() => getFormatDate(comment.date), [comment.date]);
   return (
     <li className="flex items-start justify-start flex-row w-full h-auto p-2">
       <UserImage
@@ -15,7 +17,7 @@ export const CommentsMobileComment = ({ comment }: { comment: Comment }) => {
           <h3 className="text-black mr-2 text-sm font-bold">
             {comment.username}
           </h3>
-          <h4 className="text-gray-400 text-xs">{comment.date}</h4>
+          <h4 className="text-gray-400 text-xs">{memoDate}</h4>
         </div>
         <p className="text-sm">{comment.description}</p>
       </div>

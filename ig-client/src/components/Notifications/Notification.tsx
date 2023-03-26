@@ -89,7 +89,7 @@ export const Notification = ({
         ></img>
       )}
 
-      {!isForeignUserFollowMemo.length && type === "follow" && (
+      {!isForeignUserFollowMemo && type === "follow" && (
         <button
           className="p-2 text-xs w-16 text-white font-bold shadow-sm bg-blue-500 rounded-md ml-auto"
           onClick={() =>
@@ -107,7 +107,7 @@ export const Notification = ({
         </button>
       )}
 
-      {isForeignUserFollowMemo.length > 0 && type === "follow" && (
+      {isForeignUserFollowMemo && type === "follow" && (
         <button
           className="p-2 text-xs w-18 text-black font-bold shadow-sm bg-zinc-200 rounded-md ml-auto"
           onClick={() =>

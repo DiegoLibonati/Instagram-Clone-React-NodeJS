@@ -1,8 +1,10 @@
-import { BsSuitHeart } from "react-icons/bs";
+import { getFormatDate } from "../../../helpers/getFormatDate";
 import { Comment } from "../../../types/types";
 import { UserImage } from "../../UserImage/UserImage";
+import { useMemo } from "react";
 
 export const ModalPublicationComment = ({ comment }: { comment: Comment }) => {
+  const memoDate = useMemo(() => getFormatDate(comment.date), [comment.date]);
   return (
     <li className="flex items-start justify-start flex-row w-full h-auto mb-6">
       <UserImage
@@ -16,7 +18,7 @@ export const ModalPublicationComment = ({ comment }: { comment: Comment }) => {
           {comment.description}
         </p>
         <div className="flex flex-row items-start justify-start w-full h-auto mt-1">
-          <p className="text-xs text-gray-400 mr-2">{comment.date}</p>
+          <p className="text-xs text-gray-400 mr-2">{memoDate}</p>
         </div>
       </div>
     </li>

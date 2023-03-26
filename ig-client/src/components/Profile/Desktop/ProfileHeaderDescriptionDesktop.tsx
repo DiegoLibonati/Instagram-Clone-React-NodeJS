@@ -60,7 +60,7 @@ export const ProfileHeaderDescriptionDesktop = () => {
             <>
               <h2 className="text-lg mr-8">{user.username}</h2>
 
-              {isAuthUserFollowMemo.length > 0 ? (
+              {isAuthUserFollowMemo ? (
                 <button
                   className="text-sm px-5 py-1 bg-zinc-200 text-black rounded-md cursor-pointer mr-2"
                   onClick={() =>
@@ -75,7 +75,7 @@ export const ProfileHeaderDescriptionDesktop = () => {
                 >
                   Siguiendo
                 </button>
-              ) : isForeignUserFollowMemo.length > 0 ? (
+              ) : isForeignUserFollowMemo ? (
                 <button
                   className="text-sm px-5 py-1 bg-blue-500 text-white rounded-md cursor-pointer mr-2"
                   onClick={() =>
