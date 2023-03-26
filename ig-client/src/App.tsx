@@ -5,8 +5,8 @@ import { NotificationsProvider } from "./contexts/Notifications/NotificationsCon
 import { ProfileProvider } from "./contexts/Profile/ProfileContext";
 import { PublicationProvider } from "./contexts/Publications/PublicationContext";
 import { SearchProvider } from "./contexts/Search/SearchContext";
+import { SuggestionProvider } from "./contexts/Suggestion/SuggestionContext";
 import { UIProvider } from "./contexts/Ui/UIContext";
-
 import { InstagramRouter } from "./router/InstagramRouter";
 
 function App() {
@@ -19,7 +19,9 @@ function App() {
               <SearchProvider>
                 <NotificationsProvider>
                   <FeedProvider>
-                    <InstagramRouter></InstagramRouter>
+                    <SuggestionProvider>
+                      <InstagramRouter></InstagramRouter>
+                    </SuggestionProvider>
                   </FeedProvider>
                 </NotificationsProvider>
               </SearchProvider>

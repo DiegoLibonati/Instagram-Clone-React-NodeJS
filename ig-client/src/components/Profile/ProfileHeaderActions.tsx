@@ -1,19 +1,15 @@
 import { useNavigate } from "react-router-dom";
-import { handleFollow } from "../../helpers/handleFollow";
-import { handleUnFollow } from "../../helpers/handleUnFollow";
 import { useProfileUser } from "../../hooks/useProfileUser";
 import { useContext, useMemo } from "react";
 import { isUserFollow } from "../../helpers/isUserFollow";
-import { UIContext } from "../../contexts/Ui/UIContext";
 import { AuthContext } from "../../contexts/Auth/AuthContext";
-import { ProfileContext } from "../../contexts/Profile/ProfileContext";
+import { useFollow } from "../../hooks/useFollow";
 
 export const ProfileHeaderActions = () => {
   const { user, isMainUser } = useProfileUser();
-  const { setAlertOpen } = useContext(UIContext);
-  const { user: authUser, onLogin } = useContext(AuthContext);
-  const { userForeignProfile, setUserForeignProfile } =
-    useContext(ProfileContext);
+  const { handleFollow, handleUnFollow } = useFollow();
+  const { user: authUser } = useContext(AuthContext);
+
   const navigate = useNavigate();
   const handleEditProfile = () => {
     navigate("/accounts/edit");
@@ -48,45 +44,21 @@ export const ProfileHeaderActions = () => {
           {isAuthUserFollowMemo ? (
             <button
               className="p-2 text-xs w-full text-black font-bold shadow-sm md:text-lg bg-zinc-200 rounded-md"
-              onClick={() =>
-                handleUnFollow(
-                  setAlertOpen,
-                  authUser,
-                  onLogin,
-                  userForeignProfile,
-                  setUserForeignProfile
-                )
-              }
+              onClick={() => handleUnFollow()}
             >
               Siguiendo
             </button>
           ) : isForeignUserFollowMemo ? (
             <button
               className="p-2 text-xs w-full text-white font-bold shadow-sm md:text-lg bg-blue-500 rounded-md"
-              onClick={() =>
-                handleFollow(
-                  setAlertOpen,
-                  authUser,
-                  onLogin,
-                  userForeignProfile,
-                  setUserForeignProfile
-                )
-              }
+              onClick={() => handleFollow()}
             >
               Seguir tambien
             </button>
           ) : (
             <button
               className="p-2 text-xs w-full text-white font-bold shadow-sm md:text-lg bg-blue-500 rounded-md"
-              onClick={() =>
-                handleFollow(
-                  setAlertOpen,
-                  authUser,
-                  onLogin,
-                  userForeignProfile,
-                  setUserForeignProfile
-                )
-              }
+              onClick={() => handleFollow()}
             >
               Seguir
             </button>

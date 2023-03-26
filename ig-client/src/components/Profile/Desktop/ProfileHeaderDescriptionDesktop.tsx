@@ -3,19 +3,15 @@ import { useNavigate } from "react-router-dom";
 import { useProfileUser } from "../../../hooks/useProfileUser";
 import { UserImage } from "../../UserImage/UserImage";
 import { useContext, useMemo } from "react";
-import { handleUnFollow } from "../../../helpers/handleUnFollow";
-import { handleFollow } from "../../../helpers/handleFollow";
 import { isUserFollow } from "../../../helpers/isUserFollow";
-import { UIContext } from "../../../contexts/Ui/UIContext";
 import { AuthContext } from "../../../contexts/Auth/AuthContext";
-import { ProfileContext } from "../../../contexts/Profile/ProfileContext";
+import { useFollow } from "../../../hooks/useFollow";
 
 export const ProfileHeaderDescriptionDesktop = () => {
   const { user, isMainUser } = useProfileUser();
-  const { setAlertOpen } = useContext(UIContext);
-  const { user: authUser, onLogin } = useContext(AuthContext);
-  const { userForeignProfile, setUserForeignProfile } =
-    useContext(ProfileContext);
+  const { handleFollow, handleUnFollow } = useFollow();
+  const { user: authUser } = useContext(AuthContext);
+
   const navigate = useNavigate();
   const handleEditProfile = () => {
     navigate("/accounts/edit");
@@ -63,45 +59,21 @@ export const ProfileHeaderDescriptionDesktop = () => {
               {isAuthUserFollowMemo ? (
                 <button
                   className="text-sm px-5 py-1 bg-zinc-200 text-black rounded-md cursor-pointer mr-2"
-                  onClick={() =>
-                    handleUnFollow(
-                      setAlertOpen,
-                      authUser,
-                      onLogin,
-                      userForeignProfile,
-                      setUserForeignProfile
-                    )
-                  }
+                  onClick={() => handleUnFollow()}
                 >
                   Siguiendo
                 </button>
               ) : isForeignUserFollowMemo ? (
                 <button
                   className="text-sm px-5 py-1 bg-blue-500 text-white rounded-md cursor-pointer mr-2"
-                  onClick={() =>
-                    handleFollow(
-                      setAlertOpen,
-                      authUser,
-                      onLogin,
-                      userForeignProfile,
-                      setUserForeignProfile
-                    )
-                  }
+                  onClick={() => handleFollow()}
                 >
                   Seguir tambien
                 </button>
               ) : (
                 <button
                   className="text-sm px-5 py-1 bg-blue-500 text-white rounded-md cursor-pointer mr-2"
-                  onClick={() =>
-                    handleFollow(
-                      setAlertOpen,
-                      authUser,
-                      onLogin,
-                      userForeignProfile,
-                      setUserForeignProfile
-                    )
-                  }
+                  onClick={() => handleFollow()}
                 >
                   Seguir
                 </button>

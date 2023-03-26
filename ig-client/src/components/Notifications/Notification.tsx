@@ -1,13 +1,10 @@
 import { useContext, useMemo } from "react";
 import { UserImage } from "../UserImage/UserImage";
-import { handleFollow } from "../../helpers/handleFollow";
-import { handleUnFollow } from "../../helpers/handleUnFollow";
 import { isUserFollow } from "../../helpers/isUserFollow";
-import { UIContext } from "../../contexts/Ui/UIContext";
 import { AuthContext } from "../../contexts/Auth/AuthContext";
-import { ProfileContext } from "../../contexts/Profile/ProfileContext";
 import { Link } from "react-router-dom";
 import { Publication } from "../../types/types";
+import { useFollow } from "../../hooks/useFollow";
 
 export const Notification = ({
   idAuthor,
@@ -24,10 +21,8 @@ export const Notification = ({
   type: string;
   idPost?: string;
 }) => {
-  const { setAlertOpen } = useContext(UIContext);
-  const { user, onLogin } = useContext(AuthContext);
-  const { userForeignProfile, setUserForeignProfile } =
-    useContext(ProfileContext);
+  const { handleFollow, handleUnFollow } = useFollow();
+  const { user } = useContext(AuthContext);
 
   const isForeignUserFollowMemo = useMemo(
     () => isUserFollow(user, idAuthor, "following"),
@@ -92,16 +87,7 @@ export const Notification = ({
       {!isForeignUserFollowMemo && type === "follow" && (
         <button
           className="p-2 text-xs w-16 text-white font-bold shadow-sm bg-blue-500 rounded-md ml-auto"
-          onClick={() =>
-            handleFollow(
-              setAlertOpen,
-              user,
-              onLogin,
-              userForeignProfile,
-              setUserForeignProfile,
-              idAuthor
-            )
-          }
+          onClick={() => handleFollow(idAuthor)}
         >
           Seguir
         </button>
@@ -110,16 +96,7 @@ export const Notification = ({
       {isForeignUserFollowMemo && type === "follow" && (
         <button
           className="p-2 text-xs w-18 text-black font-bold shadow-sm bg-zinc-200 rounded-md ml-auto"
-          onClick={() =>
-            handleUnFollow(
-              setAlertOpen,
-              user,
-              onLogin,
-              userForeignProfile,
-              setUserForeignProfile,
-              idAuthor
-            )
-          }
+          onClick={() => handleUnFollow(idAuthor)}
         >
           Siguiendo
         </button>

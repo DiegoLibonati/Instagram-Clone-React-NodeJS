@@ -46,7 +46,9 @@ export const Feed = () => {
             alt="instagram-check"
             className="h-24 w-24 mb-2"
           ></img>
-          <h2 className="text-2xl font-normal">No hay nada para mostrar</h2>
+          <h2 className="text-2xl font-normal text-center">
+            No hay nada para mostrar
+          </h2>
           <p className="text-center">
             Empieza a seguir a nuevos usuarios para ver contenido nuevo.
           </p>

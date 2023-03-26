@@ -12,6 +12,7 @@ import SearchRouter from "./routes/v1/searchRoutes";
 import NotificationRouter from "./routes/v1/notificationRoutes";
 import LikeRouter from "./routes/v1/likeRoutes";
 import CommentRouter from "./routes/v1/commentRoutes";
+import SuggestionRouter from "./routes/v1/suggestionRoutes";
 
 const app: Express = express();
 mongooseConnection();
@@ -37,6 +38,7 @@ app.use("/api/v1/search", SearchRouter);
 app.use("/api/v1/notification", NotificationRouter);
 app.use("/api/v1/like", LikeRouter);
 app.use("/api/v1/comment", CommentRouter);
+app.use("/api/v1/suggestion", SuggestionRouter);
 app.use("/api/v1/images", express.static("src/images"));
 app.use((req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
