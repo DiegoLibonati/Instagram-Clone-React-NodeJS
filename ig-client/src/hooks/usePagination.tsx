@@ -59,7 +59,7 @@ export const usePagination = (
   }, [onBottom, allViewed]);
 
   useEffect(() => {
-    if (array.length) {
+    if (array?.length) {
       setArr(array);
     }
   }, [array, setArr]);
