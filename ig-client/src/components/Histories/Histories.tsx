@@ -116,9 +116,6 @@ export const Histories = ({
                 color={"white"}
               ></MdOutlineAddCircleOutline>
             </div>
-            {histories.map((history) => {
-              return <></>;
-            })}
           </SwiperSlide>
         )}
 
