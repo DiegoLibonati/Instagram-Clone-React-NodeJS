@@ -5,7 +5,7 @@ import { Response } from "express";
 export const Suggestion = {
   getUsers: async (req: NewRequest, res: Response) => {
     const { id } = req.user;
-    const users = await UserModel.find().limit(10);
+    const users = await UserModel.aggregate([{ $sample: { size: 5 } }]);
 
     return res
       .status(200)
