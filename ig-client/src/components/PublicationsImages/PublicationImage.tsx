@@ -1,12 +1,13 @@
 import { useContext } from "react";
 import { BsChat, BsSuitHeart } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
+import { ExploreContext } from "../../contexts/Explore/ExploreContext";
 import { PublicationContext } from "../../contexts/Publications/PublicationContext";
 import { UIContext } from "../../contexts/Ui/UIContext";
 import { useMediaMatch } from "../../hooks/useMediaMatch";
 import { Publication } from "../../types/types";
 
-export const ProfileImage = ({
+export const PublicationImage = ({
   id,
   imgLink,
   likes,
@@ -19,6 +20,7 @@ export const ProfileImage = ({
 }: Publication) => {
   const { setModalOpen } = useContext(UIContext);
   const { setActivePublication } = useContext(PublicationContext);
+  const { setIsOpenAnyImageFromExplore } = useContext(ExploreContext);
   const { matchMediaQuery } = useMediaMatch(1024);
   const navigate = useNavigate();
   return (
@@ -38,7 +40,9 @@ export const ProfileImage = ({
             name,
           });
           setModalOpen("publication");
-        } else navigate(`/p/${username}`);
+        }
+        setIsOpenAnyImageFromExplore(true);
+        return navigate(`/p/${username}`);
       }}
     >
       <div className="opacity-0 group-hover:opacity-75 duration-300 absolute inset-x-0 h-full flex justify-evenly items-center text-xl bg-neutral-800 text-black font-semibold">

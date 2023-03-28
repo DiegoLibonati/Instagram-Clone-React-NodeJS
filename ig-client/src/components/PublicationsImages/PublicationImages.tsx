@@ -1,12 +1,15 @@
 import { AiOutlineCamera } from "react-icons/ai";
-import { useProfileUser } from "../../hooks/useProfileUser";
 import { Publication } from "../../types/types";
-import { ProfileImage } from "./ProfileImage";
+import { PublicationImage } from "./PublicationImage";
 
-export const ProfileImages = () => {
-  const { user } = useProfileUser();
-
-  if (user.publications.length === 0) {
+export const PublicationImages = ({
+  publications,
+  context,
+}: {
+  publications: Publication[];
+  context?: string;
+}) => {
+  if (publications.length === 0 && context !== "explore") {
     return (
       <section className="flex pb-14 w-full lg:pb-5 2xl:w-[75%] h-60">
         <article className="flex items-center justify-center flex-col w-full h-full relative">
@@ -21,10 +24,14 @@ export const ProfileImages = () => {
   }
 
   return (
-    <section className="grid grid-cols-3 gap-x-[2px] gap-y-[2px] pb-14 w-full h-auto lg:pb-5 2xl:w-[75%] 2xl:gap-x-[20px] 2xl:gap-y-[20px]">
-      {[...user.publications].reverse()?.map((publication: Publication) => {
+    <section
+      className={`grid grid-cols-3 gap-x-[2px] gap-y-[2px] pb-14 w-full h-auto lg:pb-5 2xl:w-[75%] 2xl:gap-x-[20px] 2xl:gap-y-[20px] ${
+        context === "explore" && "mt-14"
+      }`}
+    >
+      {[...publications].reverse()?.map((publication: Publication) => {
         return (
-          <ProfileImage
+          <PublicationImage
             key={publication._id}
             id={publication._id}
             imgLink={publication.imgLink}
@@ -35,7 +42,7 @@ export const ProfileImages = () => {
             username={publication.username}
             avatar={publication.avatar}
             name={publication.name}
-          ></ProfileImage>
+          ></PublicationImage>
         );
       })}
     </section>

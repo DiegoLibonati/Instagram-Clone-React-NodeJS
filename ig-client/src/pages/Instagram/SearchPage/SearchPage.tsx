@@ -1,12 +1,13 @@
 import { useState, useContext, useEffect } from "react";
 import { BsArrowLeft } from "react-icons/bs";
-import { instagramApiGetUsers } from "../../../api/User/instagramApiGetUsers";
 import { FooterMobile } from "../../../components/Footer/Mobile/FooterMobile";
 import { InputText } from "../../../components/Input/InputText/InputText";
 import { NavBarMobile } from "../../../components/NavBar/Mobile/NavBarMobile";
 import { SearchList } from "../../../components/Search/SearchList";
+import { ExploreContext } from "../../../contexts/Explore/ExploreContext";
 import { SearchContext } from "../../../contexts/Search/SearchContext";
 import { useSearchWithAuth } from "../../../hooks/useSearchWithAuth";
+import { PublicationImages } from "../../../components/PublicationsImages/PublicationImages";
 
 export const SearchPage = () => {
   const {
@@ -16,6 +17,7 @@ export const SearchPage = () => {
     onResetForm,
     setActiveSearch,
   } = useContext(SearchContext);
+  const { explore, getExplore } = useContext(ExploreContext);
 
   useSearchWithAuth();
 
@@ -29,6 +31,12 @@ export const SearchPage = () => {
     setActiveSearch(true);
     // eslint-disable-next-line
   }, []);
+
+  useEffect(() => {
+    if (!focus) {
+      getExplore();
+    }
+  }, [focus]);
 
   return (
     <>
@@ -71,6 +79,13 @@ export const SearchPage = () => {
             users={filterUsers}
           ></SearchList>
         </main>
+      )}
+
+      {!focus && (
+        <PublicationImages
+          publications={explore}
+          context="explore"
+        ></PublicationImages>
       )}
 
       <FooterMobile></FooterMobile>

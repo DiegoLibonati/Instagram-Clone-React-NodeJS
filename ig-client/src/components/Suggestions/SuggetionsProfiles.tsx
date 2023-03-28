@@ -15,7 +15,7 @@ export const SuggetionsProfiles = ({
   const { user } = useProfileUser();
 
   useEffect(() => {
-    const isAnyUserWithoutFollow = suggestions.some(
+    const isAnyUserWithoutFollow = suggestions?.some(
       (suggestion) => isUserFollow(user, suggestion._id!, "following") !== true
     );
 

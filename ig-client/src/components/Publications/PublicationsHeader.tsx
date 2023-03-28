@@ -1,11 +1,14 @@
+import { useContext } from "react";
 import { BsArrowLeft } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
+import { ExploreContext } from "../../contexts/Explore/ExploreContext";
 import { useProfileUser } from "../../hooks/useProfileUser";
 import { NavBarMobile } from "../NavBar/Mobile/NavBarMobile";
 
 export const PublicationsHeader = () => {
   const navigate = useNavigate();
   const { user } = useProfileUser();
+  const { isOpenAnyImageFromExplore } = useContext(ExploreContext);
 
   return (
     <NavBarMobile
@@ -19,7 +22,12 @@ export const PublicationsHeader = () => {
       <BsArrowLeft
         color="black"
         size={25}
-        onClick={() => navigate(`/${user.username}`)}
+        onClick={() => {
+          console.log(isOpenAnyImageFromExplore);
+          if (isOpenAnyImageFromExplore) return navigate("/search-page");
+
+          return navigate(`/${user.username}`);
+        }}
       ></BsArrowLeft>
       <h2 className="ml-5 font-medium text-lg">Publicaciones</h2>
     </NavBarMobile>
