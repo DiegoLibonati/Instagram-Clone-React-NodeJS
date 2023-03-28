@@ -23,7 +23,6 @@ export const PublicationsHeader = () => {
         color="black"
         size={25}
         onClick={() => {
-          console.log(isOpenAnyImageFromExplore);
           if (isOpenAnyImageFromExplore) return navigate("/search-page");
 
           return navigate(`/${user.username}`);

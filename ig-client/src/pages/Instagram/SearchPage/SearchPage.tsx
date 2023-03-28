@@ -8,6 +8,8 @@ import { ExploreContext } from "../../../contexts/Explore/ExploreContext";
 import { SearchContext } from "../../../contexts/Search/SearchContext";
 import { useSearchWithAuth } from "../../../hooks/useSearchWithAuth";
 import { PublicationImages } from "../../../components/PublicationsImages/PublicationImages";
+import { useMediaMatch } from "../../../hooks/useMediaMatch";
+import { useNavigate } from "react-router-dom";
 
 export const SearchPage = () => {
   const {
@@ -18,7 +20,8 @@ export const SearchPage = () => {
     setActiveSearch,
   } = useContext(SearchContext);
   const { explore, getExplore } = useContext(ExploreContext);
-
+  const { matchMediaQuery } = useMediaMatch(1024);
+  const navigate = useNavigate();
   useSearchWithAuth();
 
   const [focus, setFocus] = useState(false);
@@ -37,6 +40,12 @@ export const SearchPage = () => {
       getExplore();
     }
   }, [focus]);
+
+  useEffect(() => {
+    if (!focus && matchMediaQuery) {
+      navigate("/explore");
+    }
+  }, [matchMediaQuery]);
 
   return (
     <>

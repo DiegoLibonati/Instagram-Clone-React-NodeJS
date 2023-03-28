@@ -16,8 +16,8 @@ export const Profile = () => {
   const { id: urlUsername } = useParams();
   const { setAlertOpen } = useContext(UIContext);
   const { setUserForeignProfile } = useContext(ProfileContext);
-  const { user, onLogin } = useContext(AuthContext);
-  const { isMainUser } = useProfileUser();
+  const { user: authUser, onLogin } = useContext(AuthContext);
+  const { user, isMainUser } = useProfileUser();
   const { matchMediaQuery } = useMediaMatch(1024);
   const navigate = useNavigate();
 
@@ -41,7 +41,7 @@ export const Profile = () => {
 
     if (idsRecentSearched) {
       onLogin({
-        ...user,
+        ...authUser,
         recentUsers: [...user.recentUsers, ...idsRecentSearched],
       });
     }

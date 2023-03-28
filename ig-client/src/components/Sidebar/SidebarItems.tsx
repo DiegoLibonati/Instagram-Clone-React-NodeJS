@@ -42,7 +42,7 @@ export const SidebarItems = () => {
       <SidebarItem text="Buscar" onClick={() => setActiveSearch(true)}>
         <BsSearch size={25} color="black"></BsSearch>
       </SidebarItem>
-      <SidebarItem text="Explorar">
+      <SidebarItem text="Explorar" onClick={() => navigate("/explore")}>
         <MdOutlineExplore size={25} color="black"></MdOutlineExplore>
       </SidebarItem>
       <SidebarItem text="Reels">

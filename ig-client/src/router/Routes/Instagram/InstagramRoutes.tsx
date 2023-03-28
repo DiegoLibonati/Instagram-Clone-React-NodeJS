@@ -1,5 +1,6 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import { EditUserPage } from "../../../pages/Instagram/EditUserPage/EditUserPage";
+import { ExplorePage } from "../../../pages/Instagram/ExplorePage/ExplorePage";
 import { HomePage } from "../../../pages/Instagram/HomePage/HomePage";
 import { NotFoundPage } from "../../../pages/Instagram/NotFoundPage/NotFoundPage";
 import { ProfilePage } from "../../../pages/Instagram/ProfilePage/ProfilePage";
@@ -21,6 +22,7 @@ export const InstagramRoutes = () => {
         path="/accounts/edit"
         element={<EditUserPage></EditUserPage>}
       ></Route>
+      <Route path="/explore" element={<ExplorePage></ExplorePage>}></Route>
       <Route path="/*" element={<Navigate to="/"></Navigate>}></Route>
     </Routes>
   );

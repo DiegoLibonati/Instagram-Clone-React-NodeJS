@@ -39,7 +39,7 @@ export const PublicationImage = ({
             avatar,
             name,
           });
-          setModalOpen("publication");
+          return setModalOpen("publication");
         }
         setIsOpenAnyImageFromExplore(true);
         return navigate(`/p/${username}`);

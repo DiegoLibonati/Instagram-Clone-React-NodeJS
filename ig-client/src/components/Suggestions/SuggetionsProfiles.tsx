@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { isUserFollow } from "../../helpers/isUserFollow";
 import { useProfileUser } from "../../hooks/useProfileUser";
 import { User } from "../../types/types";
