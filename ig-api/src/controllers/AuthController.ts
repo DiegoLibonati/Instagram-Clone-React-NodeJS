@@ -14,6 +14,15 @@ export const Auth = {
     const { id } = req.user;
 
     const user = await UserModel.findOne({ _id: id });
+
+    if (!user) {
+      res
+        .status(400)
+        .clearCookie("ig-sess")
+        .json({ message: "¡Token expirado!" })
+        .end();
+    }
+
     let publications = await PublicationModel.find({ idAuthor: id });
 
     publications = await Promise.all(

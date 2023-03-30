@@ -1,0 +1,49 @@
+version: "3.9"
+services:
+  mongodb:
+    image: mongo:latest
+    restart: always
+    env_file: ./ig-api/.env
+    ports:
+      - "27018:27017"
+    volumes:
+      - ./data:/data/db
+    networks:
+      - net-instagram
+
+  api:
+    build:
+      context: ./
+      dockerfile: ./ig-api/Dockerfile.development
+    restart: always
+    depends_on:
+      - mongodb
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./ig-api:/app
+    env_file:
+      - ./ig-api/.env
+    networks:
+      - net-instagram
+    command: sh -c "cd /app && npm uninstall npm uninstall bcrypt && npm install bcrypt && npm run dev"
+
+  client:
+    build:
+      context: ./
+      dockerfile: ./ig-client/Dockerfile.development
+    restart: always
+    depends_on:
+      - mongodb
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./ig-client/.env
+    volumes:
+      - ./ig-client:/app
+    networks:
+      - net-instagram
+
+networks:
+  net-instagram:
+    name: net-instagram

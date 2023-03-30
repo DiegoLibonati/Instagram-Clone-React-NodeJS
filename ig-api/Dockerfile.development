@@ -1,0 +1,17 @@
+FROM node:19-alpine3.16
+
+WORKDIR /app
+
+COPY ./ig-api ./
+RUN rm -rf ./package-lock.json
+RUN rm -rf node_modules
+COPY ./ig-api/package.json ./
+
+RUN npm install
+RUN npm install -g nodemon
+RUN npm rebuild bcrypt
+
+EXPOSE 5000
+
+CMD ["npm", "run", "dev"]
+

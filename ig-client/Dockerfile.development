@@ -1,0 +1,15 @@
+FROM node:19-alpine3.16
+
+WORKDIR /app
+
+RUN rm -rf ./package-lock.json
+
+COPY ./ig-client ./
+COPY ./ig-client/package.json ./
+
+RUN npm install
+
+EXPOSE 3000
+
+CMD ["npm", "start"]
+
