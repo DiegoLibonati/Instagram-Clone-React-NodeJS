@@ -16,7 +16,7 @@ export const Auth = {
     const user = await UserModel.findOne({ _id: id });
 
     if (!user) {
-      res
+      return res
         .status(400)
         .clearCookie("ig-sess")
         .json({ message: "¡Token expirado!" })
@@ -180,6 +180,7 @@ export const Auth = {
       name: name,
       username: username,
       email: email,
+      avatar: "",
       description: `Hola soy ${name} y esta es mi presentacion`,
     });
 

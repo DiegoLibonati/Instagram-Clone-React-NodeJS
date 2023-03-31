@@ -28,7 +28,7 @@ export const ModalNewPublication = () => {
         ></AiOutlineClose>
       )}
       <div
-        className={`flex items-start  flex-col bg-white ${
+        className={`flex items-start flex-col bg-white ${
           matchMediaQuery ? "w-[800px] h-[70%] rounded-md" : "w-full h-full"
         }`}
       >
@@ -36,7 +36,7 @@ export const ModalNewPublication = () => {
 
         {previewSrc ? (
           <div
-            className={`flex w-full h-full items-start justify-center ${
+            className={`flex w-full h-full items-start justify-center bg-white ${
               matchMediaQuery ? "flex-row" : "flex-col"
             }`}
           >

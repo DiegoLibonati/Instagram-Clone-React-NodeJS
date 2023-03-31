@@ -21,6 +21,7 @@ services:
     ports:
       - "5000:5000"
     volumes:
+      - ./ig-api/src/images:/app/src/images
       - ./ig-api:/app
     env_file:
       - ./ig-api/.env
@@ -37,6 +38,8 @@ services:
       - mongodb
     ports:
       - "3000:3000"
+    environment:
+      - WATCHPACK_POLLING=true
     env_file:
       - ./ig-client/.env
     volumes:

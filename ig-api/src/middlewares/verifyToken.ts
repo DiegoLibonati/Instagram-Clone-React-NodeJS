@@ -13,7 +13,9 @@ export const verifyToken = (
   if (!token)
     return res
       .status(401)
-      .json({ message: "Token invalido, sesion expirada." });
+      .clearCookie("ig-sess")
+      .json({ message: "Token invalido, sesion expirada." })
+      .end();
 
   try {
     const verified = jwt.verify(token, config.TOKEN_SECRET);
@@ -21,6 +23,10 @@ export const verifyToken = (
 
     next();
   } catch (error) {
-    res.status(400).clearCookie("ig-sess").json({ message: error }).end();
+    return res
+      .status(400)
+      .clearCookie("ig-sess")
+      .json({ message: error })
+      .end();
   }
 };

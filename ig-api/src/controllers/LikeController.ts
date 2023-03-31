@@ -38,6 +38,14 @@ export const Like = {
 
     const user = await UserModel.findOne({ _id: publication?.idAuthor });
 
+    if (!user) {
+      return res
+        .status(400)
+        .clearCookie("ig-sess")
+        .json({ message: "¡Token expirado!" })
+        .end();
+    }
+
     let publications = await PublicationModel.find({
       idAuthor: user!.id,
     });

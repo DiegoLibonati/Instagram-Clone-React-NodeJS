@@ -75,7 +75,7 @@ export const User = {
         .status(400)
         .json({ message: "¡El usuario ingresado es invalido!" });
 
-    const user = await UserModel.findOne({ id: id });
+    const user = await UserModel.findOne({ _id: id });
 
     if (username !== user?.username) {
       const isUsernameExist = await UserModel.findOne({ username });
@@ -95,9 +95,9 @@ export const User = {
         });
     }
 
-    if (user?.avatar!.startsWith(config.API_BACK_URL!)) {
+    if (user!.avatar!.startsWith(config.API_BACK_URL!)) {
       console.log(user?.avatar!.split("/images\\")[1]);
-      fs.unlinkSync(`src/images/${user?.avatar!.split("/images\\")[1]}`);
+      fs.unlinkSync(`/images/${user?.avatar!.split("/images\\")[1]}`);
     }
 
     user!.name = name;
@@ -105,7 +105,7 @@ export const User = {
     user!.email = email;
     user!.description = description;
     user!.avatar = path
-      ? `${config.API_BACK_URL}${path!.replace("src\\", "")}`
+      ? `${config.API_BACK_URL}${path!.replace("src/", "")}`
       : user!.avatar;
 
     await user?.save();

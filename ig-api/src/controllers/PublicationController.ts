@@ -11,7 +11,7 @@ export const Publication = {
     const { path } = req.file!;
 
     const publication = new PublicationModel({
-      imgLink: `${config.API_BACK_URL}${path.replace("src\\", "")}`,
+      imgLink: `${config.API_BACK_URL}${path.replace("src/", "")}`,
       description: description,
       date: date,
       idAuthor: id,
