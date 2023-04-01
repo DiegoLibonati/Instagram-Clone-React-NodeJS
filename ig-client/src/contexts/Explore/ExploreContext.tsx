@@ -13,8 +13,7 @@ export const ExploreProvider: React.FunctionComponent<ExploreContextProps> = ({
   children,
 }) => {
   const [explore, setExplore] = useState([]);
-  const [isOpenAnyImageFromExplore, setIsOpenAnyImageFromExplore] =
-    useState(false);
+  const [imageOpenFromExplore, setImageOpenFromExplore] = useState(false);
   const { matchMediaQuery } = useMediaMatch(1024);
   const location = useLocation();
   const navigate = useNavigate();
@@ -31,8 +30,8 @@ export const ExploreProvider: React.FunctionComponent<ExploreContextProps> = ({
       setExplore([]);
     }
 
-    if (!location.pathname.startsWith("/p/") && isOpenAnyImageFromExplore)
-      return setIsOpenAnyImageFromExplore(false);
+    if (!location.pathname.startsWith("/p/") && imageOpenFromExplore)
+      return setImageOpenFromExplore(false);
   }, [location]);
 
   useEffect(() => {
@@ -44,9 +43,9 @@ export const ExploreProvider: React.FunctionComponent<ExploreContextProps> = ({
     <ExploreContext.Provider
       value={{
         explore,
-        isOpenAnyImageFromExplore,
+        imageOpenFromExplore,
         getExplore,
-        setIsOpenAnyImageFromExplore,
+        setImageOpenFromExplore,
       }}
     >
       {children}

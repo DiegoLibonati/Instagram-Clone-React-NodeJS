@@ -8,7 +8,7 @@ import { NavBarMobile } from "../NavBar/Mobile/NavBarMobile";
 export const PublicationsHeader = () => {
   const navigate = useNavigate();
   const { user } = useProfileUser();
-  const { isOpenAnyImageFromExplore } = useContext(ExploreContext);
+  const { imageOpenFromExplore } = useContext(ExploreContext);
 
   return (
     <NavBarMobile
@@ -23,7 +23,7 @@ export const PublicationsHeader = () => {
         color="black"
         size={25}
         onClick={() => {
-          if (isOpenAnyImageFromExplore) return navigate("/search-page");
+          if (imageOpenFromExplore) return navigate("/search-page");
 
           return navigate(`/${user.username}`);
         }}

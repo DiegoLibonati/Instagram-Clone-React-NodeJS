@@ -17,14 +17,14 @@ export const CommentsMobileForm = () => {
   return (
     <div className="flex items-center justify-center flex-col w-full h-auto fixed bottom-0 bg-gray-100">
       <div className="flex items-center justify-between flex-row w-full h-10 p-2">
+        <button className="text-lg">😀</button>
         <button className="text-lg">😋</button>
-        <button className="text-lg">😋</button>
-        <button className="text-lg">😋</button>
-        <button className="text-lg">😋</button>
-        <button className="text-lg">😋</button>
-        <button className="text-lg">😋</button>
-        <button className="text-lg">😋</button>
-        <button className="text-lg">😋</button>
+        <button className="text-lg">😄</button>
+        <button className="text-lg">🤣</button>
+        <button className="text-lg">😍</button>
+        <button className="text-lg">🤔</button>
+        <button className="text-lg">🤧</button>
+        <button className="text-lg">😜</button>
       </div>
       <form
         className="flex items-center justify-start w-full h-10 p-2"

@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { BsChat, BsSuitHeart } from "react-icons/bs";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { ExploreContext } from "../../contexts/Explore/ExploreContext";
 import { PublicationContext } from "../../contexts/Publications/PublicationContext";
 import { UIContext } from "../../contexts/Ui/UIContext";
@@ -20,9 +20,10 @@ export const PublicationImage = ({
 }: Publication) => {
   const { setModalOpen } = useContext(UIContext);
   const { setActivePublication } = useContext(PublicationContext);
-  const { setIsOpenAnyImageFromExplore } = useContext(ExploreContext);
+  const { setImageOpenFromExplore } = useContext(ExploreContext);
   const { matchMediaQuery } = useMediaMatch(1024);
   const navigate = useNavigate();
+  const location = useLocation();
   return (
     <div
       className="relative group h-32 md:h-48 2xl:h-72 w-full cursor-pointer"
@@ -41,7 +42,11 @@ export const PublicationImage = ({
           });
           return setModalOpen("publication");
         }
-        setIsOpenAnyImageFromExplore(true);
+
+        if (location.pathname.startsWith("/search-page")) {
+          setImageOpenFromExplore(true);
+        }
+
         return navigate(`/p/${username}`);
       }}
     >

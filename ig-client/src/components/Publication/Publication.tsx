@@ -36,7 +36,7 @@ export const Publication = ({
       <img
         src={imgLink}
         alt={description}
-        className="w-full h-auto max-h-[600px] object-cover"
+        className="w-full h-[400px] object-cover"
       ></img>
       <PublicationActions
         publication={publication}

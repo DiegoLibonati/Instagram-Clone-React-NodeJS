@@ -5,10 +5,12 @@ export const ModalPublicationImage = () => {
   const { activePublication } = useContext(PublicationContext);
 
   return (
-    <img
-      src={activePublication.imgLink}
-      alt={activePublication.name}
-      className="w-4/6 h-auto object-cover"
-    ></img>
+    <div className="w-4/6 h-full">
+      <img
+        src={activePublication.imgLink}
+        alt={activePublication.name}
+        className="h-full w-full object-contain"
+      ></img>
+    </div>
   );
 };

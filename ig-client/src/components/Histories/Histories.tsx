@@ -43,11 +43,12 @@ export const Histories = ({
   }
 
   return (
-    <article className={`bg-white w-screen lg:w-full h-24 ${className}`}>
+    <article className={`bg-white w-full h-24 ${className}`}>
       <Swiper
         slidesPerView={5}
         spaceBetween={1}
         freeMode={true}
+        resizeObserver={true}
         pagination={{
           clickable: false,
         }}
