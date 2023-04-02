@@ -94,7 +94,7 @@ It's important to note that this version is developed with a mobile-first approa
 
 ## Video
 
-![INSTAGRAM](https://www.youtube.com/watch?v=SyefayN37m0&ab_channel=DiegoLibonati)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/SyefayN37m0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 ## Documentation
 
