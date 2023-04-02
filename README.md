@@ -110,6 +110,8 @@ The `backend` of my Instagram clone is organized as follows:
 
 ### FRONTEND - CLIENT-API
 
+![CLIENT](https://raw.githubusercontent.com/DiegoLibonati/Instagram-Clone-App-Page/87637c8b9c9662a2a1808c6d729ec4e0ac09c395/ig-client/src/assets/Documentation/client.png)
+
 The `frontend` of my Instagram clone is organized as follows:
 
 - The application contains an `API folder` where functions responsible for communicating with the backend are executed. Axios is used in these files. Additionally, `instagramApi.ts` contains the predefined backend route, and the `JWT` is passed with each call through an `interceptor` in the request headers.
