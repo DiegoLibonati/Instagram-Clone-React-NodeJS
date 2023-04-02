@@ -94,7 +94,9 @@ It's important to note that this version is developed with a mobile-first approa
 
 ## Video
 
-![INSTAGRAM-VIDEO](https://raw.githubusercontent.com/DiegoLibonati/DiegoLibonatiWeb/blob/main/data/projects/React/Videos/instagram-react.mp4)
+<video width="320" height="240" controls>
+  <source src="https://raw.githubusercontent.com/DiegoLibonati/DiegoLibonatiWeb/main/data/projects/React/Videos/instagram-react.mp4" type="video/mp4">
+</video>
 
 ## Documentation
 
