@@ -82,6 +82,16 @@ It's important to note that this version is developed with a mobile-first approa
 
 ## Galery
 
+![INSTAGRAM](https://raw.githubusercontent.com/DiegoLibonati/DiegoLibonatiWeb/main/data/projects/React/Imagenes/instagram-react-0.jpg)
+
+![INSTAGRAM](https://raw.githubusercontent.com/DiegoLibonati/DiegoLibonatiWeb/main/data/projects/React/Imagenes/instagram-react-1.jpg)
+
+![INSTAGRAM](https://raw.githubusercontent.com/DiegoLibonati/DiegoLibonatiWeb/main/data/projects/React/Imagenes/instagram-react-2.jpg)
+
+![INSTAGRAM](https://raw.githubusercontent.com/DiegoLibonati/DiegoLibonatiWeb/main/data/projects/React/Imagenes/instagram-react-3.jpg)
+
+![INSTAGRAM](https://raw.githubusercontent.com/DiegoLibonati/DiegoLibonatiWeb/main/data/projects/React/Imagenes/instagram-react-4.jpg)
+
 ## Video
 
 ## Documentation
