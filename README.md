@@ -88,6 +88,8 @@ It's important to note that this version is developed with a mobile-first approa
 
 ### BACKEND - IG-API
 
+![API](https://raw.githubusercontent.com/DiegoLibonati/Instagram-Clone-App-Page/87637c8b9c9662a2a1808c6d729ec4e0ac09c395/ig-client/src/assets/Documentation/api.png)
+
 The `backend` of my Instagram clone is organized as follows:
 
 - `Models` are responsible for communicating with the database in the `controllers`. These `controllers` are called in the `routes`, and finally, the `routes` are initialized in `app.ts`. This way, when you hit the desired `route`, it will execute the desired `controller` with the chosen method and obtain information through the `models`. If the `route` does not require token verification, it won't enter the `middleware`.
