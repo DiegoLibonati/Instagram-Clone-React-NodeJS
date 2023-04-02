@@ -94,9 +94,7 @@ It's important to note that this version is developed with a mobile-first approa
 
 ## Video
 
-<video width="560" height="315" controls>
-  <source src="https://www.youtube.com/embed/SyefayN37m0" type="video/mp4">
-</video>
+https://www.youtube.com/watch?v=SyefayN37m0&ab_channel=DiegoLibonati
 
 ## Documentation
 
