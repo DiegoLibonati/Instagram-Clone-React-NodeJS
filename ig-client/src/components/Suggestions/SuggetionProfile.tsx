@@ -3,7 +3,11 @@ import { useFollow } from "../../hooks/useFollow";
 import { User } from "../../types/types";
 import { UserImage } from "../UserImage/UserImage";
 
-export const SuggetionProfile = ({ suggestion }: { suggestion: User }) => {
+export const SuggetionProfile = ({
+  suggestion,
+}: {
+  suggestion: User;
+}): JSX.Element => {
   const { handleFollow } = useFollow();
 
   return (

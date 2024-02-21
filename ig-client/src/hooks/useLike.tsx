@@ -3,14 +3,13 @@ import { useProfileUser } from "./useProfileUser";
 import { useContext } from "react";
 import { PublicationContext } from "../contexts/Publications/PublicationContext";
 import { instagramApiRemoveLike } from "../api/Like/instagramApiRemoveLike";
-import { Like, Publication } from "../types/types";
+import { Like, Publication, UseLike } from "../types/types";
 import { FeedContext } from "../contexts/Feed/FeedContext";
 
-export const useLike = () => {
+export const useLike = (): UseLike => {
   const { user, setUser } = useProfileUser();
-  const { activePublication, setActivePublication } =
-    useContext(PublicationContext);
-  const { feed, setFeed } = useContext(FeedContext);
+  const publicationContextStore = useContext(PublicationContext);
+  const feedContextStore = useContext(FeedContext);
 
   const handleAddLike = async ({
     idPublication,
@@ -25,10 +24,13 @@ export const useLike = () => {
 
     // LIKE IN ACTIVE PUBLICATION MODAL
 
-    if (activePublication) {
-      setActivePublication!({
-        ...activePublication,
-        likes: [...activePublication.likes, payload.like],
+    if (publicationContextStore?.activePublication) {
+      publicationContextStore?.setActivePublication!({
+        ...publicationContextStore?.activePublication,
+        likes: [
+          ...publicationContextStore?.activePublication.likes,
+          payload.like,
+        ],
       });
     }
 
@@ -41,15 +43,17 @@ export const useLike = () => {
 
     // LIKE IN FEED
 
-    const feedUpdated = feed.map((publication: Publication) => {
-      if (publication._id === payload.like.idPost) {
-        publication.likes.push(payload.like);
+    const feedUpdated = feedContextStore?.feed.map(
+      (publication: Publication) => {
+        if (publication._id === payload.like.idPost) {
+          publication.likes.push(payload.like);
+          return publication;
+        }
         return publication;
       }
-      return publication;
-    });
+    );
 
-    return setFeed(feedUpdated);
+    return feedContextStore?.setFeed(feedUpdated!);
   };
 
   const handleRemoveLike = async ({
@@ -64,12 +68,12 @@ export const useLike = () => {
     const payload = request.payload;
 
     // LIKE IN ACTIVE PUBLICATION MODAL
-    if (activePublication) {
-      const likes = activePublication.likes.filter(
+    if (publicationContextStore?.activePublication) {
+      const likes = publicationContextStore?.activePublication.likes.filter(
         (like: Like) => like._id !== payload.like._id
       );
-      setActivePublication!({
-        ...activePublication,
+      publicationContextStore?.setActivePublication!({
+        ...publicationContextStore?.activePublication,
         likes: likes,
       });
     }
@@ -82,17 +86,19 @@ export const useLike = () => {
     }
 
     // REMOVE LIKE IN FEED
-    const feedUpdated = feed.map((publication: Publication) => {
-      if (publication._id === payload.like.idPost) {
-        publication.likes = publication.likes.filter(
-          (like: Like) => like._id !== payload.like._id
-        );
+    const feedUpdated = feedContextStore?.feed.map(
+      (publication: Publication) => {
+        if (publication._id === payload.like.idPost) {
+          publication.likes = publication.likes.filter(
+            (like: Like) => like._id !== payload.like._id
+          );
+          return publication;
+        }
         return publication;
       }
-      return publication;
-    });
+    );
 
-    return setFeed(feedUpdated);
+    return feedContextStore?.setFeed(feedUpdated!);
   };
 
   return {

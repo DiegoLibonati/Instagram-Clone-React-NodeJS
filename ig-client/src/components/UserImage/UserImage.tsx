@@ -8,7 +8,7 @@ export const UserImage = ({
   className: string;
   avatar: string;
   name: string;
-}) => {
+}): JSX.Element => {
   return (
     <img
       src={avatar ? avatar : DefaultUserImage}

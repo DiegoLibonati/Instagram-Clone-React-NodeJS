@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { InstagramBlack } from "../../assets/Global/images";
 
-export const SidebarHeader = () => {
+export const SidebarHeader = (): JSX.Element => {
   return (
     <div className="flex items-center justify-start w-full h-40 pl-6">
       <Link to="/">

@@ -16,7 +16,7 @@ export const InputTextArea = ({
   name: string;
   label: string;
   onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
-}) => {
+}): JSX.Element => {
   return (
     <>
       <label htmlFor={id} className={classNameLabel}>

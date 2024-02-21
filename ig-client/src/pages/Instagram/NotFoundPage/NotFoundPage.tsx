@@ -3,7 +3,7 @@ import { FooterMobile } from "../../../components/Footer/Mobile/FooterMobile";
 import { Sidebar } from "../../../components/Sidebar/Sidebar";
 import { useMediaMatch } from "../../../hooks/useMediaMatch";
 
-export const NotFoundPage = () => {
+export const NotFoundPage = (): JSX.Element => {
   const { matchMediaQuery } = useMediaMatch(1024);
 
   return (

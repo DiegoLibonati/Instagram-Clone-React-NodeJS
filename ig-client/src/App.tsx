@@ -10,7 +10,7 @@ import { SuggestionProvider } from "./contexts/Suggestion/SuggestionContext";
 import { UIProvider } from "./contexts/Ui/UIContext";
 import { InstagramRouter } from "./router/InstagramRouter";
 
-function App() {
+function App(): JSX.Element {
   return (
     <BrowserRouter>
       <AuthProvider>

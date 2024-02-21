@@ -5,12 +5,12 @@ import { Sidebar } from "../../../components/Sidebar/Sidebar";
 import { ExploreContext } from "../../../contexts/Explore/ExploreContext";
 import { UIContext } from "../../../contexts/Ui/UIContext";
 
-export const ExplorePage = () => {
-  const { modal } = useContext(UIContext);
-  const { explore, getExplore } = useContext(ExploreContext);
+export const ExplorePage = (): JSX.Element => {
+  const uiContextStore = useContext(UIContext);
+  const exploreContextStore = useContext(ExploreContext);
 
   useEffect(() => {
-    getExplore();
+    exploreContextStore?.getExplore();
   }, []);
   return (
     <>
@@ -18,12 +18,12 @@ export const ExplorePage = () => {
 
       <main className="flex min-h-screen w-[80%] absolute right-0 justify-center items-start px-32 2xl:px-0">
         <PublicationImages
-          publications={explore}
+          publications={exploreContextStore?.explore!}
           context="explore"
         ></PublicationImages>
       </main>
 
-      {modal.isOpen && modal.type === "publication" && (
+      {uiContextStore?.modal.isOpen && uiContextStore?.modal.type === "publication" && (
         <ModalPublication></ModalPublication>
       )}
     </>

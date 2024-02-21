@@ -1,7 +1,7 @@
 import { useProfileUser } from "../../hooks/useProfileUser";
 import { UserImage } from "../UserImage/UserImage";
 
-export const ProfileHeaderNumbers = () => {
+export const ProfileHeaderNumbers = (): JSX.Element => {
   const { user } = useProfileUser();
 
   return (

@@ -4,42 +4,51 @@ import { useEffect, useContext } from "react";
 import { SearchContext } from "../contexts/Search/SearchContext";
 import { AuthContext } from "../contexts/Auth/AuthContext";
 
-export const useSearchWithAuth = () => {
-  const { filterUsers, formState, setFilterUsers } = useContext(SearchContext);
+export const useSearchWithAuth = (): void => {
+  const searchContextStore = useContext(SearchContext);
 
-  const { user, onLogin } = useContext(AuthContext);
+  const authContextStore = useContext(AuthContext);
 
-  const getUsers = async () => {
-    const request = await instagramApiGetUsers(formState.query);
+  const getUsers = async (): Promise<void> => {
+    const request = await instagramApiGetUsers(
+      searchContextStore?.formState.query!
+    );
 
     const { users } = request;
-    setFilterUsers(users);
+    searchContextStore?.setFilterUsers(users);
   };
 
-  const getRecentUsers = async () => {
+  const getRecentUsers = async (): Promise<void> => {
     const request = await instagramApiGetRecentUsersSearch();
 
     const recentUsers = request.payload;
 
-    onLogin({ ...user, recentUsers: recentUsers });
+    authContextStore?.onLogin({
+      ...authContextStore?.user,
+      recentUsers: recentUsers,
+    });
   };
 
   useEffect(() => {
-    if (formState.query) {
+    if (searchContextStore?.formState.query) {
       getUsers();
     } else {
-      setFilterUsers([]);
+      searchContextStore?.setFilterUsers([]);
     }
     // eslint-disable-next-line
-  }, [formState.query]);
+  }, [searchContextStore?.formState.query]);
 
   useEffect(() => {
     if (
-      !filterUsers?.length &&
-      !formState.query &&
-      user?.recentUsers?.length > 0
+      !searchContextStore?.filterUsers?.length &&
+      !searchContextStore?.formState.query &&
+      authContextStore?.user?.recentUsers?.length! > 0
     ) {
       getRecentUsers();
     }
-  }, [filterUsers, formState.query, user.recentUsers.length]);
+  }, [
+    searchContextStore?.filterUsers,
+    searchContextStore?.formState.query,
+    authContextStore?.user.recentUsers?.length!,
+  ]);
 };

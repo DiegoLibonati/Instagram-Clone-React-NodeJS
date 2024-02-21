@@ -18,25 +18,26 @@ import { NotificationsContext } from "../../../contexts/Notifications/Notificati
 import { UIContext } from "../../../contexts/Ui/UIContext";
 import { areThereNotifications } from "../../../helpers/areThereNotifications";
 import { useMediaMatch } from "../../../hooks/useMediaMatch";
+import { Notification } from "../../../types/types";
 
-export const HomePage = () => {
+export const HomePage = (): JSX.Element => {
   const { matchMediaQuery } = useMediaMatch(1024);
-  const { modal, setModalOpen } = useContext(UIContext);
-  const { setOpenNotifications } = useContext(NotificationsContext);
-  const { user, onLogin } = useContext(AuthContext);
+  const uiContextStore = useContext(UIContext);
+  const notificationsContextStore = useContext(NotificationsContext);
+  const authContextstore = useContext(AuthContext);
 
   const areThereNotificationsMemo = useMemo(
-    () => areThereNotifications(user?.notifications),
-    [user?.notifications]
+    () => areThereNotifications(authContextstore?.user?.notifications!),
+    [authContextstore?.user?.notifications]
   );
 
-  const handleOpenNotifications = async () => {
-    setOpenNotifications(true);
+  const handleOpenNotifications = async (): Promise<void> => {
+    notificationsContextStore?.setOpenNotifications(true);
     const request = await instagramApiEditNotifications();
 
-    const notifications = request.notifications;
+    const notifications: Notification[] = request.notifications;
 
-    onLogin({ ...user, notifications });
+    authContextstore?.onLogin({ ...authContextstore?.user, notifications });
   };
 
   return (
@@ -60,7 +61,7 @@ export const HomePage = () => {
             color="black"
             size={25}
             className="mx-2"
-            onClick={() => setModalOpen("newpublication")}
+            onClick={() => uiContextStore?.setModalOpen("newpublication")}
           ></MdOutlineAddBox>
           {!areThereNotificationsMemo.length && (
             <BsSuitHeart
@@ -76,7 +77,9 @@ export const HomePage = () => {
               color="red"
               size={25}
               className="mx-2 animate-pulse"
-              onClick={() => setOpenNotifications(true)}
+              onClick={() =>
+                notificationsContextStore?.setOpenNotifications(true)
+              }
             ></BsFillSuitHeartFill>
           )}
 
@@ -96,9 +99,11 @@ export const HomePage = () => {
       </main>
       {!matchMediaQuery && <Notifications></Notifications>}
       {!matchMediaQuery && <CommentsMobile></CommentsMobile>}
-      {matchMediaQuery && modal.isOpen && modal.type === "publication" && (
-        <ModalPublication></ModalPublication>
-      )}
+      {matchMediaQuery &&
+        uiContextStore?.modal.isOpen &&
+        uiContextStore?.modal.type === "publication" && (
+          <ModalPublication></ModalPublication>
+        )}
 
       <FooterMobile></FooterMobile>
     </>

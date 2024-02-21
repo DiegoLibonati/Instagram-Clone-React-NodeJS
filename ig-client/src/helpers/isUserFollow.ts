@@ -4,8 +4,8 @@ export const isUserFollow = (
   user: User | ForeignUser,
   id: string,
   arrayName: string
-) => {
-  if (user === undefined) return [];
+): boolean => {
+  if (user === undefined) return false;
   if (arrayName === "following") {
     return user.following?.some((follow: Follow) => follow.idProfile === id);
   }

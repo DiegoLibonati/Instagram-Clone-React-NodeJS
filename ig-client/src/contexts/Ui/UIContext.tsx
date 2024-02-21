@@ -1,11 +1,13 @@
 import { createContext, useEffect, useState } from "react";
-import { MAlert, MConfig, Modal } from "../../types/types";
+import {
+  MAlert,
+  MConfig,
+  Modal,
+  UIContextProps,
+  UIContextT,
+} from "../../types/types";
 
-interface UIContextProps {
-  children: React.ReactNode;
-}
-
-export const UIContext = createContext<null | any>(null);
+export const UIContext = createContext<UIContextT | null>(null);
 
 export const UIProvider: React.FunctionComponent<UIContextProps> = ({
   children,

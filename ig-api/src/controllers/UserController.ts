@@ -95,11 +95,6 @@ export const User = {
         });
     }
 
-    if (user!.avatar!.startsWith(config.API_BACK_URL!)) {
-      console.log(user?.avatar!.split("/images\\")[1]);
-      fs.unlinkSync(`/images/${user?.avatar!.split("/images\\")[1]}`);
-    }
-
     user!.name = name;
     user!.username = username;
     user!.email = email;

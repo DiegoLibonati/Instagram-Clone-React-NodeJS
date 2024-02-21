@@ -6,7 +6,7 @@ import { PublicationsHeader } from "../../../components/Publications/Publication
 import { useMediaMatch } from "../../../hooks/useMediaMatch";
 import { useProfileUser } from "../../../hooks/useProfileUser";
 
-export const PublicationsPage = () => {
+export const PublicationsPage = (): JSX.Element => {
   const { matchMediaQuery } = useMediaMatch(1024);
   const navigate = useNavigate();
   const { user } = useProfileUser();

@@ -2,25 +2,28 @@ import { createContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { instagramApiGetExplore } from "../../api/Explore/instagramApiGetExplore";
 import { useMediaMatch } from "../../hooks/useMediaMatch";
+import {
+  ExploreContextProps,
+  ExploreContextT,
+  Publication,
+} from "../../types/types";
 
-interface ExploreContextProps {
-  children: React.ReactNode;
-}
-
-export const ExploreContext = createContext<null | any>(null);
+export const ExploreContext = createContext<ExploreContextT | null>(null);
 
 export const ExploreProvider: React.FunctionComponent<ExploreContextProps> = ({
   children,
 }) => {
-  const [explore, setExplore] = useState([]);
-  const [imageOpenFromExplore, setImageOpenFromExplore] = useState(false);
+  const [explore, setExplore] = useState<Publication[]>([]);
+  const [imageOpenFromExplore, setImageOpenFromExplore] =
+    useState<boolean>(false);
   const { matchMediaQuery } = useMediaMatch(1024);
   const location = useLocation();
   const navigate = useNavigate();
-  const getExplore = async () => {
+
+  const getExplore = async (): Promise<void> => {
     const request = await instagramApiGetExplore();
 
-    const payload = await request.payload;
+    const payload: Publication[] = await request.payload;
 
     setExplore(payload);
   };

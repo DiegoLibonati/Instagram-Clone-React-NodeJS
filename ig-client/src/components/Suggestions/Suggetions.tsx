@@ -3,18 +3,20 @@ import { SuggestionContext } from "../../contexts/Suggestion/SuggestionContext";
 import { SuggetionsProfileHeader } from "./SuggetionsProfileHeader";
 import { SuggetionsProfiles } from "./SuggetionsProfiles";
 
-export const Suggetions = () => {
-  const { suggestions, getSuggestions } = useContext(SuggestionContext);
+export const Suggetions = (): JSX.Element => {
+  const suggestionContextStore = useContext(SuggestionContext);
 
   useEffect(() => {
-    getSuggestions();
+    suggestionContextStore?.getSuggestions();
   }, []);
 
   return (
     <section className="flex items-center justify-start flex-col h-auto w-[25%] ml-8">
       <SuggetionsProfileHeader></SuggetionsProfileHeader>
 
-      <SuggetionsProfiles suggestions={suggestions}></SuggetionsProfiles>
+      <SuggetionsProfiles
+        suggestions={suggestionContextStore?.suggestions!}
+      ></SuggetionsProfiles>
     </section>
   );
 };

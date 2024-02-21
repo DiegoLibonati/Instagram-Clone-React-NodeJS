@@ -4,9 +4,9 @@ import { PublicationContext } from "../../../contexts/Publications/PublicationCo
 import { UIContext } from "../../../contexts/Ui/UIContext";
 import { ModalPublicationContainer } from "./ModalPublicationContainer";
 
-export const ModalPublication = () => {
-  const { setModalClose } = useContext(UIContext);
-  const { setActivePublication } = useContext(PublicationContext);
+export const ModalPublication = (): JSX.Element => {
+  const { setModalClose } = useContext(UIContext)!;
+  const { setActivePublication } = useContext(PublicationContext)!;
   return (
     <div
       className={`flex items-center justify-center flex-row bg-black bg-opacity-50 w-screen h-screen z-[999999999] fixed`}
@@ -17,7 +17,7 @@ export const ModalPublication = () => {
         className="absolute top-2 right-2 cursor-pointer"
         onClick={() => {
           setModalClose();
-          setActivePublication(null);
+          setActivePublication(null!);
         }}
       ></AiOutlineClose>
       <ModalPublicationContainer></ModalPublicationContainer>

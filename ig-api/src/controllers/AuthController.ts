@@ -184,7 +184,7 @@ export const Auth = {
       description: `Hola soy ${name} y esta es mi presentacion`,
     });
 
-    user.password = await user.generateHash(password);
+    user.password = user.generateHash(password);
 
     await user.save();
 

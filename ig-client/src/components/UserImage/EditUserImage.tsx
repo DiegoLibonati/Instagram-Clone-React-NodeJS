@@ -3,16 +3,24 @@ import { DefaultUserImage } from "../../assets/Global/images";
 import { AuthContext } from "../../contexts/Auth/AuthContext";
 import { UIContext } from "../../contexts/Ui/UIContext";
 
-export const EditUserImage = ({ className }: { className: string }) => {
-  const { user } = useContext(AuthContext);
-  const { previewSrc } = useContext(UIContext);
+export const EditUserImage = ({
+  className,
+}: {
+  className: string;
+}): JSX.Element => {
+  const authContextStore = useContext(AuthContext);
+  const uiContextStore = useContext(UIContext);
 
   return (
     <img
       src={
-        previewSrc ? previewSrc : user.avatar ? user.avatar : DefaultUserImage
+        uiContextStore?.previewSrc
+          ? uiContextStore?.previewSrc
+          : authContextStore?.user.avatar
+          ? authContextStore?.user.avatar
+          : DefaultUserImage
       }
-      alt={user?.name}
+      alt={authContextStore?.user?.name}
       className={className}
     ></img>
   );

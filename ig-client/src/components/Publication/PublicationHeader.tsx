@@ -10,7 +10,7 @@ export const PublicationHeader = ({
   avatar: string;
   name: string;
   username: string;
-}) => {
+}): JSX.Element => {
   return (
     <div className="flex items-center justify-between p-2 w-full h-auto">
       <div className="flex items-center justify-between w-8 h-auto">

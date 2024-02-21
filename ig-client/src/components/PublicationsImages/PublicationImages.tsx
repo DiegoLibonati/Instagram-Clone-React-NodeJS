@@ -8,7 +8,7 @@ export const PublicationImages = ({
 }: {
   publications: Publication[];
   context?: string;
-}) => {
+}): JSX.Element => {
   if (publications.length === 0 && context !== "explore") {
     return (
       <section className="flex pb-14 w-full lg:pb-5 2xl:w-[75%] h-60">
@@ -32,8 +32,8 @@ export const PublicationImages = ({
       {[...publications].reverse()?.map((publication: Publication) => {
         return (
           <PublicationImage
-            key={publication._id}
-            id={publication._id}
+            key={publication._id!}
+            id={publication._id!}
             imgLink={publication.imgLink}
             likes={publication.likes}
             comments={publication.comments}

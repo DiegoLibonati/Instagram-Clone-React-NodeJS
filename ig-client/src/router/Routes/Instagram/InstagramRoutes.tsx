@@ -7,7 +7,7 @@ import { ProfilePage } from "../../../pages/Instagram/ProfilePage/ProfilePage";
 import { PublicationsPage } from "../../../pages/Instagram/PublicationsPage/PublicationsPage";
 import { SearchPage } from "../../../pages/Instagram/SearchPage/SearchPage";
 
-export const InstagramRoutes = () => {
+export const InstagramRoutes = (): JSX.Element => {
   return (
     <Routes>
       <Route path="/" element={<HomePage></HomePage>}></Route>

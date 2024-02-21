@@ -1,6 +1,6 @@
 import { useProfileUser } from "../../hooks/useProfileUser";
 
-export const ProfileHeaderDescription = () => {
+export const ProfileHeaderDescription = (): JSX.Element => {
   const { user } = useProfileUser();
 
   return (

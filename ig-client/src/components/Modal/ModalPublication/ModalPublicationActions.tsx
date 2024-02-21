@@ -16,9 +16,9 @@ import { useComment } from "../../../hooks/useComment";
 import { useForm } from "../../../hooks/useForm";
 import { InputText } from "../../Input/InputText/InputText";
 
-export const ModalPublicationActions = () => {
-  const { activePublication } = useContext(PublicationContext);
-  const { user } = useContext(AuthContext);
+export const ModalPublicationActions = (): JSX.Element => {
+  const { activePublication } = useContext(PublicationContext)!;
+  const { user } = useContext(AuthContext)!;
   const { handleAddLike, handleRemoveLike } = useLike();
   const { handleAddComment } = useComment();
   const { formState, onInputChange, onResetForm } = useForm({
@@ -46,7 +46,7 @@ export const ModalPublicationActions = () => {
               className="mr-4 cursor-pointer"
               onClick={() =>
                 handleRemoveLike({
-                  idPublication: activePublication._id,
+                  idPublication: activePublication._id!,
                   context: activePublication.context,
                 })
               }
@@ -58,7 +58,7 @@ export const ModalPublicationActions = () => {
               className="mr-4 cursor-pointer"
               onClick={() =>
                 handleAddLike({
-                  idPublication: activePublication._id,
+                  idPublication: activePublication._id!,
                   context: activePublication.context,
                 })
               }
@@ -90,9 +90,9 @@ export const ModalPublicationActions = () => {
         onSubmit={(e) =>
           handleAddComment(
             e,
-            activePublication._id,
+            activePublication._id!,
             formState.comment,
-            activePublication.context,
+            activePublication.context!,
             onResetForm
           )
         }

@@ -1,14 +1,14 @@
 import { useEffect, useState, useRef, useCallback } from "react";
-import { Publication } from "../types/types";
+import { Publication, UsePagination } from "../types/types";
 
 export const usePagination = (
   array: Publication[],
   maxPublications: number
-) => {
-  const [publicationPerPage] = useState(maxPublications);
-  const [allViewed, setAllViewed] = useState(false);
-  const [page, setPage] = useState(1);
-  const [loading, setLoading] = useState(false);
+): UsePagination => {
+  const [publicationPerPage] = useState<number>(maxPublications);
+  const [allViewed, setAllViewed] = useState<boolean>(false);
+  const [page, setPage] = useState<number>(1);
+  const [loading, setLoading] = useState<boolean>(false);
   const [arrayPagination, setArrayPagination] = useState<Publication[] | null>(
     array
   );
@@ -78,9 +78,9 @@ export const usePagination = (
   }, [arrayPagination, loading]);
 
   return {
-    arrayPagination: arrayPagination,
+    arrayPagination: arrayPagination!,
     allViewed,
     loading,
-    elementRef,
+    elementRef: elementRef,
   };
 };

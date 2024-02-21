@@ -8,7 +8,7 @@ import { FiSend } from "react-icons/fi";
 import { AuthContext } from "../../contexts/Auth/AuthContext";
 import { useLike } from "../../hooks/useLike";
 import { Publication } from "../../types/types";
-import { useContext, useMemo } from "react";
+import { useContext } from "react";
 import { isPublicationLikedByUser } from "../../helpers/isPublicationLikedByUser";
 import { UIContext } from "../../contexts/Ui/UIContext";
 import { PublicationContext } from "../../contexts/Publications/PublicationContext";
@@ -20,16 +20,16 @@ export const PublicationActions = ({
 }: {
   publication: Publication;
   context?: string;
-}) => {
+}): JSX.Element => {
   const { handleAddLike, handleRemoveLike } = useLike();
-  const { user } = useContext(AuthContext);
-  const { setModalOpen } = useContext(UIContext);
-  const { setActivePublication } = useContext(PublicationContext);
+  const authContextStore = useContext(AuthContext);
+  const uiContextStore = useContext(UIContext);
+  const publicationContextStore = useContext(PublicationContext);
   const location = useLocation();
 
-  const handleOpenComments = () => {
-    setModalOpen("publication");
-    setActivePublication({
+  const handleOpenComments = (): void => {
+    uiContextStore?.setModalOpen("publication");
+    publicationContextStore?.setActivePublication({
       ...publication,
       context: location.pathname === "/" ? "feed" : "",
     });
@@ -38,7 +38,7 @@ export const PublicationActions = ({
   return (
     <div className="flex items-center justify-between w-full p-2 h-auto">
       <div className="flex items-center justify-between h-auto">
-        {isPublicationLikedByUser(publication, user.id) ? (
+        {isPublicationLikedByUser(publication, authContextStore?.user.id!) ? (
           <BsSuitHeartFill
             color="red"
             size={25}

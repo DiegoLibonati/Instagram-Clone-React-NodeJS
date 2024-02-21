@@ -10,19 +10,22 @@ const form = {
   password: "",
 };
 
-export const LoginPage = () => {
-  const { formState, onInputChange, onResetForm } = useForm(form);
-  const { setAlertOpen } = useContext(UIContext);
-  const { onChecking, onLogout, onLogin } = useContext(AuthContext);
+export const LoginPage = (): JSX.Element => {
+  const { formState, onInputChange, onResetForm } = useForm<{
+    email: string;
+    password: string;
+  }>(form);
+  const uiContextStore = useContext(UIContext);
+  const authContextStore = useContext(AuthContext);
 
   const onSubmitLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    onChecking();
+    authContextStore?.onChecking();
     const request = await instagramApiLogin(formState);
 
     if (request.hasOwnProperty("response")) {
-      onLogout();
-      return setAlertOpen(
+      authContextStore?.onLogout();
+      return uiContextStore?.setAlertOpen(
         "error",
         "¡Oh, algo salio mal!",
         request.response.data.message,
@@ -33,7 +36,7 @@ export const LoginPage = () => {
     const userData = request.payload;
 
     onResetForm();
-    onLogin(userData);
+    authContextStore?.onLogin(userData);
   };
 
   return (

@@ -3,7 +3,7 @@ import { Comment } from "../../../types/types";
 import { UserImage } from "../../UserImage/UserImage";
 import { useMemo } from "react";
 
-export const ModalPublicationComment = ({ comment }: { comment: Comment }) => {
+export const ModalPublicationComment = ({ comment }: { comment: Comment }): JSX.Element => {
   const memoDate = useMemo(() => getFormatDate(comment.date), [comment.date]);
   return (
     <li className="flex items-start justify-start flex-row w-full h-auto mb-6">

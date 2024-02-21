@@ -20,22 +20,22 @@ export const Notification = ({
   username: string;
   type: string;
   idPost?: string;
-}) => {
+}): JSX.Element => {
   const { handleFollow, handleUnFollow } = useFollow();
-  const { user } = useContext(AuthContext);
+  const authContextStore = useContext(AuthContext);
 
   const isForeignUserFollowMemo = useMemo(
-    () => isUserFollow(user, idAuthor, "following"),
-    [user, idAuthor]
+    () => isUserFollow(authContextStore?.user!, idAuthor, "following"),
+    [authContextStore?.user, idAuthor]
   );
 
   const getImage = (idPublication: string) => {
     if (!idPublication) return "";
-    const publication = user.publications.find(
+    const publication = authContextStore?.user.publications.find(
       (publication: Publication) => publication._id === idPublication
     );
 
-    return publication.imgLink;
+    return publication?.imgLink;
   };
 
   return (

@@ -2,25 +2,26 @@ import { createContext, useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "../../hooks/useForm";
 import { useMediaMatch } from "../../hooks/useMediaMatch";
+import {
+  FilterUser,
+  SearchContextProps,
+  SearchContextT,
+} from "../../types/types";
 
-interface SearchContextProps {
-  children: React.ReactNode;
-}
-
-export const SearchContext = createContext<null | any>(null);
+export const SearchContext = createContext<SearchContextT | null>(null);
 
 export const SearchProvider: React.FunctionComponent<SearchContextProps> = ({
   children,
 }) => {
-  const [activeSearch, setActiveSearch] = useState(false);
+  const [activeSearch, setActiveSearch] = useState<boolean>(false);
 
-  const [filterUsers, setFilterUsers] = useState([]);
+  const [filterUsers, setFilterUsers] = useState<FilterUser[]>([]);
   const { matchMediaQuery } = useMediaMatch(1024);
 
   const location = useLocation();
   const navigate = useNavigate();
 
-  const { formState, onInputChange, onResetForm } = useForm({
+  const { formState, onInputChange, onResetForm } = useForm<{ query: string }>({
     query: "",
   });
 

@@ -1,13 +1,9 @@
 import { createContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { instagramApiGetFeed } from "../../api/Feed/instagramApiGetFeed";
-import { Publication } from "../../types/types";
+import { FeedContextProps, FeedContextT, Publication } from "../../types/types";
 
-interface FeedContextProps {
-  children: React.ReactNode;
-}
-
-export const FeedContext = createContext<null | any>(null);
+export const FeedContext = createContext<FeedContextT | null>(null);
 
 export const FeedProvider: React.FunctionComponent<FeedContextProps> = ({
   children,
@@ -15,7 +11,7 @@ export const FeedProvider: React.FunctionComponent<FeedContextProps> = ({
   const [feed, setFeed] = useState<Publication[]>([]);
   const location = useLocation();
 
-  const getFeed = async () => {
+  const getFeed = async (): Promise<void> => {
     const request = await instagramApiGetFeed();
 
     const { payload } = request;

@@ -12,14 +12,8 @@ import { useMediaMatch } from "../../../hooks/useMediaMatch";
 import { useNavigate } from "react-router-dom";
 
 export const SearchPage = () => {
-  const {
-    filterUsers,
-    formState,
-    onInputChange,
-    onResetForm,
-    setActiveSearch,
-  } = useContext(SearchContext);
-  const { explore, getExplore } = useContext(ExploreContext);
+  const searchContextStore = useContext(SearchContext);
+  const exploreContextStore = useContext(ExploreContext);
   const { matchMediaQuery } = useMediaMatch(1024);
   const navigate = useNavigate();
   useSearchWithAuth();
@@ -31,13 +25,13 @@ export const SearchPage = () => {
   };
 
   useEffect(() => {
-    setActiveSearch(true);
+    searchContextStore?.setActiveSearch(true);
     // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
     if (!focus) {
-      getExplore();
+      exploreContextStore?.getExplore();
     }
   }, [focus]);
 
@@ -63,7 +57,7 @@ export const SearchPage = () => {
             size={25}
             onClick={() => {
               setFocus(false);
-              onResetForm();
+              searchContextStore?.onResetForm();
             }}
           ></BsArrowLeft>
         )}
@@ -71,9 +65,9 @@ export const SearchPage = () => {
           id="query"
           onFocus={onFocus}
           placeholder="Buscar..."
-          value={formState.query}
+          value={searchContextStore?.formState.query!}
           name="query"
-          onChange={onInputChange}
+          onChange={searchContextStore?.onInputChange!}
           label=""
           classNameInput=" bg-gray-200 rounded-full mx-3 p-1 pl-2 w-full outline-none"
         ></InputText>
@@ -85,14 +79,14 @@ export const SearchPage = () => {
             className="flex flex-row flex-wrap w-full h-auto"
             title="Recientes"
             outTitle={true}
-            users={filterUsers}
+            users={searchContextStore?.filterUsers!}
           ></SearchList>
         </main>
       )}
 
       {!focus && (
         <PublicationImages
-          publications={explore}
+          publications={exploreContextStore?.explore!}
           context="explore"
         ></PublicationImages>
       )}

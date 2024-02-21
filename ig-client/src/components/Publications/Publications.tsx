@@ -5,7 +5,7 @@ export const Publications = ({
   publications,
 }: {
   publications: PublicationType[];
-}) => {
+}): JSX.Element => {
   return (
     <main className="flex flex-col items-start justify-center w-screen h-auto">
       {publications.map((publication) => {

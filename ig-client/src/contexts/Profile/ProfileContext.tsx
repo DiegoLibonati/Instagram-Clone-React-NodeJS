@@ -1,11 +1,11 @@
 import { createContext, useState } from "react";
-import { ForeignUser } from "../../types/types";
+import {
+  ForeignUser,
+  ProfileContextProps,
+  ProfileContextT,
+} from "../../types/types";
 
-interface ProfileContextProps {
-  children: React.ReactNode;
-}
-
-export const ProfileContext = createContext<null | any>(null);
+export const ProfileContext = createContext<ProfileContextT | null>(null);
 
 export const ProfileProvider: React.FunctionComponent<ProfileContextProps> = ({
   children,

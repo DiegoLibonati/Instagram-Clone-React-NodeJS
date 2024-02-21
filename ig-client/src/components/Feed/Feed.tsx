@@ -7,18 +7,18 @@ import { Loader2 } from "../Loader/Loader2/Loader2";
 import { useContext, useEffect } from "react";
 import { FeedContext } from "../../contexts/Feed/FeedContext";
 
-export const Feed = () => {
-  const { feed, getFeed } = useContext(FeedContext);
+export const Feed = (): JSX.Element => {
+  const feedContextStore = useContext(FeedContext);
 
   const { arrayPagination, allViewed, loading, elementRef } = usePagination(
-    feed,
+    feedContextStore?.feed!,
     5
   );
 
   const { user } = useProfileUser();
 
   useEffect(() => {
-    getFeed();
+    feedContextStore?.getFeed();
   }, []);
 
   return (

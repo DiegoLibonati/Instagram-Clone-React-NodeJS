@@ -12,11 +12,11 @@ import { instagramApiSetRecentUserSearch } from "../../api/Search/instagramApiSe
 import { MenuConfigMobile } from "../MenuConfig/Mobile/MenuConfigMobile";
 import { PublicationImages } from "../PublicationsImages/PublicationImages";
 
-export const Profile = () => {
+export const Profile = (): JSX.Element => {
   const { id: urlUsername } = useParams();
-  const { setAlertOpen } = useContext(UIContext);
-  const { setUserForeignProfile } = useContext(ProfileContext);
-  const { user: authUser, onLogin } = useContext(AuthContext);
+  const uiContextStore = useContext(UIContext);
+  const profileContextStore = useContext(ProfileContext);
+  const authContextStore = useContext(AuthContext);
   const { user, isMainUser } = useProfileUser();
   const { matchMediaQuery } = useMediaMatch(1024);
   const navigate = useNavigate();
@@ -25,7 +25,7 @@ export const Profile = () => {
     const foreignRequest = await instagramApiGetUser(urlUsername!);
     const authRequest = await instagramApiSetRecentUserSearch(urlUsername!);
     if (foreignRequest.hasOwnProperty("response")) {
-      setAlertOpen(
+      uiContextStore?.setAlertOpen(
         "error",
         "¡Oh, algo salio mal!",
         foreignRequest.response.data.message,
@@ -37,16 +37,23 @@ export const Profile = () => {
     const foreignUserData = foreignRequest.payload;
     const idsRecentSearched = authRequest.payload;
 
-    setUserForeignProfile(foreignUserData);
+    profileContextStore?.setUserForeignProfile(foreignUserData);
 
     if (idsRecentSearched) {
-      onLogin({
-        ...authUser,
-        recentUsers: [...user.recentUsers, ...idsRecentSearched],
+      authContextStore?.onLogin({
+        ...authContextStore?.user,
+        recentUsers: user.recentUsers
+          ? [...user.recentUsers!, ...idsRecentSearched]
+          : [idsRecentSearched],
       });
     }
     // eslint-disable-next-line
-  }, [navigate, setAlertOpen, setUserForeignProfile, urlUsername]);
+  }, [
+    navigate,
+    uiContextStore?.setAlertOpen,
+    profileContextStore?.setUserForeignProfile,
+    urlUsername,
+  ]);
 
   useEffect(() => {
     if (!isMainUser) {

@@ -1,7 +1,9 @@
 import { Publication } from "../../types/types";
 import instagramApi from "../instagramApi";
 
-export const instagramApiCreatePublication = async (form: Publication) => {
+export const instagramApiCreatePublication = async (
+  form: Partial<Publication>
+) => {
   try {
     const request = await instagramApi.post(`/publication/new`, form, {
       headers: { "Content-Type": "multipart/form-data" },

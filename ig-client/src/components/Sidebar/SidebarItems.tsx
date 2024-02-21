@@ -13,25 +13,25 @@ import { areThereNotifications } from "../../helpers/areThereNotifications";
 import { instagramApiEditNotifications } from "../../api/Notifications/instagramApiEditNotifications";
 import { UserImage } from "../UserImage/UserImage";
 
-export const SidebarItems = () => {
+export const SidebarItems = (): JSX.Element => {
   const navigate = useNavigate();
-  const { setModalOpen } = useContext(UIContext);
-  const { user, onLogin } = useContext(AuthContext);
-  const { setActiveSearch } = useContext(SearchContext);
-  const { setOpenNotifications } = useContext(NotificationsContext);
+  const uiContextStore = useContext(UIContext);
+  const authContextStore = useContext(AuthContext);
+  const searchContextStore = useContext(SearchContext);
+  const notificationsContextStore = useContext(NotificationsContext);
 
   const areThereNotificationsMemo = useMemo(
-    () => areThereNotifications(user.notifications),
-    [user.notifications]
+    () => areThereNotifications(authContextStore?.user.notifications!),
+    [authContextStore?.user.notifications]
   );
 
-  const handleOpenNotifications = async () => {
-    setOpenNotifications(true);
+  const handleOpenNotifications = async (): Promise<void> => {
+    notificationsContextStore?.setOpenNotifications(true);
     const request = await instagramApiEditNotifications();
 
     const notifications = request.notifications;
 
-    onLogin({ ...user, notifications });
+    authContextStore?.onLogin({ ...authContextStore?.user, notifications });
   };
 
   return (
@@ -39,7 +39,10 @@ export const SidebarItems = () => {
       <SidebarItem text="Inicio" onClick={() => navigate("/")}>
         <AiOutlineHome size={25} color="black"></AiOutlineHome>
       </SidebarItem>
-      <SidebarItem text="Buscar" onClick={() => setActiveSearch(true)}>
+      <SidebarItem
+        text="Buscar"
+        onClick={() => searchContextStore?.setActiveSearch(true)}
+      >
         <BsSearch size={25} color="black"></BsSearch>
       </SidebarItem>
       <SidebarItem text="Explorar" onClick={() => navigate("/explore")}>
@@ -68,14 +71,20 @@ export const SidebarItems = () => {
           </>
         )}
       </SidebarItem>
-      <SidebarItem text="Crear" onClick={() => setModalOpen("newpublication")}>
+      <SidebarItem
+        text="Crear"
+        onClick={() => uiContextStore?.setModalOpen("newpublication")}
+      >
         <MdOutlineAddBox size={25} color="black"></MdOutlineAddBox>
       </SidebarItem>
-      <SidebarItem text="Perfil" onClick={() => navigate(`/${user.username}`)}>
+      <SidebarItem
+        text="Perfil"
+        onClick={() => navigate(`/${authContextStore?.user.username}`)}
+      >
         <UserImage
           className="w-6 h-6 object-cover rounded-full"
-          avatar={user.avatar}
-          name={user.name}
+          avatar={authContextStore?.user.avatar!}
+          name={authContextStore?.user.name!}
         ></UserImage>
       </SidebarItem>
     </ul>

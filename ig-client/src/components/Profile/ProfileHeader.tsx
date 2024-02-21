@@ -5,7 +5,7 @@ import { ProfileHeaderDescriptionDesktop } from "./Desktop/ProfileHeaderDescript
 import { ProfileHeaderNumbers } from "./ProfileHeaderNumbers";
 import { useMediaMatch } from "../../hooks/useMediaMatch";
 
-export const ProfileHeader = () => {
+export const ProfileHeader = (): JSX.Element => {
   const { matchMediaQuery } = useMediaMatch(1024);
 
   return (

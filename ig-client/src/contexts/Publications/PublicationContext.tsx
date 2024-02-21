@@ -1,13 +1,15 @@
 import { createContext, useState } from "react";
 import { instagramApiCreatePublication } from "../../api/Publication/instagramApiCreatePublication";
 import { useForm } from "../../hooks/useForm";
-import { Publication } from "../../types/types";
+import {
+  Publication,
+  PublicationContextProps,
+  PublicationContextT,
+} from "../../types/types";
 
-interface PublicationContextProps {
-  children: React.ReactNode;
-}
-
-export const PublicationContext = createContext<null | any>(null);
+export const PublicationContext = createContext<PublicationContextT | null>(
+  null
+);
 
 export const PublicationProvider: React.FunctionComponent<
   PublicationContextProps
@@ -26,14 +28,19 @@ export const PublicationProvider: React.FunctionComponent<
     context: "",
   });
 
-  const { formState, onInputChange, onResetForm } = useForm({
+  const { formState,onInputChange, onInputChangeTextArea, onResetForm } = useForm<
+    Partial<Publication>
+  >({
     imgLink: "",
     description: "",
     date: "",
   });
 
-  const handleNewPublication = async () => {
-    formState["date"] = new Date().getTime();
+  const handleNewPublication = async (): Promise<{
+    message: string;
+    publication: Publication;
+  }> => {
+    formState["date"] = String(new Date().getTime());
 
     const request = await instagramApiCreatePublication(formState);
 
@@ -54,6 +61,7 @@ export const PublicationProvider: React.FunctionComponent<
         formState,
         activePublication,
         setActivePublication,
+        onInputChangeTextArea,
         onInputChange,
         onResetForm,
         handleNewPublication,

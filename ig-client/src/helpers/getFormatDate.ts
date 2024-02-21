@@ -1,4 +1,4 @@
-export const getFormatDate = (date: string) => {
+export const getFormatDate = (date: string): string => {
   if (date) {
     const currentDate = new Date();
 

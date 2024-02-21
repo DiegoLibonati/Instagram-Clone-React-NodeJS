@@ -6,11 +6,10 @@ import { SliderFullScreen } from "../../SliderFullScreen/SliderFullScreen";
 import { NotificationList } from "../NotificationList";
 
 export const Notifications = () => {
-  const { openNotifications, setOpenNotifications } =
-    useContext(NotificationsContext);
+  const notificationsContextStore = useContext(NotificationsContext);
 
   return (
-    <SliderFullScreen isTrue={openNotifications}>
+    <SliderFullScreen isTrue={notificationsContextStore?.openNotifications!}>
       <NavBarMobile
         classNameHeader={
           "flex flex-row items-center justify-start h-14 w-screen shadow-md mb-2 bg-white"
@@ -22,7 +21,7 @@ export const Notifications = () => {
         <BsArrowLeft
           color="black"
           size={25}
-          onClick={() => setOpenNotifications(false)}
+          onClick={() => notificationsContextStore?.setOpenNotifications(false)}
         ></BsArrowLeft>
         <h2 className="ml-5 font-medium text-lg">Notificaciones</h2>
       </NavBarMobile>

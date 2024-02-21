@@ -15,7 +15,7 @@ import CommentRouter from "./routes/v1/commentRoutes";
 import SuggestionRouter from "./routes/v1/suggestionRoutes";
 import ExploreRouter from "./routes/v1/exploreRoutes";
 
-const app: Express = express();
+const app = express();
 mongooseConnection();
 
 //Middlewares

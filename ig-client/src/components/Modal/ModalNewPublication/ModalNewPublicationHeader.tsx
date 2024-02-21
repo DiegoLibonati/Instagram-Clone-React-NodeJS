@@ -7,11 +7,11 @@ import { UIContext } from "../../../contexts/Ui/UIContext";
 import { AuthContext } from "../../../contexts/Auth/AuthContext";
 import { PublicationContext } from "../../../contexts/Publications/PublicationContext";
 
-export const ModalNewPublicationHeader = () => {
+export const ModalNewPublicationHeader = (): JSX.Element => {
   const { matchMediaQuery } = useMediaMatch(1024);
-  const { setModalClose, setAlertOpen } = useContext(UIContext);
-  const { user, onLogin } = useContext(AuthContext);
-  const { handleNewPublication } = useContext(PublicationContext);
+  const uiContextStore = useContext(UIContext)!;
+  const authContextStore = useContext(AuthContext)!;
+  const publicationContextStore = useContext(PublicationContext)!;
   const navigate = useNavigate();
 
   return (
@@ -20,7 +20,7 @@ export const ModalNewPublicationHeader = () => {
         <AiOutlineClose
           size={20}
           className="cursor-pointer"
-          onClick={setModalClose}
+          onClick={uiContextStore?.setModalClose}
         ></AiOutlineClose>
       )}
       <h2 className={`font-medium text-md ${matchMediaQuery && "pl-3"}`}>
@@ -30,20 +30,23 @@ export const ModalNewPublicationHeader = () => {
         size={20}
         className="text-blue-500 cursor-pointer"
         onClick={async () => {
-          const request = await handleNewPublication();
+          const request = await publicationContextStore?.handleNewPublication();
 
-          setModalClose();
-          onLogin({
-            ...user,
-            publications: [...user.publications, request.publication],
+          uiContextStore?.setModalClose();
+          authContextStore?.onLogin({
+            ...authContextStore?.user,
+            publications: [
+              ...authContextStore?.user.publications,
+              request.publication,
+            ],
           });
-          setAlertOpen(
+          uiContextStore?.setAlertOpen(
             "success",
             "¡Bien, todo esta ok!",
             request.message,
             "bg-green-600"
           );
-          navigate(`/${user.username}`);
+          navigate(`/${authContextStore?.user.username}`);
         }}
       ></BsArrowRight>
     </div>

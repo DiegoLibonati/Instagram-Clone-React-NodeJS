@@ -5,14 +5,8 @@ import { InputText } from "../../Input/InputText/InputText";
 import { SearchList } from "../../Search/SearchList";
 import { useSearchWithAuth } from "../../../hooks/useSearchWithAuth";
 
-export const SidebarSearch = () => {
-  const {
-    filterUsers,
-    formState,
-    onInputChange,
-    onResetForm,
-    setActiveSearch,
-  } = useContext(SearchContext);
+export const SidebarSearch = (): JSX.Element => {
+  const searchContextStore = useContext(SearchContext);
 
   useSearchWithAuth();
 
@@ -23,17 +17,17 @@ export const SidebarSearch = () => {
           size={25}
           className="cursor-pointer"
           onClick={() => {
-            setActiveSearch(false);
-            onResetForm();
+            searchContextStore?.setActiveSearch(false);
+            searchContextStore?.onResetForm();
           }}
         ></BsArrowLeft>
         <InputText
           id="query"
           placeholder="Buscar..."
           name="query"
-          value={formState.query}
+          value={searchContextStore?.formState.query!}
           classNameInput="ml-2 w-full bg-gray-200 rounded-full p-1 px-2 outline-none"
-          onChange={onInputChange}
+          onChange={searchContextStore?.onInputChange!}
         ></InputText>
       </div>
 
@@ -41,7 +35,7 @@ export const SidebarSearch = () => {
         inTitle={true}
         title="Recientes"
         className="flex flex-col items-start w-full h-full overflow-y-scroll p-2"
-        users={filterUsers}
+        users={searchContextStore?.filterUsers!}
       ></SearchList>
     </form>
   );

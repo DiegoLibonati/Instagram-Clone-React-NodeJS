@@ -3,8 +3,8 @@ import { useContext, useMemo } from "react";
 import { getFormatDate } from "../../../helpers/getFormatDate";
 import { PublicationContext } from "../../../contexts/Publications/PublicationContext";
 
-export const ModalPublicationDescription = () => {
-  const { activePublication } = useContext(PublicationContext);
+export const ModalPublicationDescription = (): JSX.Element => {
+  const { activePublication } = useContext(PublicationContext)!;
 
   const date = useMemo(
     () => getFormatDate(activePublication.date),

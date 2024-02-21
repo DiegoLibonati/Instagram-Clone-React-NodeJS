@@ -6,12 +6,12 @@ import { UIContext } from "../../../contexts/Ui/UIContext";
 import { AuthContext } from "../../../contexts/Auth/AuthContext";
 import { instagramApiLogout } from "../../../api/Auth/instagramApiLogout";
 
-export const MenuConfigMobile = () => {
-  const { menuConfig, setMenuConfigClose } = useContext(UIContext);
-  const { onLogout } = useContext(AuthContext);
+export const MenuConfigMobile = (): JSX.Element => {
+  const uiContextStore = useContext(UIContext);
+  const authContextStore = useContext(AuthContext);
 
   return (
-    <SliderFullScreen isTrue={menuConfig.isOpen}>
+    <SliderFullScreen isTrue={uiContextStore?.menuConfig.isOpen!}>
       <NavBarMobile
         classNameHeader={
           "flex flex-row items-center justify-start h-14 w-screen shadow-md"
@@ -23,7 +23,7 @@ export const MenuConfigMobile = () => {
         <BsArrowLeft
           color="black"
           size={25}
-          onClick={setMenuConfigClose}
+          onClick={uiContextStore?.setMenuConfigClose}
         ></BsArrowLeft>
         <h2 className="ml-5 font-medium text-lg">Configuración</h2>
       </NavBarMobile>
@@ -32,8 +32,8 @@ export const MenuConfigMobile = () => {
         <button
           className="p-2 text-red-600 w-full text-start mt-2"
           onClick={() => {
-            onLogout();
-            setMenuConfigClose();
+            authContextStore?.onLogout();
+            uiContextStore?.setMenuConfigClose();
             instagramApiLogout();
           }}
         >

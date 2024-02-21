@@ -8,30 +8,28 @@ import { ModalAlert } from "../components/Modal/ModalAlert/ModalAlert";
 import { InstagramRoutes } from "./Routes/Instagram/InstagramRoutes";
 import { AuthRoutes } from "./Routes/Auth/AuthRoutes";
 
-export const InstagramRouter = () => {
-  const { modal, alert } = useContext(UIContext);
+export const InstagramRouter = (): JSX.Element => {
+  const uiContextStore = useContext(UIContext);
 
-  const { checkAuthToken, user } = useContext(AuthContext);
-
-  const { status } = user;
+  const authContextStore = useContext(AuthContext);
 
   useEffect(() => {
-    checkAuthToken();
+    authContextStore?.checkAuthToken();
     // eslint-disable-next-line
   }, []);
 
-  if (status === "checking") {
+  if (authContextStore?.user?.status === "checking") {
     return <Loader></Loader>;
   }
 
   return (
     <>
-      {modal.isOpen && modal.type === "newpublication" && (
+      {uiContextStore?.modal.isOpen && uiContextStore?.modal.type === "newpublication" && (
         <ModalNewPublication></ModalNewPublication>
       )}
-      {alert.isOpen && <ModalAlert></ModalAlert>}
+      {uiContextStore?.alert.isOpen && <ModalAlert></ModalAlert>}
       <Routes>
-        {status === "authenticated" ? (
+        {authContextStore?.user?.status  === "authenticated" ? (
           <Route
             path="/*"
             element={<InstagramRoutes></InstagramRoutes>}

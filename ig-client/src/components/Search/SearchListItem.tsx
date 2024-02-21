@@ -7,7 +7,7 @@ export const SearchListItem = ({
 }: {
   username: string;
   avatar: string;
-}) => {
+}): JSX.Element => {
   const navigate = useNavigate();
 
   return (

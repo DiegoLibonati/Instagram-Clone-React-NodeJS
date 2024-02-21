@@ -13,9 +13,30 @@ export type User = {
   following?: User[];
   avatar: string;
   description?: string;
-  recentUsers?: Record<string, string>[];
-  notifications?: Record<string, string | boolean>[];
+  recentUsers?: RecentSearch[];
+  notifications?: Notification[];
 };
+
+export type Notification = {
+  id: string;
+  _id?: string;
+  name: string;
+  username: string;
+  avatar: string;
+  notificationType: string;
+  wasViewed: boolean;
+  idProfile: string;
+  idAuthor: string;
+  idPost?: string;
+}
+
+export type RecentSearch = {
+  idSearched: string;
+  username: string;
+  name: string;
+  avatar: string;
+};
+
 
 export type ForeignUser = {
   id: string;
@@ -37,11 +58,34 @@ export type Publication = {
   imgLink?: string;
   description?: string;
   date?: Date;
-  likes?: Array;
-  comments?: Array;
+  likes?: Like[];
+  comments?: Comment[];
   idAuthor?: string;
   createdAt?: Date;
   updatedAt?: Date;
+};
+
+export type Comment = {
+  id: string;
+  _id?: string;
+  username: string;
+  avatar: string;
+  name: string;
+  description: string;
+  date: string;
+  idPost: string;
+  idAuthor: string;
+};
+
+
+export type Like = {
+  id?: string;
+  _id?: string;
+  name: string;
+  username: string;
+  avatar: string;
+  idPost: string;
+  idAuthor: string;
 };
 
 export interface NewRequest extends Request {

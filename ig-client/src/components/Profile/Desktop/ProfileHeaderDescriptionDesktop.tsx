@@ -7,10 +7,10 @@ import { isUserFollow } from "../../../helpers/isUserFollow";
 import { AuthContext } from "../../../contexts/Auth/AuthContext";
 import { useFollow } from "../../../hooks/useFollow";
 
-export const ProfileHeaderDescriptionDesktop = () => {
+export const ProfileHeaderDescriptionDesktop = (): JSX.Element => {
   const { user, isMainUser } = useProfileUser();
   const { handleFollow, handleUnFollow } = useFollow();
-  const { user: authUser } = useContext(AuthContext);
+  const authContextStore = useContext(AuthContext);
 
   const navigate = useNavigate();
   const handleEditProfile = () => {
@@ -18,13 +18,13 @@ export const ProfileHeaderDescriptionDesktop = () => {
   };
 
   const isForeignUserFollowMemo = useMemo(
-    () => isUserFollow(authUser, user.id, "followers"),
-    [authUser, user.id]
+    () => isUserFollow(authContextStore?.user!, user.id, "followers"),
+    [authContextStore?.user, user.id]
   );
 
   const isAuthUserFollowMemo = useMemo(
-    () => isUserFollow(user, authUser.id, "followers"),
-    [user, authUser.id]
+    () => isUserFollow(user, authContextStore?.user.id!, "followers"),
+    [user, authContextStore?.user.id]
   );
 
   return (

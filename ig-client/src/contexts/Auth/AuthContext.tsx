@@ -1,12 +1,8 @@
 import { createContext, useState } from "react";
 import { instagramApiRenew } from "../../api/Auth/instagramApiRenew";
-import { User } from "../../types/types";
+import { AuthContextProps, AuthContextT, User } from "../../types/types";
 
-interface AuthContextProps {
-  children: React.ReactNode;
-}
-
-export const AuthContext = createContext<null | any>(null);
+export const AuthContext = createContext<AuthContextT | null>(null);
 
 export const AuthProvider: React.FunctionComponent<AuthContextProps> = ({
   children,
@@ -26,7 +22,7 @@ export const AuthProvider: React.FunctionComponent<AuthContextProps> = ({
     notifications: [],
   });
 
-  const onLogout = () => {
+  const onLogout = (): void => {
     setUser({
       status: "not-authenticated",
       id: "",
@@ -43,7 +39,7 @@ export const AuthProvider: React.FunctionComponent<AuthContextProps> = ({
     });
   };
 
-  const onLogin = (payload: User) => {
+  const onLogin = (payload: User): void => {
     setUser({
       ...user,
       status: "authenticated",
@@ -51,14 +47,14 @@ export const AuthProvider: React.FunctionComponent<AuthContextProps> = ({
     });
   };
 
-  const onChecking = () => {
+  const onChecking = (): void => {
     setUser({
       ...user,
       status: "checking",
     });
   };
 
-  const checkAuthToken = async () => {
+  const checkAuthToken = async (): Promise<void> => {
     setUser({ ...user, status: "checking" });
     const token = document.cookie?.split("=")[1];
 

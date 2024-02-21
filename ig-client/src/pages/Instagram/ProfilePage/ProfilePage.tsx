@@ -10,9 +10,9 @@ import { UIContext } from "../../../contexts/Ui/UIContext";
 import { useMediaMatch } from "../../../hooks/useMediaMatch";
 import { useProfileUser } from "../../../hooks/useProfileUser";
 
-export const ProfilePage = () => {
+export const ProfilePage = (): JSX.Element => {
   const { matchMediaQuery } = useMediaMatch(1024);
-  const { modal, setMenuConfigOpen, setModalOpen } = useContext(UIContext);
+  const uiContextStore = useContext(UIContext);
   const { user } = useProfileUser();
 
   return (
@@ -33,21 +33,23 @@ export const ProfilePage = () => {
               color="black"
               size={25}
               className="mx-2"
-              onClick={() => setModalOpen("newpublication")}
+              onClick={() => uiContextStore?.setModalOpen("newpublication")}
             ></MdOutlineAddBox>
             <RxHamburgerMenu
               color="black"
               size={25}
-              onClick={setMenuConfigOpen}
+              onClick={uiContextStore?.setMenuConfigOpen}
             ></RxHamburgerMenu>
           </div>
         </NavBarMobile>
       )}
       {matchMediaQuery && <Sidebar></Sidebar>}
       <Profile></Profile>
-      {matchMediaQuery && modal.isOpen && modal.type === "publication" && (
-        <ModalPublication></ModalPublication>
-      )}
+      {matchMediaQuery &&
+        uiContextStore?.modal.isOpen &&
+        uiContextStore?.modal.type === "publication" && (
+          <ModalPublication></ModalPublication>
+        )}
       {!matchMediaQuery && <FooterMobile></FooterMobile>}
     </>
   );

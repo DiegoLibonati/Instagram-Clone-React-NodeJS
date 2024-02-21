@@ -1,9 +1,8 @@
-export const areThereNotifications = (
-  notifications: Record<string, string | boolean>[]
-) => {
+import { Notification } from "../types/types";
+
+export const areThereNotifications = (notifications: Notification[]) => {
   const areThereNotifications = notifications.filter(
-    (notification: Record<string, string | boolean>) =>
-      notification.wasViewed === false
+    (notification: Notification) => notification.wasViewed === false
   );
 
   return areThereNotifications;

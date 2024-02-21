@@ -2,22 +2,32 @@ import { useContext } from "react";
 import { useParams } from "react-router-dom";
 import { AuthContext } from "../contexts/Auth/AuthContext";
 import { ProfileContext } from "../contexts/Profile/ProfileContext";
+import { UseProfileUser } from "../types/types";
 
-export const useProfileUser = () => {
+export const useProfileUser = (): UseProfileUser => {
   const { id: urlUsername } = useParams();
-  const { user, setUser } = useContext(AuthContext);
+  const authContextStore = useContext(AuthContext);
 
-  const { userForeignProfile, setUserForeignProfile } =
+  const profileContextStore =
     useContext(ProfileContext);
 
   if (!urlUsername || urlUsername === undefined || urlUsername === null)
-    return { user, isMainUser: true, setUser };
+    return {
+      user: authContextStore?.user!,
+      isMainUser: true,
+      setUser: authContextStore?.setUser!,
+    };
 
-  if (urlUsername === user.username) return { user, isMainUser: true, setUser };
+  if (urlUsername === authContextStore?.user.username)
+    return {
+      user: authContextStore?.user,
+      isMainUser: true,
+      setUser: authContextStore?.setUser,
+    };
 
   return {
-    user: userForeignProfile,
+    user: profileContextStore?.userForeignProfile!,
     isMainUser: false,
-    setUser: setUserForeignProfile,
+    setUser: profileContextStore?.setUserForeignProfile!,
   };
 };

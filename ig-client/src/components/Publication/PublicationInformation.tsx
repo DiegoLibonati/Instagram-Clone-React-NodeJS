@@ -16,9 +16,9 @@ export const PublicationInformation = ({
   description: string;
   comments: Publication["comments"];
   publication: Publication;
-}) => {
-  const { setModalOpen } = useContext(UIContext);
-  const { setActivePublication } = useContext(PublicationContext);
+}): JSX.Element => {
+  const uiContextStore = useContext(UIContext);
+  const publicationContextStore = useContext(PublicationContext);
 
   const location = useLocation();
 
@@ -34,8 +34,8 @@ export const PublicationInformation = ({
         <button
           className="text-gray-500 text-sm my-[2px]"
           onClick={() => {
-            setModalOpen("publication");
-            setActivePublication({
+            uiContextStore?.setModalOpen("publication");
+            publicationContextStore?.setActivePublication({
               ...publication,
               context: location.pathname === "/" ? "feed" : "",
             });

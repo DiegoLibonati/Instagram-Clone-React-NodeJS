@@ -9,9 +9,9 @@ import { useContext } from "react";
 import { AuthContext } from "../../../contexts/Auth/AuthContext";
 import { UserImage } from "../../UserImage/UserImage";
 
-export const FooterMobile = () => {
+export const FooterMobile = (): JSX.Element => {
   const navigate = useNavigate();
-  const { user } = useContext(AuthContext);
+  const authContextStore = useContext(AuthContext);
   return (
     <footer className="lg:hidden flex items-center justify-between fixed bg-white w-screen bottom-0 p-2 h-14">
       <AiOutlineHome
@@ -26,11 +26,11 @@ export const FooterMobile = () => {
       ></AiOutlineSearch>
       <RxVideo color="black" size={25}></RxVideo>
       <AiOutlineShopping color="black" size={25}></AiOutlineShopping>
-      <Link to={`/${user.username}`}>
+      <Link to={`/${authContextStore?.user.username}`}>
         <UserImage
           className="w-6 h-6 object-cover rounded-full"
-          avatar={user.avatar}
-          name={user.name}
+          avatar={authContextStore?.user.avatar!}
+          name={authContextStore?.user.name!}
         ></UserImage>
       </Link>
     </footer>

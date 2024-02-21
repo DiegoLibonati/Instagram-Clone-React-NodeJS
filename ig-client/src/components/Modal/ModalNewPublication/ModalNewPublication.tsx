@@ -8,11 +8,11 @@ import { PublicationContext } from "../../../contexts/Publications/PublicationCo
 import { AuthContext } from "../../../contexts/Auth/AuthContext";
 import { UserImage } from "../../UserImage/UserImage";
 
-export const ModalNewPublication = () => {
+export const ModalNewPublication = (): JSX.Element => {
   const { matchMediaQuery } = useMediaMatch(1024);
-  const { previewSrc, setModalClose } = useContext(UIContext);
-  const { formState, onInputChange } = useContext(PublicationContext);
-  const { user } = useContext(AuthContext);
+  const modalContextStore = useContext(UIContext);
+  const publicationContextStore = useContext(PublicationContext);
+  const authContextStore = useContext(AuthContext);
 
   return (
     <div
@@ -24,7 +24,7 @@ export const ModalNewPublication = () => {
         <AiOutlineClose
           size={25}
           className="cursor-pointer absolute top-2 right-2"
-          onClick={setModalClose}
+          onClick={modalContextStore?.setModalClose}
         ></AiOutlineClose>
       )}
       <div
@@ -34,15 +34,15 @@ export const ModalNewPublication = () => {
       >
         <ModalNewPublicationHeader></ModalNewPublicationHeader>
 
-        {previewSrc ? (
+        {modalContextStore?.previewSrc ? (
           <div
             className={`flex w-full h-full items-start justify-center bg-white ${
               matchMediaQuery ? "flex-row" : "flex-col"
             }`}
           >
             <img
-              src={previewSrc}
-              alt={previewSrc}
+              src={modalContextStore?.previewSrc}
+              alt={modalContextStore?.previewSrc}
               className={`h-full object-contain bg-[#1A1A1A] ${
                 matchMediaQuery ? "w-4/6" : "w-full"
               }`}
@@ -56,16 +56,18 @@ export const ModalNewPublication = () => {
               <div className="flex items-center justify-between w-8 h-auto">
                 <UserImage
                   className="rounded-full mr-2 w-8 h-8"
-                  avatar={user.avatar}
-                  name={user.name}
+                  avatar={authContextStore?.user.avatar!}
+                  name={authContextStore?.user.name!}
                 ></UserImage>
-                <h3 className="text-black">{user.username}</h3>
+                <h3 className="text-black">
+                  {authContextStore?.user.username}
+                </h3>
               </div>
 
               <textarea
-                value={formState.description}
+                value={publicationContextStore?.formState.description}
                 name="description"
-                onChange={onInputChange}
+                onChange={publicationContextStore?.onInputChangeTextArea}
                 className="outline-none w-full resize-none mt-4 shadow-sm"
                 rows={5}
                 placeholder="Escribe una descripcion..."

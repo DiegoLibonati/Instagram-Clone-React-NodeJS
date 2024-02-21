@@ -1,12 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { GooglePlay, Microsoft, screen1 } from "../../../assets/Auth/images";
+import { AuthLayoutProps } from "../../../types/types";
 
-export const AuthLayout: React.FC<{
-  children: React.ReactNode;
-  text: string;
-  textLink: string;
-}> = ({ children, text, textLink }) => {
+export const AuthLayout = ({
+  children,
+  text,
+  textLink,
+}: AuthLayoutProps): JSX.Element => {
   return (
     <main className="flex items-center justify-center flex-row w-full p-3 sm:bg-white">
       <section className="hidden lg:block">

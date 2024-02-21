@@ -1,15 +1,16 @@
 import { useState } from "react";
+import { UseForm } from "../types/types";
 
-export const useForm = (initialForm: any) => {
+export const useForm = <T,>(initialForm: T): UseForm<T> => {
   const [formState, setFormState] = useState(initialForm);
 
-  const onInputChange = (e: React.ChangeEvent<any>) => {
-    const { name } = e.target;
+  const onInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const { name } = e.target as HTMLInputElement;
     switch (e.target.type) {
       case "file":
         setFormState({
           ...formState,
-          [name]: e.target.files[0],
+          [name]: e.target.files![0],
         });
         break;
       default:
@@ -21,6 +22,16 @@ export const useForm = (initialForm: any) => {
     }
   };
 
+  const onInputChangeTextArea = (
+    e: React.ChangeEvent<HTMLTextAreaElement>
+  ): void => {
+    const { name } = e.target as HTMLTextAreaElement;
+    setFormState({
+      ...formState,
+      [name]: e.target.value,
+    });
+  };
+
   const onResetForm = () => {
     setFormState(initialForm);
   };
@@ -28,6 +39,7 @@ export const useForm = (initialForm: any) => {
   return {
     formState,
     onInputChange,
+    onInputChangeTextArea,
     onResetForm,
   };
 };

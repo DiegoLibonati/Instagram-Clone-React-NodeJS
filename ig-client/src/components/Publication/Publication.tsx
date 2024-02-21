@@ -12,7 +12,7 @@ export const Publication = ({
 }: {
   publication: PublicationType;
   context?: string;
-}) => {
+}): JSX.Element => {
   const {
     imgLink,
     description,

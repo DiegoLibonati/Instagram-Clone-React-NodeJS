@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../contexts/Auth/AuthContext";
 import { SearchContext } from "../../contexts/Search/SearchContext";
 import { SearchListItem } from "./SearchListItem";
+import { RecentSearch } from "../../types/types";
 
 export const SearchList = ({
   outTitle,
@@ -18,42 +19,35 @@ export const SearchList = ({
     username: string;
     avatar: string;
   }[];
-}) => {
-  const { formState } = useContext(SearchContext);
-  const { user } = useContext(AuthContext);
+}): JSX.Element => {
+  const searchContextStore = useContext(SearchContext);
+  const authContextStore = useContext(AuthContext);
 
   return (
     <>
-      {outTitle && !formState.query && (
+      {outTitle && !searchContextStore?.formState.query && (
         <h2 className="font-medium mt-2">{title}</h2>
       )}
       <ul className={className}>
-        {inTitle && !formState.query && (
+        {inTitle && !searchContextStore?.formState.query && (
           <h2 className="font-medium mb-2">{title}</h2>
         )}
 
-        {user.recentUsers.length > 0 &&
-          !formState.query &&
-          [...user.recentUsers]
+        {authContextStore?.user.recentUsers?.length! > 0 &&
+          !searchContextStore?.formState.query &&
+          [...authContextStore?.user.recentUsers!]
             .reverse()
-            .map(
-              (recentUser: {
-                id: string;
-                avatar: string;
-                username: string;
-                name: string;
-              }) => {
-                return (
-                  <SearchListItem
-                    key={recentUser.id}
-                    username={recentUser.username}
-                    avatar={recentUser.avatar}
-                  ></SearchListItem>
-                );
-              }
-            )}
+            .map((recentUser: RecentSearch) => {
+              return (
+                <SearchListItem
+                  key={recentUser.id}
+                  username={recentUser.username}
+                  avatar={recentUser.avatar}
+                ></SearchListItem>
+              );
+            })}
 
-        {users?.length === 0 && formState.query && (
+        {users?.length === 0 && searchContextStore?.formState.query && (
           <div className="flex items-center justify-center w-full h-full">
             <h2>No se encontraron resultados</h2>
           </div>

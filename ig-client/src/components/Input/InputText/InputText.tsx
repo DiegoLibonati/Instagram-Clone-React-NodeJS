@@ -18,7 +18,7 @@ export const InputText = ({
   label?: string;
   onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}) => {
+}): JSX.Element => {
   return (
     <>
       {label && (

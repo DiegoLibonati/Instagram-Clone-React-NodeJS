@@ -10,20 +10,23 @@ import { InputFile } from "../Input/InputFile/InputFile";
 import { InputText } from "../Input/InputText/InputText";
 import { InputTextArea } from "../Input/InputTextArea/InputTextArea";
 import { EditUserImage } from "../UserImage/EditUserImage";
+import { UserEdit } from "../../types/types";
 
-export const FormEditUser = () => {
+export const FormEditUser = (): JSX.Element => {
   const { matchMediaQuery } = useMediaMatch(1024);
-  const { user, onLogin } = useContext(AuthContext);
-  const { setPreviewSrc, setAlertOpen } = useContext(UIContext);
+  const authContextStore = useContext(AuthContext);
+  const uiContextStore = useContext(UIContext);
   const navigate = useNavigate();
 
-  const { formState, onInputChange } = useForm({
-    avatar: user.avatar,
-    name: user?.name,
-    username: user.username,
-    description: user.description,
-    email: user.email,
-  });
+  const { formState, onInputChange, onInputChangeTextArea } = useForm<UserEdit>(
+    {
+      avatar: authContextStore?.user.avatar!,
+      name: authContextStore?.user?.name!,
+      username: authContextStore?.user.username!,
+      description: authContextStore?.user.description!,
+      email: authContextStore?.user.email!,
+    }
+  );
 
   const handleSendForm = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,7 +34,7 @@ export const FormEditUser = () => {
     const request = await instagramApiEditUser(formState);
 
     if (request.hasOwnProperty("response")) {
-      return setAlertOpen(
+      return uiContextStore?.setAlertOpen(
         "error",
         "¡Oh, algo salio mal!",
         request.response.data.message,
@@ -41,11 +44,16 @@ export const FormEditUser = () => {
     const payload = request.payload;
     const message = request.message;
 
-    onLogin(payload);
+    authContextStore?.onLogin(payload);
 
-    setAlertOpen("success", "¡Bien, todo esta ok!", message, "bg-green-600");
-    setPreviewSrc("");
-    navigate(`/${user.username}`);
+    uiContextStore?.setAlertOpen(
+      "success",
+      "¡Bien, todo esta ok!",
+      message,
+      "bg-green-600"
+    );
+    uiContextStore?.setPreviewSrc("");
+    navigate(`/${authContextStore?.user.username}`);
   };
 
   return (
@@ -60,8 +68,8 @@ export const FormEditUser = () => {
           size={25}
           className="absolute left-2 cursor-pointer"
           onClick={() => {
-            navigate(`/${user.username}`);
-            setPreviewSrc("");
+            navigate(`/${authContextStore?.user.username}`);
+            uiContextStore?.setPreviewSrc("");
           }}
         ></BsArrowLeft>
       )}
@@ -114,7 +122,7 @@ export const FormEditUser = () => {
         value={formState.description}
         label="Presentacion"
         placeholder="Presentacion"
-        onChange={onInputChange}
+        onChange={onInputChangeTextArea!}
       ></InputTextArea>
 
       {matchMediaQuery && (

@@ -12,17 +12,24 @@ const form = {
   password: "",
 };
 
-export const RegisterPage = () => {
-  const { formState, onInputChange, onResetForm } = useForm(form);
+export const RegisterPage = (): JSX.Element => {
+  const { formState, onInputChange, onResetForm } = useForm<{
+    email: string;
+    name: string;
+    username: string;
+    password: string;
+  }>(form);
   const navigate = useNavigate();
-  const { setAlertOpen } = useContext(UIContext);
+  const uiContextStore = useContext(UIContext);
 
-  const onSubmitRegister = async (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmitRegister: React.FormEventHandler<HTMLFormElement> = async (
+    e
+  ) => {
     e.preventDefault();
     const request = await instagramApiRegister(formState);
 
     if (request.hasOwnProperty("response")) {
-      return setAlertOpen(
+      return uiContextStore?.setAlertOpen(
         "error",
         "¡Oh, algo salio mal!",
         request.response.data.message,
@@ -32,7 +39,12 @@ export const RegisterPage = () => {
 
     const message = request.message;
 
-    setAlertOpen("success", "¡Bien, todo esta ok!", message, "bg-green-600");
+    uiContextStore?.setAlertOpen(
+      "success",
+      "¡Bien, todo esta ok!",
+      message,
+      "bg-green-600"
+    );
 
     onResetForm();
 

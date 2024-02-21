@@ -4,10 +4,10 @@ import { useContext } from "react";
 import { BsCheckCircle } from "react-icons/bs";
 import { UIContext } from "../../../contexts/Ui/UIContext";
 
-export const ModalAlert = (): React.ReactElement => {
-  const { alert, setAlertClose } = useContext(UIContext);
+export const ModalAlert = (): JSX.Element => {
+  const uiContextStore = useContext(UIContext);
 
-  const { type, title, message, color } = alert;
+  const { type, title, message, color } = uiContextStore?.alert!;
 
   const iconColor = color === "bg-green-600" ? "green" : "red";
 
@@ -32,7 +32,7 @@ export const ModalAlert = (): React.ReactElement => {
         size={20}
         color="gray"
         className="cursor-pointer absolute right-1"
-        onClick={() => setAlertClose()}
+        onClick={() => uiContextStore?.setAlertClose()}
       ></MdClose>
     </div>
   );

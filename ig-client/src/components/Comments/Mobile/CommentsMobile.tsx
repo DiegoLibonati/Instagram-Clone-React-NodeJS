@@ -6,11 +6,11 @@ import { CommentsMobileForm } from "./CommentsMobileForm";
 import { CommentsMobileHeader } from "./CommentsMobileHeader";
 import { CommentsMobilePublication } from "./CommentsMobilePublication";
 
-export const CommentsMobile = () => {
-  const { modal } = useContext(UIContext);
+export const CommentsMobile = (): JSX.Element => {
+  const uiContextStore = useContext(UIContext);
 
   return (
-    <SliderFullScreen isTrue={modal.isOpen && modal.type === "publication"}>
+    <SliderFullScreen isTrue={uiContextStore?.modal.isOpen! && uiContextStore?.modal.type === "publication"}>
       <CommentsMobileHeader></CommentsMobileHeader>
 
       <CommentsMobilePublication></CommentsMobilePublication>

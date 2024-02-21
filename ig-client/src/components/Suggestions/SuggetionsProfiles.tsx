@@ -10,8 +10,8 @@ export const SuggetionsProfiles = ({
   suggestions,
 }: {
   suggestions: User[];
-}) => {
-  const [hasChildrens, setHasChildrens] = useState(false);
+}): JSX.Element => {
+  const [hasChildrens, setHasChildrens] = useState<boolean>(false);
   const { user } = useProfileUser();
 
   useEffect(() => {

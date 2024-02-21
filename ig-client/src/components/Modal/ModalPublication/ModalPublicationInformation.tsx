@@ -2,7 +2,7 @@ import { ModalPublicationComments } from "./ModalPublicationComments";
 import { ModalPublicationDescription } from "./ModalPublicationDescription";
 import { ModalPublicationHeader } from "./ModalPublicationHeader";
 
-export const ModalPublicationInformation = () => {
+export const ModalPublicationInformation = (): JSX.Element => {
   return (
     <>
       <div className="flex items-start justify-start flex-col w-2/6 h-full relative bg-white shadow-slate-300 shadow-sm overflow-y-scroll overflow-x-hidden no-scrollbar">

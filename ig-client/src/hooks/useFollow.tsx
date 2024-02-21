@@ -4,20 +4,20 @@ import { instagramApiGetUnFollow } from "../api/Follow/instagramApiGetUnFollow";
 import { AuthContext } from "../contexts/Auth/AuthContext";
 import { ProfileContext } from "../contexts/Profile/ProfileContext";
 import { UIContext } from "../contexts/Ui/UIContext";
+import { UseFollow } from "../types/types";
 
-export const useFollow = () => {
-  const { setAlertOpen } = useContext(UIContext);
-  const { user, onLogin } = useContext(AuthContext);
-  const { userForeignProfile, setUserForeignProfile } =
-    useContext(ProfileContext);
+export const useFollow = (): UseFollow => {
+  const uiContextStore = useContext(UIContext);
+  const authContextT = useContext(AuthContext);
+  const profileContextT = useContext(ProfileContext);
 
   const handleFollow = async (idAuthorNotification?: string) => {
     const request = await instagramApiGetFollow(
-      idAuthorNotification || userForeignProfile.id
+      idAuthorNotification || profileContextT?.userForeignProfile.id!
     );
 
     if (request.hasOwnProperty("response")) {
-      return setAlertOpen(
+      return uiContextStore?.setAlertOpen(
         "error",
         "¡Oh, algo salio mal!",
         request.response.data.message,
@@ -27,17 +27,20 @@ export const useFollow = () => {
 
     const following = request.payload;
     const followers = request.payloadForeignUser;
-    onLogin({ ...user, ...following });
-    setUserForeignProfile({ ...userForeignProfile, ...followers });
+    authContextT?.onLogin({ ...authContextT?.user, ...following });
+    profileContextT?.setUserForeignProfile({
+      ...profileContextT?.userForeignProfile,
+      ...followers,
+    });
   };
 
   const handleUnFollow = async (idAuthorNotification?: string) => {
     const request = await instagramApiGetUnFollow(
-      idAuthorNotification || userForeignProfile.id
+      idAuthorNotification || profileContextT?.userForeignProfile.id!
     );
 
     if (request.hasOwnProperty("response")) {
-      return setAlertOpen(
+      return uiContextStore?.setAlertOpen(
         "error",
         "¡Oh, algo salio mal!",
         request.response.data.message,
@@ -47,8 +50,11 @@ export const useFollow = () => {
 
     const following = request.payload;
     const followers = request.payloadForeignUser;
-    onLogin({ ...user, ...following });
-    setUserForeignProfile({ ...userForeignProfile, ...followers });
+    authContextT?.onLogin({ ...authContextT?.user, ...following });
+    profileContextT?.setUserForeignProfile({
+      ...profileContextT?.userForeignProfile,
+      ...followers,
+    });
   };
 
   return { handleFollow, handleUnFollow };

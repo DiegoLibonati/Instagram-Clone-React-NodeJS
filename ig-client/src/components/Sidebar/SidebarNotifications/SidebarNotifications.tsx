@@ -3,8 +3,8 @@ import { useContext } from "react";
 import { NotificationsContext } from "../../../contexts/Notifications/NotificationsContext";
 import { NotificationList } from "../../Notifications/NotificationList";
 
-export const SidebarNotifications = () => {
-  const { setOpenNotifications } = useContext(NotificationsContext);
+export const SidebarNotifications = (): JSX.Element => {
+  const notificationsContextStore = useContext(NotificationsContext);
   return (
     <div className='className="flex flex-col items-start justify-center w-[calc(100%-16px)] h-screen m-2 shadow-sm rounded-md'>
       <div className="flex flex-row w-full h-16 items-center justify-start p-2">
@@ -12,7 +12,7 @@ export const SidebarNotifications = () => {
           size={25}
           className="cursor-pointer"
           onClick={() => {
-            setOpenNotifications(false);
+            notificationsContextStore?.setOpenNotifications(false);
           }}
         ></BsArrowLeft>
 

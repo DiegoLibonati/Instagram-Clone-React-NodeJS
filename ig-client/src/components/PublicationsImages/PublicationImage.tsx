@@ -17,10 +17,10 @@ export const PublicationImage = ({
   username,
   avatar,
   name,
-}: Publication) => {
-  const { setModalOpen } = useContext(UIContext);
-  const { setActivePublication } = useContext(PublicationContext);
-  const { setImageOpenFromExplore } = useContext(ExploreContext);
+}: Publication): JSX.Element => {
+  const uiContextStore = useContext(UIContext);
+  const publicationContextStore = useContext(PublicationContext);
+  const exploreContextStore = useContext(ExploreContext);
   const { matchMediaQuery } = useMediaMatch(1024);
   const navigate = useNavigate();
   const location = useLocation();
@@ -29,7 +29,7 @@ export const PublicationImage = ({
       className="relative group h-32 md:h-48 2xl:h-72 w-full cursor-pointer"
       onClick={() => {
         if (matchMediaQuery) {
-          setActivePublication({
+          publicationContextStore?.setActivePublication({
             _id: id,
             imgLink,
             likes,
@@ -40,11 +40,11 @@ export const PublicationImage = ({
             avatar,
             name,
           });
-          return setModalOpen("publication");
+          return uiContextStore?.setModalOpen("publication");
         }
 
         if (location.pathname.startsWith("/search-page")) {
-          setImageOpenFromExplore(true);
+          exploreContextStore?.setImageOpenFromExplore(true);
         }
 
         return navigate(`/p/${username}`);

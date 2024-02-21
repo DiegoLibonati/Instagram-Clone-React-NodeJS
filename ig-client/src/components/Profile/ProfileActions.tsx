@@ -3,7 +3,7 @@ import { RxVideo } from "react-icons/rx";
 import { BsPersonSquare } from "react-icons/bs";
 import { useMediaMatch } from "../../hooks/useMediaMatch";
 
-export const ProfileActions = () => {
+export const ProfileActions = (): JSX.Element => {
   const { matchMediaQuery } = useMediaMatch(1024);
 
   return (

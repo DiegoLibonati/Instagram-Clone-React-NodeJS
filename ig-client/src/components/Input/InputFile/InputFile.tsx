@@ -11,8 +11,8 @@ export const InputFile = ({
   classNameLabel: string;
   name?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}) => {
-  const { setPreviewSrc } = useContext(UIContext);
+}): JSX.Element => {
+  const uiContextStore = useContext(UIContext)!;
 
   return (
     <>
@@ -26,7 +26,7 @@ export const InputFile = ({
         hidden
         onChange={(e) => {
           onChange!(e);
-          setPreviewSrc(URL.createObjectURL(e.target!.files![0]));
+          uiContextStore?.setPreviewSrc(URL.createObjectURL(e.target!.files![0]));
         }}
       ></input>
     </>

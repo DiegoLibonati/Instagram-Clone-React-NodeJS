@@ -9,31 +9,23 @@ import "swiper/css/pagination";
 // import required modules
 import { FreeMode } from "swiper";
 
-import { Histories as HistoriesType } from "../../types/types";
+import { HistoriesProps } from "../../types/types";
 import { UserImage } from "../UserImage/UserImage";
 import { AuthContext } from "../../contexts/Auth/AuthContext";
 import { useContext } from "react";
 import { MdOutlineAddCircleOutline } from "react-icons/md";
 import { useLocation } from "react-router-dom";
 
-const histories: Array<Record<string, string>> = [
-  {
-    id: "1",
-    imgLink: "https://pfpmaker.com/_nuxt/img/profile-3-1.3e702c5.png",
-    name: "die_libonati",
-  },
-];
-
 export const Histories = ({
   className = "",
   profileHistories = false,
-}: HistoriesType) => {
-  const { user } = useContext(AuthContext);
+}: HistoriesProps): JSX.Element => {
+  const authContextStore = useContext(AuthContext);
   const location = useLocation();
 
   if (
     profileHistories &&
-    user.username !== location.pathname.replace("/", "")
+    authContextStore?.user.username !== location.pathname.replace("/", "")
   ) {
     return (
       <div className="flex items-center justify-center w-full h-24">
@@ -107,8 +99,8 @@ export const Histories = ({
           <SwiperSlide className="flex items-center justify-center flex-col">
             <div className="flex items-center justify-center relative cursor-pointer">
               <UserImage
-                avatar={user.avatar}
-                name={user.name}
+                avatar={authContextStore?.user.avatar!}
+                name={authContextStore?.user.name!}
                 className="w-14 h-14 rounded-full"
               ></UserImage>
               <MdOutlineAddCircleOutline
@@ -121,12 +113,12 @@ export const Histories = ({
         )}
 
         {profileHistories &&
-          user.username === location.pathname.replace("/", "") && (
+          authContextStore?.user.username === location.pathname.replace("/", "") && (
             <SwiperSlide className="flex items-center justify-center flex-col">
               <div className="flex items-center justify-center relative cursor-pointer">
                 <UserImage
-                  avatar={user.avatar}
-                  name={user.name}
+                  avatar={authContextStore?.user.avatar}
+                  name={authContextStore?.user.name}
                   className="w-14 h-14 rounded-full"
                 ></UserImage>
                 <MdOutlineAddCircleOutline

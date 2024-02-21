@@ -6,11 +6,13 @@ import { useComment } from "../../../hooks/useComment";
 import { useForm } from "../../../hooks/useForm";
 import { PublicationContext } from "../../../contexts/Publications/PublicationContext";
 
-export const CommentsMobileForm = () => {
-  const { activePublication } = useContext(PublicationContext);
-  const { user } = useContext(AuthContext);
+export const CommentsMobileForm = (): JSX.Element => {
+  const publicationContextStore = useContext(PublicationContext);
+  const authContextStore = useContext(AuthContext);
   const { handleAddComment } = useComment();
-  const { formState, onInputChange, onResetForm } = useForm({
+  const { formState, onInputChange, onResetForm } = useForm<{
+    comment: string;
+  }>({
     comment: "",
   });
 
@@ -31,17 +33,17 @@ export const CommentsMobileForm = () => {
         onSubmit={(e) =>
           handleAddComment(
             e,
-            activePublication._id,
+            publicationContextStore?.activePublication._id!,
             formState.comment,
-            activePublication.context,
+            publicationContextStore?.activePublication.context!,
             onResetForm
           )
         }
       >
         <UserImage
           className="rounded-full w-8 h-8 mr-2"
-          avatar={user?.avatar}
-          name={user?.name}
+          avatar={authContextStore?.user?.avatar!}
+          name={authContextStore?.user?.name!}
         ></UserImage>
         <InputText
           value={formState.comment}

@@ -10,10 +10,10 @@ import { AuthContext } from "../../../contexts/Auth/AuthContext";
 import { UIContext } from "../../../contexts/Ui/UIContext";
 import { useMediaMatch } from "../../../hooks/useMediaMatch";
 
-export const EditUserPage = () => {
+export const EditUserPage = (): JSX.Element => {
   const { matchMediaQuery } = useMediaMatch(1024);
-  const { user } = useContext(AuthContext);
-  const { setPreviewSrc } = useContext(UIContext);
+  const authContextStore = useContext(AuthContext);
+  const uiContextStore = useContext(UIContext);
   const navigate = useNavigate();
 
   return (
@@ -31,8 +31,8 @@ export const EditUserPage = () => {
             color="black"
             size={25}
             onClick={() => {
-              navigate(`/${user.username}`);
-              setPreviewSrc("");
+              navigate(`/${authContextStore?.user.username}`);
+              uiContextStore?.setPreviewSrc("");
             }}
           ></BsArrowLeft>
           <h2 className="ml-5 font-medium text-lg">Editar perfil</h2>

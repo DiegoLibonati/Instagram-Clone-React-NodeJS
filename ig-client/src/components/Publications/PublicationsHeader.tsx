@@ -5,10 +5,10 @@ import { ExploreContext } from "../../contexts/Explore/ExploreContext";
 import { useProfileUser } from "../../hooks/useProfileUser";
 import { NavBarMobile } from "../NavBar/Mobile/NavBarMobile";
 
-export const PublicationsHeader = () => {
+export const PublicationsHeader = (): JSX.Element => {
   const navigate = useNavigate();
   const { user } = useProfileUser();
-  const { imageOpenFromExplore } = useContext(ExploreContext);
+  const exploreContextStore = useContext(ExploreContext);
 
   return (
     <NavBarMobile
@@ -23,7 +23,8 @@ export const PublicationsHeader = () => {
         color="black"
         size={25}
         onClick={() => {
-          if (imageOpenFromExplore) return navigate("/search-page");
+          if (exploreContextStore?.imageOpenFromExplore)
+            return navigate("/search-page");
 
           return navigate(`/${user.username}`);
         }}

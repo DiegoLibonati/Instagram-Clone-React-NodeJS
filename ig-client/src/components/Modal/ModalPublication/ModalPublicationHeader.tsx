@@ -5,10 +5,10 @@ import { Link } from "react-router-dom";
 import { PublicationContext } from "../../../contexts/Publications/PublicationContext";
 import { UIContext } from "../../../contexts/Ui/UIContext";
 
-export const ModalPublicationHeader = () => {
+export const ModalPublicationHeader = (): JSX.Element => {
   const { activePublication, setActivePublication } =
-    useContext(PublicationContext);
-  const { setModalClose } = useContext(UIContext);
+    useContext(PublicationContext)!;
+  const { setModalClose } = useContext(UIContext)!;
 
   return (
     <div className="flex items-center justify-start flex-row w-full h-14 shadow-slate-300 shadow-sm p-2">
@@ -20,7 +20,7 @@ export const ModalPublicationHeader = () => {
       <Link
         to={`/${activePublication.username}`}
         onClick={() => {
-          setActivePublication(null);
+          setActivePublication(null!);
           setModalClose();
         }}
       >

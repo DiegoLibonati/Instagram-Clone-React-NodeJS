@@ -2,13 +2,12 @@ import { FormEvent, useContext } from "react";
 import { instagramApiNewComment } from "../api/Comment/instagramApiNewComment";
 import { FeedContext } from "../contexts/Feed/FeedContext";
 import { PublicationContext } from "../contexts/Publications/PublicationContext";
-import { Publication } from "../types/types";
+import { Publication, UseComment } from "../types/types";
 import { useProfileUser } from "./useProfileUser";
 
-export const useComment = () => {
-  const { activePublication, setActivePublication } =
-    useContext(PublicationContext);
-  const { feed, setFeed } = useContext(FeedContext);
+export const useComment = (): UseComment => {
+  const publicationContextStore = useContext(PublicationContext);
+  const feedContextStore = useContext(FeedContext);
   const { user, setUser } = useProfileUser();
 
   const handleAddComment = async (
@@ -29,10 +28,13 @@ export const useComment = () => {
 
     // Comment IN ACTIVE PUBLICATION MODAL
 
-    if (activePublication) {
-      setActivePublication!({
-        ...activePublication,
-        comments: [...activePublication.comments, payload.comment],
+    if (publicationContextStore?.activePublication) {
+      publicationContextStore?.setActivePublication!({
+        ...publicationContextStore?.activePublication,
+        comments: [
+          ...publicationContextStore?.activePublication.comments,
+          payload.comment,
+        ],
       });
     }
     console.log(context);
@@ -45,15 +47,17 @@ export const useComment = () => {
 
     // Comment IN FEED
 
-    const feedUpdated = feed.map((publication: Publication) => {
-      if (publication._id === payload.comment.idPost) {
-        publication.comments.push(payload.comment);
+    const feedUpdated = feedContextStore?.feed.map(
+      (publication: Publication) => {
+        if (publication._id === payload.comment.idPost) {
+          publication.comments.push(payload.comment);
+          return publication;
+        }
         return publication;
       }
-      return publication;
-    });
+    );
     onResetForm();
-    return setFeed(feedUpdated);
+    return feedContextStore?.setFeed(feedUpdated!);
   };
 
   return { handleAddComment };

@@ -1,6 +1,6 @@
 {
   "name": "ig-api",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "API for a instagram clone app",
   "main": "index.ts",
   "scripts": {
@@ -30,7 +30,7 @@
     "typescript": "^5.0.2"
   },
   "dependencies": {
-    "bcrypt": "^5.1.0",
+    "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",

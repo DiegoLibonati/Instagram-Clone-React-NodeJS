@@ -1,15 +1,13 @@
 import { createContext, useState } from "react";
+import { NotificationsContextProps, NotificationsContextT } from "../../types/types";
 
-interface NotificationsContextProps {
-  children: React.ReactNode;
-}
 
-export const NotificationsContext = createContext<null | any>(null);
+export const NotificationsContext = createContext<NotificationsContextT | null>(null);
 
 export const NotificationsProvider: React.FunctionComponent<
   NotificationsContextProps
 > = ({ children }) => {
-  const [openNotifications, setOpenNotifications] = useState(false);
+  const [openNotifications, setOpenNotifications] = useState<boolean>(false);
 
   return (
     <NotificationsContext.Provider
