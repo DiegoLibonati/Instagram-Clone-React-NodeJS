@@ -65,6 +65,7 @@ It's important to note that this version is developed with a mobile-first approa
 5. CSS
 6. Node JS
 7. Mongo DB
+8. Docker
 
 ## Libraries used
 
